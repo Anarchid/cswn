@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo024",
+          "type": "combat_knife_slash",
           "count": 1,
           "speed": 4,
           "jitter": 0,

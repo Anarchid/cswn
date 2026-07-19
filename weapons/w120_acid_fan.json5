@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo063",
+          "type": "acid_spray",
           "count": 1,
           "speed": 2.6,
           "jitter": 0.183,

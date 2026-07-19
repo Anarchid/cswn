@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo025",
+          "type": "grenade",
           "count": 1,
           "speed": 2.44,
           "jitter": 0.107,

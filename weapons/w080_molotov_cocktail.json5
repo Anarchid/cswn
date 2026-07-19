@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo101",
+          "type": "molotov",
           "count": 1,
           "speed": 2.94,
           "jitter": 0.007,

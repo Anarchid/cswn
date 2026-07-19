@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo073",
+          "type": "xm109_shell",
           "count": 1,
           "speed": 2.5,
           "jitter": 0,

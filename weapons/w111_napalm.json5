@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo088",
+          "type": "super_napalm_charge",
           "count": 50,
           "speed": 4,
           "jitter": 15.807,

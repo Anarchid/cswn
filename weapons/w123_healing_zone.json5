@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo048_wid_25",
+          "type": "healing_zone_field",
           "count": 2,
           "speed": 1,
           "jitter": 0,

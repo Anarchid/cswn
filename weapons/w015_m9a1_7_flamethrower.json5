@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo009",
+          "type": "m9a1_flame",
           "count": 2,
           "speed": 3.4,
           "jitter": 0.305,

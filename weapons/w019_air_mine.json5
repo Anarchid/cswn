@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo013",
+          "type": "air_mine",
           "count": 1,
           "speed": 5.5,
           "jitter": 0.003,

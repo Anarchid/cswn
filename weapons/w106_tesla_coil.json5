@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo133_wid_4",
+          "type": "tesla_arc",
           "count": 3,
           "speed": 3.6,
           "jitter": 0.18,

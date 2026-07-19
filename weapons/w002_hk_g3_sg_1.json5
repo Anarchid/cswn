@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo001",
+          "type": "g3_bullet",
           "count": 1,
           "speed": 3.6,
           "jitter": 0,
@@ -19,7 +19,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_flash_003",
+          "type": "muzzle_flash_03",
           "count": 1,
           "speed": 0.08,
           "jitter": 0,
@@ -28,7 +28,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_shell",
+          "type": "shell_casing",
           "count": 1,
           "speed": 0.18,
           "jitter": 0.24,

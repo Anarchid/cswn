@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo089",
+          "type": "caltrops_throw",
           "count": 15,
           "speed": 3,
           "jitter": 1.3,

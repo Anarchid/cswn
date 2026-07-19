@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo062",
+          "type": "super_hellfire_rocket",
           "count": 15,
           "speed": 2.4,
           "jitter": 0.298,

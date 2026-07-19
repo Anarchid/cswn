@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo058_wid_6",
+          "type": "shockgrenade",
           "count": 1,
           "speed": 3.3,
           "jitter": 0.122,

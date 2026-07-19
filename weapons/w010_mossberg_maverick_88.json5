@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo153",
+          "type": "maverick_88_slug",
           "count": 9,
           "speed": 5,
           "jitter": 0.8,
@@ -19,7 +19,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_flash_004",
+          "type": "muzzle_flash_04",
           "count": 1,
           "speed": 0.08,
           "jitter": 0,
@@ -28,7 +28,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_shell",
+          "type": "shell_casing",
           "count": 1,
           "speed": 0.18,
           "jitter": 0.24,

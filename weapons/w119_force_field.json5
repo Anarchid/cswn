@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo053",
+          "type": "force_field_cell",
           "count": 1,
           "speed": 4.2,
           "jitter": 0,

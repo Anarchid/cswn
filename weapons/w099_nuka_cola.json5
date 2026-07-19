@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo104",
+          "type": "nuka_cola",
           "count": 1,
           "speed": 2.38,
           "jitter": 0.007,

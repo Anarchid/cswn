@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo008",
+          "type": "cluster_mine_pod",
           "count": 1,
           "speed": 3.58,
           "jitter": 0.198,

@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo055",
+          "type": "super_grenade",
           "count": 1,
           "speed": 2.44,
           "jitter": 0.107,

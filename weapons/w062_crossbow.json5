@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo124",
+          "type": "crossbow_bolt",
           "count": 1,
           "speed": 4,
           "jitter": 0.03,

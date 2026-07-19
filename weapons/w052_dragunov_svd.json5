@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo132",
+          "type": "dragunov_bullet",
           "count": 1,
           "speed": 5,
           "jitter": 0,

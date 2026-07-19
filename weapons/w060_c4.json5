@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo090",
+          "type": "c4_charge",
           "count": 1,
           "speed": 4.4,
           "jitter": 0,

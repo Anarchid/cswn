@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo059_wid_6",
+          "type": "booby_trap",
           "count": 1,
           "speed": 1.8,
           "jitter": 0.122,

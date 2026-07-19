@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo108",
+          "type": "adrenaline_shot",
           "count": 1,
           "speed": -2,
           "jitter": 0,

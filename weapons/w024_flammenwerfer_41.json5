@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo098",
+          "type": "flammenwerfer_flame",
           "count": 4,
           "speed": 2.34,
           "jitter": 0.305,

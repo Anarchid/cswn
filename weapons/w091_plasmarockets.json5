@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo042",
+          "type": "plasma_rocket",
           "count": 2,
           "speed": 2.4,
           "jitter": 0.2,

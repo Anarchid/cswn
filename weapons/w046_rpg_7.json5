@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo029",
+          "type": "rpg_7_rocket",
           "count": 1,
           "speed": 1.5,
           "jitter": 0.15,
@@ -19,7 +19,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_flash_003",
+          "type": "muzzle_flash_03",
           "count": 1,
           "speed": 0.08,
           "jitter": 0,

@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo117_wid_16",
+          "type": "jackhammer_pellet",
           "count": 8,
           "speed": 2.6,
           "jitter": 0.08,
@@ -19,7 +19,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_flash_010",
+          "type": "muzzle_flash_10",
           "count": 1,
           "speed": 0.08,
           "jitter": 0,
@@ -28,7 +28,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_shell",
+          "type": "shell_casing",
           "count": 1,
           "speed": 0.18,
           "jitter": 0.24,

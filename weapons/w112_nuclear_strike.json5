@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo139",
+          "type": "nuclear_strike_marker",
           "count": 1,
           "speed": 5,
           "jitter": 0,

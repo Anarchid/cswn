@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo102",
+          "type": "gadget",
           "count": 1,
           "speed": 1,
           "jitter": 0,

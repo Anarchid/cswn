@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo028",
+          "type": "laser_pulse",
           "count": 1,
           "speed": 3,
           "jitter": 0.001,
@@ -19,7 +19,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_flash_001",
+          "type": "muzzle_flash_01",
           "count": 1,
           "speed": 0.08,
           "jitter": 0,

@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo154",
+          "type": "energy_shield_pulse",
           "count": 1,
           "speed": -2,
           "jitter": 0,

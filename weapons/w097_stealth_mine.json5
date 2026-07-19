@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo067",
+          "type": "stealth_mine",
           "count": 1,
           "speed": 5.5,
           "jitter": 0.003,

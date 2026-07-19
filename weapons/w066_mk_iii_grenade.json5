@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo085",
+          "type": "mk_iii_grenade",
           "count": 1,
           "speed": 3.5,
           "jitter": 0.107,
@@ -19,7 +19,7 @@
       },
       {
         "emit": {
-          "type": "zz_fx_flash_003",
+          "type": "muzzle_flash_03",
           "count": 1,
           "speed": 0.08,
           "jitter": 0,

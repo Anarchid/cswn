@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo047",
+          "type": "stimpack_shot",
           "count": 1,
           "speed": -2,
           "jitter": 0,

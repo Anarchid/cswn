@@ -10,7 +10,7 @@
     "fire": [
       {
         "emit": {
-          "type": "wo157",
+          "type": "throwing_knife",
           "count": 1,
           "speed": 2.14,
           "jitter": 0.2,
