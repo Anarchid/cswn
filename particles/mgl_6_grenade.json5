@@ -79,9 +79,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "mgl_6_dropper"
-      }
+      "effect": "mgl_6_trail"
     }
   ]
 }

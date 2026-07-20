@@ -80,9 +80,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "mac_10_bullet"
-      }
+      "effect": "hawk_smoke"
     }
   ]
 }

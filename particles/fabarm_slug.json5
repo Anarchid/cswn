@@ -88,9 +88,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "super_stinger_missile"
-      }
+      "effect": "fabarm_tracer"
     }
   ],
   "terrain": [

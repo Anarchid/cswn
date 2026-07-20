@@ -80,9 +80,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "booby_trap"
-      }
+      "effect": "aks_74u_tracer"
     }
   ]
 }

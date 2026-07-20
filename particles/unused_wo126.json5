@@ -77,9 +77,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "super_grenade"
-      }
+      "effect": "unused_sx055"
     }
   ],
   "terrain": [

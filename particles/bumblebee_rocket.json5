@@ -86,9 +86,7 @@
   "trails": [
     {
       "tick": 2,
-      "spawn": {
-        "type": "m249_bullet"
-      }
+      "effect": "bumblebee_smoke"
     }
   ],
   "terrain": [

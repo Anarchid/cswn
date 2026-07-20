@@ -77,9 +77,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "m82a1_bullet"
-      }
+      "effect": "voughnought_tracer"
     }
   ],
   "terrain": [

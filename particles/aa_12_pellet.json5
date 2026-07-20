@@ -80,9 +80,7 @@
   "trails": [
     {
       "tick": 3,
-      "spawn": {
-        "type": "super_flak_shell"
-      }
+      "effect": "aa_12_tracer"
     }
   ]
 }

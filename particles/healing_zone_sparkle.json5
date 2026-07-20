@@ -28,7 +28,7 @@
   "detonation": [
     {
       "emit": {
-        "type": "healing_zone_mote",
+        "type": "blood_droplet",
         "count": 0,
         "scatter": 0
       }

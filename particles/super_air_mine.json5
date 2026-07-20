@@ -25,7 +25,7 @@
     "variance": 0
   },
   "detonation": [
-    "_mine_explosion",
+    "mine_explosion",
     {
       "emit": {
         "type": "super_air_mine_shrapnel",

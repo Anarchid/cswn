@@ -82,9 +82,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "hellfire_rocket"
-      }
+      "effect": "m79_smoke"
     },
     {
       "tick": 1,

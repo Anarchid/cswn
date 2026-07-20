@@ -97,9 +97,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "super_hellfire_rocket"
-      }
+      "effect": "unused_sx062"
     }
   ],
   "terrain": [

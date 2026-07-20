@@ -86,9 +86,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "glock18_bullet"
-      }
+      "effect": "smoke_wisp"
     }
   ],
   "terrain": [

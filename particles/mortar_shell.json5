@@ -96,9 +96,7 @@
   "trails": [
     {
       "tick": 2,
-      "spawn": {
-        "type": "rocket_exhaust"
-      }
+      "effect": "poof"
     }
   ],
   "terrain": [

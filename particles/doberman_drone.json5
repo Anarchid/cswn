@@ -93,9 +93,7 @@
   "trails": [
     {
       "tick": 88,
-      "spawn": {
-        "type": "doberman_bomb"
-      }
+      "effect": "doberman_muzzle_flash"
     },
     {
       "tick": 88,

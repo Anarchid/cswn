@@ -86,9 +86,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "force_field_cell"
-      }
+      "effect": "unused_sx053"
     }
   ],
   "terrain": [

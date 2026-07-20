@@ -76,9 +76,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "black_betty_bullet"
-      }
+      "effect": "merr_sonn_smoke"
     }
   ]
 }

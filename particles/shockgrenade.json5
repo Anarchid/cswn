@@ -99,9 +99,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "stinger_missile"
-      }
+      "effect": "shock_trail"
     }
   ]
 }

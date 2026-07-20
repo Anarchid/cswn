@@ -84,9 +84,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "spas_12_pellet"
-      }
+      "effect": "mine_explosion"
     }
   ]
 }

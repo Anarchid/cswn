@@ -85,9 +85,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "shockgrenade"
-      }
+      "effect": "tesla_trail"
     }
   ]
 }

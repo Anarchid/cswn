@@ -80,9 +80,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "gshg_charge"
-      }
+      "effect": "gshg_tracer"
     }
   ]
 }

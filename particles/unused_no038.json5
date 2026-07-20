@@ -79,7 +79,7 @@
   "trails": [
     {
       "tick": 1,
-      "effect": "_mine_explosion"
+      "effect": "mine_explosion"
     }
   ]
 }

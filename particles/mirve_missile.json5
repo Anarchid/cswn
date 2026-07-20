@@ -103,9 +103,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "energy_trail"
-      }
+      "effect": "smoke_puff"
     }
   ]
 }

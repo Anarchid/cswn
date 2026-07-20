@@ -25,7 +25,7 @@
     "variance": 600
   },
   "detonation": [
-    "_mine_explosion",
+    "mine_explosion",
     {
       "remove": {}
     }

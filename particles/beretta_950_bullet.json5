@@ -71,9 +71,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "stealth_mine"
-      }
+      "effect": "beretta_950_tracer"
     },
     {
       "tick": 1,

@@ -77,9 +77,7 @@
   "trails": [
     {
       "tick": 3,
-      "spawn": {
-        "type": "steyr_tmp_bullet"
-      }
+      "effect": "spark_burst"
     }
   ]
 }

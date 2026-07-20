@@ -73,9 +73,7 @@
   "trails": [
     {
       "tick": 8,
-      "spawn": {
-        "type": "mirve_missile"
-      }
+      "effect": "unused_sx030"
     }
   ]
 }

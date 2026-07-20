@@ -81,9 +81,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "rpg_7_rocket"
-      }
+      "effect": "virus_srifle_trail"
     }
   ],
   "terrain": [

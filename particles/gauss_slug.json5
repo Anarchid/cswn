@@ -87,9 +87,7 @@
   "trails": [
     {
       "tick": 1,
-      "spawn": {
-        "type": "p90_bullet"
-      }
+      "effect": "gauss_tracer"
     }
   ],
   "terrain": [

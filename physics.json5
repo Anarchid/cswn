@@ -2,6 +2,12 @@
 // Native T0 package (MOD-FORMAT-SPEC.md). Hand edits are legal — re-run the
 // fidelity gate if you intend to stay byte-compatible with the WL original.
 {
+  // Which particle def is blood. Bound by NAME: the engine's legacy
+  // fallback is the Liero convention nObject[6], an absolute index, so
+  // without this a def rename can redefine what bleeding does.
+  "blood_particle": "blood_droplet",
+  // The effect a bonus crate detonates with (legacy fallback: effect 0).
+  "bonus_death_effect": "mine_explosion",
   "blood_gravity": 0.015,
   "blood_palette": {
     "first": 80,
