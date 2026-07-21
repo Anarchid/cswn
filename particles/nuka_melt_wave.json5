@@ -22,23 +22,17 @@
     "ticks": 1,
     "variance": 0
   },
-  "detonation": [
-    "shockwave_melt",
-    {
-      "emit": {
-        "type": "nuka_fireball",
-        "count": 255,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "shockwave_melt",
+      {
+        "emit": {
+          "type": "nuka_fireball",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {

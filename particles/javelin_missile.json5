@@ -27,26 +27,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "javelin_explosion",
-    {
-      "emit": {
-        "type": "javelin_shrapnel",
-        "count": 255,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "javelin_explosion",
+      {
+        "emit": {
+          "type": "javelin_shrapnel",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "javelin_explosion",
+      {
+        "emit": {
+          "type": "javelin_shrapnel",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -65,7 +76,18 @@
           "count": 20
         }
       },
-      "detonate",
+      "javelin_explosion",
+      {
+        "emit": {
+          "type": "javelin_shrapnel",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

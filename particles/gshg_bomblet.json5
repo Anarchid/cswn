@@ -22,18 +22,15 @@
     "ticks": 180,
     "variance": 179
   },
-  "detonation": [
-    "gshg_blast",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "gshg_blast"
     ],
     "collide_terrain": [
-      "detonate"
+      "gshg_blast",
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -52,7 +49,7 @@
           "count": 4
         }
       },
-      "detonate",
+      "gshg_blast",
       {
         "remove": {}
       }

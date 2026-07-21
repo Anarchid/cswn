@@ -25,15 +25,9 @@
     "ticks": 35,
     "variance": 18
   },
-  "detonation": [
-    "unused_sx031",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "unused_sx031"
     ],
     "collide_worm": [
       {

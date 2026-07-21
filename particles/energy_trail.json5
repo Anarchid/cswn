@@ -24,22 +24,19 @@
     "ticks": 120,
     "variance": 5
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "energy_spark",
-        "count": 1,
-        "velocity": "inherit",
-        "inherit": 1
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "energy_spark",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

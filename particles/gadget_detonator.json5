@@ -22,26 +22,31 @@
     "ticks": 2,
     "variance": 0
   },
-  "detonation": [
-    "nuke_epicenter",
-    {
-      "emit": {
-        "type": "gadget_shatter_wave",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "nuke_epicenter",
+      {
+        "emit": {
+          "type": "gadget_shatter_wave",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "nuke_epicenter",
+      {
+        "emit": {
+          "type": "gadget_shatter_wave",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

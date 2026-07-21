@@ -24,26 +24,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "unused_sx052",
-    {
-      "emit": {
-        "type": "unused_no124",
-        "count": 66,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "unused_sx052",
+      {
+        "emit": {
+          "type": "unused_no124",
+          "count": 66,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "unused_sx052",
+      {
+        "emit": {
+          "type": "unused_no124",
+          "count": 66,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -62,7 +73,18 @@
           "count": 4
         }
       },
-      "detonate",
+      "unused_sx052",
+      {
+        "emit": {
+          "type": "unused_no124",
+          "count": 66,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

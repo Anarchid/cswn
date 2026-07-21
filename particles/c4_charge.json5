@@ -27,23 +27,20 @@
     "ticks": 75,
     "variance": 0
   },
-  "detonation": [
-    "explosion_large",
-    {
-      "emit": {
-        "type": "c4_fragment",
-        "count": 255,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "explosion_large",
+      {
+        "emit": {
+          "type": "c4_fragment",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

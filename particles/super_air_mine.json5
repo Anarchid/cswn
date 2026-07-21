@@ -24,23 +24,20 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "mine_explosion",
-    {
-      "emit": {
-        "type": "super_air_mine_shrapnel",
-        "count": 255,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "mine_explosion",
+      {
+        "emit": {
+          "type": "super_air_mine_shrapnel",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {
@@ -53,7 +50,18 @@
           "factor": 0
         }
       },
-      "detonate",
+      "mine_explosion",
+      {
+        "emit": {
+          "type": "super_air_mine_shrapnel",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

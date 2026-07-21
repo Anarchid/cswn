@@ -22,26 +22,31 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "mine_explosion",
-    {
-      "emit": {
-        "type": "unused_no037",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "mine_explosion",
+      {
+        "emit": {
+          "type": "unused_no037",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "mine_explosion",
+      {
+        "emit": {
+          "type": "unused_no037",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

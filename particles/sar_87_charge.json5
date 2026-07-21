@@ -22,26 +22,31 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "impact_light",
-    {
-      "emit": {
-        "type": "buckshot_fragment",
-        "count": 7,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "impact_light",
+      {
+        "emit": {
+          "type": "buckshot_fragment",
+          "count": 7,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "impact_light",
+      {
+        "emit": {
+          "type": "buckshot_fragment",
+          "count": 7,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -58,6 +63,14 @@
         "emit": {
           "type": "core:blood",
           "count": 7
+        }
+      },
+      {
+        "emit": {
+          "type": "buckshot_fragment",
+          "count": 7,
+          "velocity": "radial",
+          "wl_free_step": true
         }
       },
       {

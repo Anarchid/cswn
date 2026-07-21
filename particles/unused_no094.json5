@@ -23,23 +23,17 @@
     "ticks": 55,
     "variance": 12
   },
-  "detonation": [
-    "explosion_large",
-    {
-      "emit": {
-        "type": "unused_no095",
-        "count": 111,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "explosion_large",
+      {
+        "emit": {
+          "type": "unused_no095",
+          "count": 111,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {

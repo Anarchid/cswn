@@ -27,26 +27,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "hallconnen_explosion",
-    {
-      "emit": {
-        "type": "hallconnen_shrapnel",
-        "count": 177,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "hallconnen_explosion",
+      {
+        "emit": {
+          "type": "hallconnen_shrapnel",
+          "count": 177,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "hallconnen_explosion",
+      {
+        "emit": {
+          "type": "hallconnen_shrapnel",
+          "count": 177,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

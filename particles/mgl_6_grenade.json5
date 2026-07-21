@@ -23,26 +23,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "incendiary_blast",
-    {
-      "emit": {
-        "type": "mgl_6_fragment",
-        "count": 40,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "incendiary_blast",
+      {
+        "emit": {
+          "type": "mgl_6_fragment",
+          "count": 40,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "incendiary_blast",
+      {
+        "emit": {
+          "type": "mgl_6_fragment",
+          "count": 40,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -55,7 +66,18 @@
           "factor": 0
         }
       },
-      "detonate",
+      "incendiary_blast",
+      {
+        "emit": {
+          "type": "mgl_6_fragment",
+          "count": 40,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

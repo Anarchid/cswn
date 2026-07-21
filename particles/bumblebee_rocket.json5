@@ -24,26 +24,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "explosion_large",
-    {
-      "emit": {
-        "type": "bumblebee_flame",
-        "count": 166,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "explosion_large",
+      {
+        "emit": {
+          "type": "bumblebee_flame",
+          "count": 166,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "explosion_large",
+      {
+        "emit": {
+          "type": "bumblebee_flame",
+          "count": 166,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

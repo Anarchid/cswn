@@ -20,22 +20,19 @@
     "ticks": 45,
     "variance": 0
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "cluster_mine_armed",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "cluster_mine_armed",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

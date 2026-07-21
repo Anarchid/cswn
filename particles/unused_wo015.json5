@@ -27,23 +27,20 @@
     "ticks": 111,
     "variance": 20
   },
-  "detonation": [
-    "incendiary_blast",
-    {
-      "emit": {
-        "type": "unused_no053",
-        "count": 111,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "incendiary_blast",
+      {
+        "emit": {
+          "type": "unused_no053",
+          "count": 111,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

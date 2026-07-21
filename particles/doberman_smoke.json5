@@ -22,18 +22,15 @@
     "ticks": 22,
     "variance": 20
   },
-  "detonation": [
-    "smoke_wisp",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "smoke_wisp"
     ],
     "collide_terrain": [
-      "detonate"
+      "smoke_wisp",
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

@@ -23,18 +23,15 @@
     "ticks": 2,
     "variance": 0
   },
-  "detonation": [
-    "shield_zap",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "shield_zap"
     ],
     "collide_terrain": [
-      "detonate"
+      "shield_zap",
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

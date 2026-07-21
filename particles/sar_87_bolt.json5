@@ -23,26 +23,37 @@
     "ticks": 1,
     "variance": 0
   },
-  "detonation": [
-    "sar_87_blast",
-    {
-      "emit": {
-        "type": "sar_87_charge",
-        "count": 1,
-        "velocity": "inherit",
-        "inherit": 1
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "sar_87_blast",
+      {
+        "emit": {
+          "type": "sar_87_charge",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "sar_87_blast",
+      {
+        "emit": {
+          "type": "sar_87_charge",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

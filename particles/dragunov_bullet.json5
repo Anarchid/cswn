@@ -26,22 +26,19 @@
     "ticks": 44,
     "variance": 21
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "dragunov_marker",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "dragunov_marker",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {
@@ -54,7 +51,17 @@
           "factor": 0
         }
       },
-      "detonate",
+      {
+        "emit": {
+          "type": "dragunov_marker",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

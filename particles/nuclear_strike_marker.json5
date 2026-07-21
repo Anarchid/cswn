@@ -25,22 +25,19 @@
     "ticks": 46,
     "variance": 0
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "nuke_bomb",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "nuke_bomb",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {
@@ -53,7 +50,17 @@
           "factor": 0
         }
       },
-      "detonate",
+      {
+        "emit": {
+          "type": "nuke_bomb",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

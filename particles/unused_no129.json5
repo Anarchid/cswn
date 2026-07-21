@@ -25,15 +25,9 @@
     "ticks": 4,
     "variance": 2
   },
-  "detonation": [
-    "impact_light",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "impact_light"
     ],
     "collide_worm": [
       {

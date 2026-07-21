@@ -24,18 +24,21 @@
     "ticks": 1,
     "variance": 0
   },
-  "detonation": [
-    "spark_burst",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "spark_burst",
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "spark_burst",
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

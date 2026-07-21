@@ -25,23 +25,17 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "spark_pop",
-    {
-      "emit": {
-        "type": "hidden_mine",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "spark_pop",
+      {
+        "emit": {
+          "type": "hidden_mine",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {
@@ -60,7 +54,15 @@
           "count": 3
         }
       },
-      "detonate",
+      "spark_pop",
+      {
+        "emit": {
+          "type": "hidden_mine",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
       {
         "remove": {}
       }

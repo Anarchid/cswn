@@ -26,23 +26,17 @@
     "ticks": 14,
     "variance": 13
   },
-  "detonation": [
-    "nuke_burst",
-    {
-      "emit": {
-        "type": "nuka_afterburst",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "nuke_burst",
+      {
+        "emit": {
+          "type": "nuka_afterburst",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {

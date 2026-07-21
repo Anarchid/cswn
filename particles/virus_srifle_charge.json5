@@ -22,25 +22,29 @@
     "ticks": 14,
     "variance": 12
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "virus_srifle_spore",
-        "count": 4,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "virus_srifle_spore",
+          "count": 4,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      {
+        "emit": {
+          "type": "virus_srifle_spore",
+          "count": 4,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -53,7 +57,14 @@
           "factor": 0
         }
       },
-      "detonate",
+      {
+        "emit": {
+          "type": "virus_srifle_spore",
+          "count": 4,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
       {
         "remove": {}
       }

@@ -22,15 +22,9 @@
     "ticks": 2,
     "variance": 0
   },
-  "detonation": [
-    "dragunov_flash",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "dragunov_flash"
     ],
     "collide_worm": [
       {
@@ -43,7 +37,7 @@
           "factor": 0
         }
       },
-      "detonate",
+      "dragunov_flash",
       {
         "remove": {}
       }

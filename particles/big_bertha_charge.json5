@@ -23,23 +23,17 @@
     "ticks": 4,
     "variance": 0
   },
-  "detonation": [
-    "big_bertha_blast",
-    {
-      "emit": {
-        "type": "big_bertha_fragment",
-        "count": 22,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "big_bertha_blast",
+      {
+        "emit": {
+          "type": "big_bertha_fragment",
+          "count": 22,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {

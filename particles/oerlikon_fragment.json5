@@ -22,26 +22,31 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "impact_heavy",
-    {
-      "emit": {
-        "type": "oerlikon_shard",
-        "count": 5,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "impact_heavy",
+      {
+        "emit": {
+          "type": "oerlikon_shard",
+          "count": 5,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "impact_heavy",
+      {
+        "emit": {
+          "type": "oerlikon_shard",
+          "count": 5,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -60,7 +65,15 @@
           "count": 5
         }
       },
-      "detonate",
+      "impact_heavy",
+      {
+        "emit": {
+          "type": "oerlikon_shard",
+          "count": 5,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
       {
         "remove": {}
       }

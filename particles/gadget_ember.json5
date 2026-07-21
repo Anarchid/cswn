@@ -23,15 +23,8 @@
     "ticks": 320,
     "variance": 160
   },
-  "detonation": [
-    {
-      "remove": {}
-    }
-  ],
   "on": {
-    "fuse": [
-      "detonate"
-    ],
+    "fuse": [],
     "collide_worm": [
       {
         "damage_other": {

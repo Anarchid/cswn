@@ -27,23 +27,20 @@
     "ticks": 9999,
     "variance": 9200
   },
-  "detonation": [
-    "badger_dig",
-    {
-      "emit": {
-        "type": "badger_spray",
-        "count": 99,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "badger_dig",
+      {
+        "emit": {
+          "type": "badger_spray",
+          "count": 99,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

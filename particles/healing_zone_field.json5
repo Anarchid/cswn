@@ -20,22 +20,19 @@
     "ticks": 9000,
     "variance": 0
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "healing_zone_sparkle",
-        "count": 0,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "healing_zone_sparkle",
+          "count": 0,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

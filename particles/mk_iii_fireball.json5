@@ -25,15 +25,9 @@
     "ticks": 11,
     "variance": 7
   },
-  "detonation": [
-    "incendiary_blast",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "incendiary_blast"
     ],
     "collide_worm": [
       {

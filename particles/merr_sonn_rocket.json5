@@ -24,26 +24,37 @@
     "ticks": 85,
     "variance": 50
   },
-  "detonation": [
-    "merr_sonn_explosion",
-    {
-      "emit": {
-        "type": "merr_sonn_shrapnel",
-        "count": 99,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "merr_sonn_explosion",
+      {
+        "emit": {
+          "type": "merr_sonn_shrapnel",
+          "count": 99,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "merr_sonn_explosion",
+      {
+        "emit": {
+          "type": "merr_sonn_shrapnel",
+          "count": 99,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

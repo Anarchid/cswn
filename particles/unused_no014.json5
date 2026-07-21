@@ -25,22 +25,16 @@
     "ticks": 25,
     "variance": 5
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "ricochet",
-        "count": 3,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "ricochet",
+          "count": 3,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {

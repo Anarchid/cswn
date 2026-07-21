@@ -22,18 +22,15 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "bullet_impact",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "bullet_impact"
     ],
     "collide_terrain": [
-      "detonate"
+      "bullet_impact",
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

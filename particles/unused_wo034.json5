@@ -24,15 +24,12 @@
     "ticks": 4000,
     "variance": 600
   },
-  "detonation": [
-    "mine_explosion",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "mine_explosion",
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {
@@ -51,7 +48,10 @@
           "count": 20
         }
       },
-      "detonate",
+      "mine_explosion",
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

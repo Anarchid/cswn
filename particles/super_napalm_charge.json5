@@ -27,22 +27,19 @@
     "ticks": 600,
     "variance": 270
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "super_napalm_fireball",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "super_napalm_fireball",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

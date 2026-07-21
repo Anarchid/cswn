@@ -22,26 +22,31 @@
     "ticks": 2,
     "variance": 0
   },
-  "detonation": [
-    "bullet_impact",
-    {
-      "emit": {
-        "type": "big_bertha_shard",
-        "count": 2,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "bullet_impact",
+      {
+        "emit": {
+          "type": "big_bertha_shard",
+          "count": 2,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "bullet_impact",
+      {
+        "emit": {
+          "type": "big_bertha_shard",
+          "count": 2,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -58,6 +63,14 @@
         "emit": {
           "type": "core:blood",
           "count": 3
+        }
+      },
+      {
+        "emit": {
+          "type": "big_bertha_shard",
+          "count": 2,
+          "velocity": "radial",
+          "wl_free_step": true
         }
       },
       {

@@ -23,26 +23,31 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "incendiary_blast",
-    {
-      "emit": {
-        "type": "napalm_flame",
-        "count": 50,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "incendiary_blast",
+      {
+        "emit": {
+          "type": "napalm_flame",
+          "count": 50,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "incendiary_blast",
+      {
+        "emit": {
+          "type": "napalm_flame",
+          "count": 50,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

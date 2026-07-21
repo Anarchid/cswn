@@ -22,26 +22,31 @@
     "ticks": 11,
     "variance": 3
   },
-  "detonation": [
-    "explosion_medium",
-    {
-      "emit": {
-        "type": "mgl_6_bomblet",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "explosion_medium",
+      {
+        "emit": {
+          "type": "mgl_6_bomblet",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "explosion_medium",
+      {
+        "emit": {
+          "type": "mgl_6_bomblet",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -60,7 +65,15 @@
           "count": 4
         }
       },
-      "detonate",
+      "explosion_medium",
+      {
+        "emit": {
+          "type": "mgl_6_bomblet",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
       {
         "remove": {}
       }

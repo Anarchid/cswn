@@ -22,23 +22,17 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "energy_burst",
-    {
-      "emit": {
-        "type": "energy_shard",
-        "count": 10,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "energy_burst",
+      {
+        "emit": {
+          "type": "energy_shard",
+          "count": 10,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {
@@ -57,7 +51,15 @@
           "count": 10
         }
       },
-      "detonate",
+      "energy_burst",
+      {
+        "emit": {
+          "type": "energy_shard",
+          "count": 10,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
       {
         "remove": {}
       }

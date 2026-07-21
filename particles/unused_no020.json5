@@ -25,15 +25,9 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "mine_explosion",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "mine_explosion"
     ],
     "collide_worm": [
       {

@@ -22,26 +22,31 @@
     "ticks": 1,
     "variance": 0
   },
-  "detonation": [
-    "nuke_burst",
-    {
-      "emit": {
-        "type": "fallout_soot_riser",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "nuke_burst",
+      {
+        "emit": {
+          "type": "fallout_soot_riser",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "nuke_burst",
+      {
+        "emit": {
+          "type": "fallout_soot_riser",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

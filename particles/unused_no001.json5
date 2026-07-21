@@ -25,25 +25,29 @@
     "ticks": 200,
     "variance": 50
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "blood_droplet",
-        "count": 0,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "blood_droplet",
+          "count": 0,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      {
+        "emit": {
+          "type": "blood_droplet",
+          "count": 0,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

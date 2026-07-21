@@ -20,26 +20,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "impact_light",
-    {
-      "emit": {
-        "type": "ricochet",
-        "count": 1,
-        "velocity": "inherit",
-        "inherit": 1
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "impact_light",
+      {
+        "emit": {
+          "type": "ricochet",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "impact_light",
+      {
+        "emit": {
+          "type": "ricochet",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -56,6 +67,14 @@
         "emit": {
           "type": "core:blood",
           "count": 2
+        }
+      },
+      {
+        "emit": {
+          "type": "ricochet",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
         }
       },
       {

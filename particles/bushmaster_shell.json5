@@ -23,26 +23,37 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "bullet_impact",
-    {
-      "emit": {
-        "type": "bushmaster_shrapnel",
-        "count": 21,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "bullet_impact",
+      {
+        "emit": {
+          "type": "bushmaster_shrapnel",
+          "count": 21,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_terrain": [
-      "detonate"
+      "bullet_impact",
+      {
+        "emit": {
+          "type": "bushmaster_shrapnel",
+          "count": 21,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

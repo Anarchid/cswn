@@ -27,15 +27,12 @@
     "ticks": 230,
     "variance": 185
   },
-  "detonation": [
-    "unused_sx046",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "unused_sx046",
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {
@@ -54,7 +51,10 @@
           "count": 1
         }
       },
-      "detonate",
+      "unused_sx046",
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

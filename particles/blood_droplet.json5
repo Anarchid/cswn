@@ -25,17 +25,12 @@
     "ticks": 15,
     "variance": 3
   },
-  "detonation": [
-    {
-      "remove": {}
-    }
-  ],
   "on": {
-    "fuse": [
-      "detonate"
-    ],
+    "fuse": [],
     "collide_terrain": [
-      "detonate"
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {

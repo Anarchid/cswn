@@ -23,18 +23,15 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "explosion_medium",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "explosion_medium"
     ],
     "collide_terrain": [
-      "detonate"
+      "explosion_medium",
+      {
+        "remove": {}
+      }
     ],
     "collide_worm": [
       {
@@ -53,7 +50,7 @@
           "count": 4
         }
       },
-      "detonate",
+      "explosion_medium",
       {
         "remove": {}
       }

@@ -22,23 +22,17 @@
     "ticks": 99,
     "variance": 87
   },
-  "detonation": [
-    "ags_17_blast",
-    {
-      "emit": {
-        "type": "ags_17_shard",
-        "count": 44,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "ags_17_blast",
+      {
+        "emit": {
+          "type": "ags_17_shard",
+          "count": 44,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {

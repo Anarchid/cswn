@@ -27,23 +27,20 @@
     "ticks": 0,
     "variance": 0
   },
-  "detonation": [
-    "booby_trap_blast",
-    {
-      "emit": {
-        "type": "splinter",
-        "count": 255,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "booby_trap_blast",
+      {
+        "emit": {
+          "type": "splinter",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {
@@ -62,7 +59,18 @@
           "count": 1
         }
       },
-      "detonate",
+      "booby_trap_blast",
+      {
+        "emit": {
+          "type": "splinter",
+          "count": 255,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      },
+      {
+        "explo_sound": {}
+      },
       {
         "remove": {}
       }

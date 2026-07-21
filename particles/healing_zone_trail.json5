@@ -23,15 +23,9 @@
     "ticks": 11,
     "variance": 0
   },
-  "detonation": [
-    "healing_zone_glow",
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "healing_zone_glow"
     ],
     "collide_worm": [
       {

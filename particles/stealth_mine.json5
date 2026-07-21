@@ -24,23 +24,20 @@
     "ticks": 30,
     "variance": 0
   },
-  "detonation": [
-    "poof",
-    {
-      "emit": {
-        "type": "stealth_mine_charge",
-        "count": 1,
-        "velocity": "inherit",
-        "inherit": 1
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      "poof",
+      {
+        "emit": {
+          "type": "stealth_mine_charge",
+          "count": 1,
+          "velocity": "inherit",
+          "inherit": 1
+        }
+      },
+      {
+        "explo_sound": {}
+      }
     ],
     "collide_worm": [
       {

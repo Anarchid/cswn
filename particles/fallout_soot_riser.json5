@@ -22,22 +22,16 @@
     "ticks": 180,
     "variance": 120
   },
-  "detonation": [
-    {
-      "emit": {
-        "type": "fallout_soot",
-        "count": 1,
-        "velocity": "radial",
-        "wl_free_step": true
-      }
-    },
-    {
-      "remove": {}
-    }
-  ],
   "on": {
     "fuse": [
-      "detonate"
+      {
+        "emit": {
+          "type": "fallout_soot",
+          "count": 1,
+          "velocity": "radial",
+          "wl_free_step": true
+        }
+      }
     ],
     "collide_worm": [
       {
