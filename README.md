@@ -1,7 +1,7 @@
-# cswn
+# csliero-wormnõid
 
-A total-conversion weapon mod for the wormnõid engine, in its native package
-format: **124 weapons, 342 particles and 81 effects, one definition per file,
+*cswn* for short. A total-conversion weapon mod for the wormnõid engine, in
+its native package format: **124 weapons, 342 particles and 81 effects, one definition per file,
 every one of them named for what it does.**
 
 It began life as *csliero rewormed v0.36b*, a WebLiero mod whose entire
@@ -45,9 +45,8 @@ The lineage, as far as the files themselves record it:
 - **csliero-webnoita** — our adaptation layer, replacing the weapons whose
   classic map-hacks don't survive a falling-sand engine (nuclear strike,
   gadget, nuka-cola, barracuda, badger)
-- **cswn** — this repository: converted to the native package format, then
-  hand-authored (the working tree is still called `cswn-native`, from when
-  the distinction from the WebLiero-format original still mattered)
+- **csliero-wormnõid** — this repository: converted to the native package
+  format, then hand-authored
 
 No license is known to have been published for any of the upstream work, and
 none of it carries a license file. This package is published in the spirit in

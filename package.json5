@@ -3,8 +3,10 @@
 // fidelity gate if you intend to stay byte-compatible with the WL original.
 {
   "format": 1,
-  "id": "csliero_rewormed_v0_36b_webnoita",
-  "name": "csliero rewormed v0.36b WebNoita",
+  // The id is also this package's def namespace, so it is restricted to
+  // [a-z0-9_]+ — hence the transliterated õ.
+  "id": "csliero_wormnoid",
+  "name": "csliero-wormnõid",
   "version": "",
   "role": "game",
   "authors": [],
