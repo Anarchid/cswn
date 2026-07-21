@@ -55,6 +55,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "javelin_smoke"
+        ]
+      }
     ]
   },
   "anim": {
@@ -67,11 +76,5 @@
       "start": 0,
       "draw_on_map": false
     }
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "javelin_smoke"
-    }
-  ]
+  }
 }

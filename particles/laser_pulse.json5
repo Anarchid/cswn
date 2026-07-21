@@ -29,7 +29,8 @@
       "emit": {
         "type": "ricochet",
         "count": 5,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -63,6 +64,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "smoke_puff"
+        ]
+      }
     ]
   },
   "anim": {
@@ -79,11 +89,5 @@
       "start": -1
     }
   },
-  "speed": 3,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "smoke_puff"
-    }
-  ]
+  "speed": 3
 }

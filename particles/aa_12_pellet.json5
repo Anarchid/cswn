@@ -26,7 +26,8 @@
       "emit": {
         "type": "ricochet",
         "count": 2,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -60,6 +61,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 3,
+        "unit": "wl_tick_burst",
+        "do": [
+          "aa_12_tracer"
+        ]
+      }
     ]
   },
   "anim": {
@@ -76,11 +86,5 @@
       "start": -1
     }
   },
-  "speed": 3.3,
-  "trails": [
-    {
-      "tick": 3,
-      "effect": "aa_12_tracer"
-    }
-  ]
+  "speed": 3.3
 }

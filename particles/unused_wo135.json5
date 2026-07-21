@@ -31,7 +31,8 @@
       "emit": {
         "type": "unused_no140",
         "count": 40,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -66,6 +67,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "unused_sx062"
+        ]
+      }
     ]
   },
   "anim": {
@@ -94,12 +104,6 @@
     }
   },
   "speed": 2.5,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "unused_sx062"
-    }
-  ],
   "terrain": [
     {
       "carve": {

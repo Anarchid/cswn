@@ -26,7 +26,8 @@
       "emit": {
         "type": "ricochet",
         "count": 5,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {
@@ -60,6 +61,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "spark_burst"
+        ]
+      }
     ]
   },
   "anim": {
@@ -77,12 +87,6 @@
     }
   },
   "speed": 4,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "spark_burst"
-    }
-  ],
   "terrain": [
     {
       "carve": {

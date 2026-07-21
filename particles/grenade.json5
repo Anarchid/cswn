@@ -33,7 +33,8 @@
       "emit": {
         "type": "splinter_charge",
         "count": 40,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -55,6 +55,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "merr_sonn_sparkle"
+        ]
+      }
     ]
   },
   "anim": {
@@ -68,12 +77,6 @@
       "draw_on_map": false
     }
   },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "merr_sonn_sparkle"
-    }
-  ],
   "terrain": [
     {
       "carve": {

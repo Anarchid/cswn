@@ -58,6 +58,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "fabarm_tracer"
+        ]
+      }
     ]
   },
   "anim": {
@@ -85,12 +94,6 @@
     }
   },
   "speed": 2.5,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "fabarm_tracer"
-    }
-  ],
   "terrain": [
     {
       "carve": {

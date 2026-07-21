@@ -29,7 +29,8 @@
       "emit": {
         "type": "rmk30_charge",
         "count": 20,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

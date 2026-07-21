@@ -26,7 +26,8 @@
       "emit": {
         "type": "virus_srifle_charge",
         "count": 6,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -61,6 +62,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "virus_srifle_trail"
+        ]
+      }
     ]
   },
   "anim": {
@@ -78,12 +88,6 @@
     }
   },
   "speed": 4,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "virus_srifle_trail"
-    }
-  ],
   "terrain": [
     {
       "carve": {

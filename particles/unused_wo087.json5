@@ -43,6 +43,22 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 500,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "unused_no060",
+              "velocity": "radial",
+              "wl_inherit_div": 3,
+              "wl_free_step": true
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -60,14 +76,5 @@
     },
     "sprite": "s557_4"
   },
-  "speed": 2.22,
-  "trails": [
-    {
-      "tick": 500,
-      "spawn": {
-        "type": "unused_no060"
-      },
-      "larpa_mode": 0
-    }
-  ]
+  "speed": 2.22
 }

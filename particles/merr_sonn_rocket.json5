@@ -30,7 +30,8 @@
       "emit": {
         "type": "merr_sonn_shrapnel",
         "count": 99,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -55,6 +56,15 @@
           "factor": 0.25
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "merr_sonn_smoke"
+        ]
+      }
     ]
   },
   "anim": {
@@ -72,11 +82,5 @@
     },
     "sprite": "s601_13"
   },
-  "speed": 0,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "merr_sonn_smoke"
-    }
-  ]
+  "speed": 0
 }

@@ -29,7 +29,8 @@
       "emit": {
         "type": "unused_no078",
         "count": 20,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -51,6 +52,15 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 8,
+        "unit": "wl_tick_burst",
+        "do": [
+          "unused_sx030"
+        ]
+      }
     ]
   },
   "anim": {
@@ -69,11 +79,5 @@
     "wl_id": 11,
     "wl_name": "wid 11"
   },
-  "speed": 3.5,
-  "trails": [
-    {
-      "tick": 8,
-      "effect": "unused_sx030"
-    }
-  ]
+  "speed": 3.5
 }

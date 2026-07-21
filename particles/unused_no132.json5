@@ -27,7 +27,8 @@
       "emit": {
         "type": "unused_no133",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -54,6 +54,28 @@
           "count": 3
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 88,
+        "unit": "wl_tick_burst",
+        "do": [
+          "doberman_muzzle_flash"
+        ]
+      },
+      {
+        "every": 88,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "doberman_charge",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -89,18 +111,5 @@
   },
   "thrust": {
     "accel": 1
-  },
-  "trails": [
-    {
-      "tick": 88,
-      "effect": "doberman_muzzle_flash"
-    },
-    {
-      "tick": 88,
-      "spawn": {
-        "type": "doberman_charge"
-      },
-      "larpa_mode": 1
-    }
-  ]
+  }
 }

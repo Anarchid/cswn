@@ -30,7 +30,8 @@
       "emit": {
         "type": "bumblebee_flame",
         "count": 166,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -54,6 +55,15 @@
         "push_other": {
           "factor": 0
         }
+      }
+    ],
+    "tick": [
+      {
+        "every": 2,
+        "unit": "wl_tick_burst",
+        "do": [
+          "bumblebee_smoke"
+        ]
       }
     ]
   },
@@ -83,12 +93,6 @@
     }
   },
   "speed": 4,
-  "trails": [
-    {
-      "tick": 2,
-      "effect": "bumblebee_smoke"
-    }
-  ],
   "terrain": [
     {
       "carve": {

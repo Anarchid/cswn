@@ -56,6 +56,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "unused_sx018"
+        ]
+      }
     ]
   },
   "anim": {
@@ -69,11 +78,5 @@
       "draw_on_map": false
     },
     "sprite": "s219_4"
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "unused_sx018"
-    }
-  ]
+  }
 }

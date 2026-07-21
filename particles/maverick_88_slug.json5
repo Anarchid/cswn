@@ -29,7 +29,8 @@
       "emit": {
         "type": "maverick_88_fragment",
         "count": 5,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

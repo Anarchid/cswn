@@ -40,6 +40,21 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 6,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "force_field_spark",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -56,14 +71,5 @@
       "start": -1
     }
   },
-  "speed": 3.7,
-  "trails": [
-    {
-      "tick": 6,
-      "spawn": {
-        "type": "force_field_spark"
-      },
-      "larpa_mode": 1
-    }
-  ]
+  "speed": 3.7
 }

@@ -29,7 +29,8 @@
       "emit": {
         "type": "gadget_detonator",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

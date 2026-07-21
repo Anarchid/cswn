@@ -30,7 +30,8 @@
       "emit": {
         "type": "hawk_shrapnel",
         "count": 36,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -59,6 +60,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "hawk_smoke"
+        ]
+      }
     ]
   },
   "anim": {
@@ -76,11 +86,5 @@
     },
     "sprite": "s640_13"
   },
-  "speed": 0,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "hawk_smoke"
-    }
-  ]
+  "speed": 0
 }

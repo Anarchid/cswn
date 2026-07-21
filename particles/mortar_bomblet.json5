@@ -28,7 +28,8 @@
       "emit": {
         "type": "splinter_charge",
         "count": 5,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -63,6 +64,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 5,
+        "unit": "wl_tick_burst",
+        "do": [
+          "poof"
+        ]
+      }
     ]
   },
   "anim": {
@@ -76,12 +86,6 @@
       "draw_on_map": false
     }
   },
-  "trails": [
-    {
-      "tick": 5,
-      "effect": "poof"
-    }
-  ],
   "terrain": [
     {
       "carve": {

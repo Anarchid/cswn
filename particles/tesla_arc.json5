@@ -32,7 +32,8 @@
       "emit": {
         "type": "tesla_spark",
         "count": 3,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -63,6 +64,15 @@
           "count": 6
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "tesla_trail"
+        ]
+      }
     ]
   },
   "anim": {
@@ -81,11 +91,5 @@
     "wl_id": 4,
     "wl_name": "wid 4"
   },
-  "speed": 3,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "tesla_trail"
-    }
-  ]
+  "speed": 3
 }

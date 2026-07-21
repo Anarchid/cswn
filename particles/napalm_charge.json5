@@ -29,7 +29,8 @@
       "emit": {
         "type": "napalm_flame",
         "count": 141,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -29,7 +29,8 @@
       "emit": {
         "type": "splinter",
         "count": 16,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {
@@ -63,6 +64,15 @@
       "detonate",
       {
         "remove": {}
+      }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "smoke_puff"
+        ]
       }
     ]
   },
@@ -99,11 +109,5 @@
   },
   "thrust": {
     "accel": 2.5
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "smoke_puff"
-    }
-  ]
+  }
 }

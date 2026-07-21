@@ -28,7 +28,8 @@
       "emit": {
         "type": "energy_shard",
         "count": 10,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -60,6 +61,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 200,
+        "unit": "wl_tick_burst",
+        "do": [
+          "bullet_impact"
+        ]
+      }
     ]
   },
   "anim": {
@@ -82,11 +92,5 @@
       "radius": 12,
       "inferred": true
     }
-  },
-  "trails": [
-    {
-      "tick": 200,
-      "effect": "bullet_impact"
-    }
-  ]
+  }
 }

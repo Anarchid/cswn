@@ -26,7 +26,8 @@
       "emit": {
         "type": "stinger_shrapnel",
         "count": 15,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -60,6 +61,15 @@
       "detonate",
       {
         "remove": {}
+      }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "poof"
+        ]
       }
     ]
   },
@@ -96,11 +106,5 @@
   },
   "thrust": {
     "accel": 2
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "poof"
-    }
-  ]
+  }
 }

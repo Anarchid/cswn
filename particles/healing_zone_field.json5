@@ -25,7 +25,8 @@
       "emit": {
         "type": "healing_zone_sparkle",
         "count": 0,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -47,6 +48,22 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "healing_zone_trail",
+              "velocity": "radial",
+              "wl_inherit_div": 3,
+              "wl_free_step": true
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -65,14 +82,5 @@
     "wl_id": 25,
     "wl_name": "wid 25"
   },
-  "speed": 3,
-  "trails": [
-    {
-      "tick": 1,
-      "spawn": {
-        "type": "healing_zone_trail"
-      },
-      "larpa_mode": 0
-    }
-  ]
+  "speed": 3
 }

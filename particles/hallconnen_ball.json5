@@ -33,7 +33,8 @@
       "emit": {
         "type": "hallconnen_shrapnel",
         "count": 177,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

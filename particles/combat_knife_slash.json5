@@ -54,6 +54,15 @@
           "count": 20
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "spark_burst"
+        ]
+      }
     ]
   },
   "anim": {
@@ -71,11 +80,5 @@
     },
     "sprite": "s140_13"
   },
-  "speed": 3,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "spark_burst"
-    }
-  ]
+  "speed": 3
 }

@@ -32,7 +32,8 @@
       "emit": {
         "type": "super_napalm_fireball",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -48,6 +48,18 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "do": [
+          {
+            "emit": {
+              "type": "core:blood"
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -60,13 +72,5 @@
       "start": 0,
       "draw_on_map": false
     }
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "spawn": {
-        "type": "core:blood"
-      }
-    }
-  ]
+  }
 }

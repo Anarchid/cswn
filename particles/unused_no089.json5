@@ -32,7 +32,8 @@
       "emit": {
         "type": "ags_17_shard",
         "count": 55,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

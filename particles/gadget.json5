@@ -28,7 +28,8 @@
       "emit": {
         "type": "gadget_core",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

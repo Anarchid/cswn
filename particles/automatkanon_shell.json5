@@ -26,7 +26,8 @@
       "emit": {
         "type": "automatkanon_flak",
         "count": 10,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -26,7 +26,8 @@
       "emit": {
         "type": "ricochet",
         "count": 3,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {
@@ -51,6 +52,28 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "beretta_950_tracer"
+        ]
+      },
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "beretta_950_tracer",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -68,19 +91,6 @@
     }
   },
   "speed": 3.3,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "beretta_950_tracer"
-    },
-    {
-      "tick": 1,
-      "spawn": {
-        "type": "beretta_950_tracer"
-      },
-      "larpa_mode": 1
-    }
-  ],
   "terrain": [
     {
       "carve": {

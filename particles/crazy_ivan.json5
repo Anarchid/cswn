@@ -33,7 +33,8 @@
       "emit": {
         "type": "crazy_ivan_bomblet",
         "count": 40,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

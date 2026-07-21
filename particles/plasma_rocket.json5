@@ -50,6 +50,21 @@
           "count": 3
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "plasma_trail",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -77,14 +92,5 @@
       "inferred": true
     }
   },
-  "speed": 3.4,
-  "trails": [
-    {
-      "tick": 1,
-      "spawn": {
-        "type": "plasma_trail"
-      },
-      "larpa_mode": 1
-    }
-  ]
+  "speed": 3.4
 }

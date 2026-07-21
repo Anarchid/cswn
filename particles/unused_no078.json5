@@ -52,6 +52,15 @@
           "count": 1
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 14,
+        "unit": "wl_tick_burst",
+        "do": [
+          "unused_sx031"
+        ]
+      }
     ]
   },
   "anim": {
@@ -66,11 +75,5 @@
     },
     "wl_id": 22,
     "wl_name": "nid 22"
-  },
-  "trails": [
-    {
-      "tick": 14,
-      "effect": "unused_sx031"
-    }
-  ]
+  }
 }

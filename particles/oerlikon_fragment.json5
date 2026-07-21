@@ -28,7 +28,8 @@
       "emit": {
         "type": "oerlikon_shard",
         "count": 5,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

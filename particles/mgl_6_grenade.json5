@@ -29,7 +29,8 @@
       "emit": {
         "type": "mgl_6_fragment",
         "count": 40,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -58,6 +59,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "mgl_6_trail"
+        ]
+      }
     ]
   },
   "anim": {
@@ -75,11 +85,5 @@
     },
     "sprite": "s613_1"
   },
-  "speed": 3.3,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "mgl_6_trail"
-    }
-  ]
+  "speed": 3.3
 }

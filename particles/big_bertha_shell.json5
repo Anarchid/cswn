@@ -29,7 +29,8 @@
       "emit": {
         "type": "big_bertha_charge",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -60,6 +61,21 @@
           "count": 44
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 5,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "big_bertha_charge",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -77,15 +93,6 @@
     }
   },
   "speed": 3.5,
-  "trails": [
-    {
-      "tick": 5,
-      "spawn": {
-        "type": "big_bertha_charge"
-      },
-      "larpa_mode": 1
-    }
-  ],
   "terrain": [
     {
       "carve": {

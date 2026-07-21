@@ -26,7 +26,8 @@
       "emit": {
         "type": "splinter",
         "count": 16,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {
@@ -60,6 +61,28 @@
       "detonate",
       {
         "remove": {}
+      }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "smoke_puff"
+        ]
+      },
+      {
+        "every": 2,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "super_mirve_splinter",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
       }
     ]
   },
@@ -96,18 +119,5 @@
   },
   "thrust": {
     "accel": 2.5
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "smoke_puff"
-    },
-    {
-      "tick": 2,
-      "spawn": {
-        "type": "super_mirve_splinter"
-      },
-      "larpa_mode": 1
-    }
-  ]
+  }
 }

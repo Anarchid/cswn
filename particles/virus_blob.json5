@@ -29,7 +29,8 @@
       "emit": {
         "type": "virus_spore",
         "count": 99,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

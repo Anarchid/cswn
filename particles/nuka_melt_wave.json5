@@ -28,7 +28,8 @@
       "emit": {
         "type": "nuka_fireball",
         "count": 255,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -27,7 +27,8 @@
       "emit": {
         "type": "flame",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -62,6 +63,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 2,
+        "unit": "wl_tick_burst",
+        "do": [
+          "molotov_fire"
+        ]
+      }
     ]
   },
   "anim": {
@@ -76,12 +86,6 @@
     },
     "sprite": "s574_6"
   },
-  "trails": [
-    {
-      "tick": 2,
-      "effect": "molotov_fire"
-    }
-  ],
   "terrain": [
     {
       "carve": {

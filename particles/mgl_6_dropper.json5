@@ -48,6 +48,21 @@
           "factor": 0
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 360,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "hidden_mine",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -64,14 +79,5 @@
       "start": -1
     }
   },
-  "speed": 2.4,
-  "trails": [
-    {
-      "tick": 360,
-      "spawn": {
-        "type": "hidden_mine"
-      },
-      "larpa_mode": 1
-    }
-  ]
+  "speed": 2.4
 }

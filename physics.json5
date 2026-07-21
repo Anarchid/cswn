@@ -27,8 +27,6 @@
     "rope_max_length": 250,
     "rope_gravity": 0.015,
     "rope_speed": 8,
-    "splinter_larpa_vel_div": 3,
-    "splinter_crackler_vel_div": 3,
     "rope_initial_length": 250,
     "rope_attach_length": 28.125,
     "rope_min_length": 10.625,

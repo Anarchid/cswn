@@ -30,7 +30,8 @@
       "emit": {
         "type": "ricochet",
         "count": 2,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {

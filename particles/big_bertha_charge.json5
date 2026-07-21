@@ -29,7 +29,8 @@
       "emit": {
         "type": "big_bertha_fragment",
         "count": 22,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

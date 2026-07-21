@@ -30,7 +30,8 @@
       "emit": {
         "type": "ricochet",
         "count": 4,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -65,6 +66,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "smoke_wisp"
+        ]
+      }
     ]
   },
   "anim": {
@@ -83,12 +93,6 @@
     "sprite": "s223_13"
   },
   "speed": 2.4,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "smoke_wisp"
-    }
-  ],
   "terrain": [
     {
       "carve": {

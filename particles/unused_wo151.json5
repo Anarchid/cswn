@@ -37,7 +37,8 @@
       "emit": {
         "type": "healing_zone_sparkle",
         "count": 0,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -53,6 +53,21 @@
           "count": 35
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          {
+            "emit": {
+              "type": "doberman_smoke",
+              "velocity": "inherit",
+              "wl_inherit_div": 3
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -71,14 +86,5 @@
     "wl_id": 39,
     "wl_name": "wid 39"
   },
-  "speed": 10.5,
-  "trails": [
-    {
-      "tick": 1,
-      "spawn": {
-        "type": "doberman_smoke"
-      },
-      "larpa_mode": 1
-    }
-  ]
+  "speed": 10.5
 }

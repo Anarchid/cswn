@@ -26,7 +26,8 @@
       "emit": {
         "type": "ricochet",
         "count": 2,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {
@@ -60,6 +61,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "spark_burst"
+        ]
+      }
     ]
   },
   "anim": {
@@ -76,11 +86,5 @@
       "start": -1
     }
   },
-  "speed": 3.5,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "spark_burst"
-    }
-  ]
+  "speed": 3.5
 }

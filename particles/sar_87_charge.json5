@@ -28,7 +28,8 @@
       "emit": {
         "type": "buckshot_fragment",
         "count": 7,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

@@ -28,7 +28,8 @@
       "emit": {
         "type": "unused_no129",
         "count": 15,
-        "scatter": 1
+        "velocity": "inherit",
+        "inherit": 1
       }
     },
     {

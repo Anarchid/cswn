@@ -57,6 +57,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "voughnought_tracer"
+        ]
+      }
     ]
   },
   "anim": {
@@ -74,12 +83,6 @@
     }
   },
   "speed": 4,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "voughnought_tracer"
-    }
-  ],
   "terrain": [
     {
       "carve": {

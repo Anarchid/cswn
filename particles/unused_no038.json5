@@ -27,7 +27,8 @@
       "emit": {
         "type": "unused_no039",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -52,6 +53,15 @@
           "factor": 1
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "mine_explosion"
+        ]
+      }
     ]
   },
   "anim": {
@@ -75,11 +85,5 @@
       "radius": 12,
       "inferred": true
     }
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "mine_explosion"
-    }
-  ]
+  }
 }

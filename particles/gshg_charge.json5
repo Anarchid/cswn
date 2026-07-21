@@ -29,7 +29,8 @@
       "emit": {
         "type": "gshg_bomblet",
         "count": 144,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -64,6 +65,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "mine_explosion"
+        ]
+      }
     ]
   },
   "anim": {
@@ -80,11 +90,5 @@
       "start": -1
     }
   },
-  "speed": 0,
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "mine_explosion"
-    }
-  ]
+  "speed": 0
 }

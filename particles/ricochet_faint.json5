@@ -58,6 +58,15 @@
       {
         "remove": {}
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "unit": "wl_tick_burst",
+        "do": [
+          "smoke_puff"
+        ]
+      }
     ]
   },
   "anim": {
@@ -70,11 +79,5 @@
       "start": 0,
       "draw_on_map": false
     }
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "effect": "smoke_puff"
-    }
-  ]
+  }
 }

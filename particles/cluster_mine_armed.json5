@@ -28,7 +28,8 @@
       "emit": {
         "type": "cluster_mine_bomblet",
         "count": 33,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {

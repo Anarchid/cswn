@@ -30,7 +30,8 @@
       "emit": {
         "type": "blood_droplet",
         "count": 0,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
@@ -55,6 +56,18 @@
           "factor": 0.05
         }
       }
+    ],
+    "tick": [
+      {
+        "every": 1,
+        "do": [
+          {
+            "emit": {
+              "type": "core:blood"
+            }
+          }
+        ]
+      }
     ]
   },
   "anim": {
@@ -68,13 +81,5 @@
       "draw_on_map": false
     },
     "sprite": "s169_4"
-  },
-  "trails": [
-    {
-      "tick": 1,
-      "spawn": {
-        "type": "core:blood"
-      }
-    }
-  ]
+  }
 }

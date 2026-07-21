@@ -25,7 +25,8 @@
       "emit": {
         "type": "cluster_mine_armed",
         "count": 1,
-        "scatter": 0
+        "velocity": "radial",
+        "wl_free_step": true
       }
     },
     {
