@@ -1,14 +1,17 @@
 # cswn
 
-A total-conversion weapon mod for the wormnõid engine, in its native T0
-package format: **124 weapons, 342 particles and 81 effects, one definition
-per file, every one of them named for what it does.**
+A total-conversion weapon mod for the wormnõid engine, in its native package
+format: **124 weapons, 342 particles and 81 effects, one definition per file,
+every one of them named for what it does.**
 
 It began life as *csliero rewormed v0.36b*, a WebLiero mod whose entire
 vocabulary was numeric — `wo47`, `nobj112`, sprite `s40_15` — with particles
 reused across weapons and across each other, so that no filename told you
 anything and no weapon's effect tree could be read without tracing ids by
 hand. This repository is that mod after the untangling.
+
+The engine is not public yet, so a checkout here is data without a runtime —
+a legible one, which is rather the point.
 
 ## What's here
 
@@ -64,14 +67,3 @@ what that does and does not extend to. In short: the packaging, naming,
 organization and WebNoita adaptations are freely reusable; the inherited
 weapon data and sprite art carry whatever status their original authors gave
 them, which is to say none stated.
-
-## Notes for anyone poking at this
-
-The wormnõid engine is not public yet, so a checkout of this repository is
-data without a runtime — a legible one, which is rather the point.
-
-**Do not regenerate over this tree.** The T1 converter that bootstrapped it
-(`npm run t0-materialize -- --native-extras`, run against the WebLiero
-original, last at engine commit `47488e1`) remains the tool for importing
-*other* WebLiero mods; run against this directory it would destroy every
-authored change. Format migrations arrive as migration scripts instead.
