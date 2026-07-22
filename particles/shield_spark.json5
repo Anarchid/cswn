@@ -56,10 +56,5 @@
       "start": 0,
       "draw_on_map": false
     },
-    "light": {
-      "rgb": [0.478,0.478,0.973],
-      "intensity": 0,
-      "radius": 1
-    }
   }
 }
