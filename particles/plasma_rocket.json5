@@ -83,12 +83,12 @@
     "sprite": "s101_1",
     "light": {
       "rgb": [
-        1,
         0,
-        0
+        1,
+        0.3
       ],
-      "intensity": 0.5405,
-      "radius": 12
+      "intensity": 0.7,
+      "radius": 20
     }
   },
   "speed": 3.4
