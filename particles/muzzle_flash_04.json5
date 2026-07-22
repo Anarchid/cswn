@@ -59,9 +59,8 @@
     "sprite": "s9_7",
     "light": {
       "color": "#ffd080",
-      "intensity": 0.45,
-      "radius": 18,
-      "inferred": true
+      "intensity": 0.5032,
+      "radius": 18
     }
   }
 }

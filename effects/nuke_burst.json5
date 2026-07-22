@@ -45,9 +45,8 @@
         0.8448,
         0.3404
       ],
-      "intensity": 1,
-      "radius": 48,
-      "inferred": true
+      "intensity": 0.018,
+      "radius": 48
     }
   }
 }

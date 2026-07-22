@@ -67,9 +67,8 @@
         1,
         0.5895
       ],
-      "intensity": 0.5,
-      "radius": 12,
-      "inferred": true
+      "intensity": 0.5405,
+      "radius": 12
     }
   },
   "terrain": [

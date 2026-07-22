@@ -164,28 +164,81 @@ if (args.includes('--defs') || args.includes('--apply')) {
     const tag = l.inferred ? '' : '  [AUTHORED — hands off]';
     console.log(`${String(n).padStart(5)}×  ${dn}: ${cur} → ${prop.toFixed(3)}${tag}`);
   }
-  if (args.includes('--apply')) {
-    // √n-normalize inferred lights with real sibling stacks (n ≥ 4; 2-3×
-    // overlaps barely exceed the clamp and keep their punch). Textual
-    // in-place edit of the intensity value inside the light block so the
-    // files' comments and formatting survive.
-    const { writeFileSync } = await import('node:fs');
-    let applied = 0;
-    for (const { dn, n, l } of drows) {
-      if (!l.inferred || n < 4) continue;
-      const kind = kindOf(dn) === 'particle' ? 'particles' : 'effects';
-      const file = join(root, kind, `${dn}.json5`);
-      const text = readFileSync(file, 'utf8');
-      const prop = Math.round((intensityOf(l) / Math.sqrt(n)) * 1e4) / 1e4;
-      const out = text.replace(
-        /("light"\s*:\s*\{[^}]*"intensity"\s*:\s*)([0-9.]+)/,
-        (_, pre) => `${pre}${prop}`,
-      );
-      if (out === text) { console.log(`  !! no intensity match in ${file}`); continue; }
-      writeFileSync(file, out);
-      applied++;
-      console.log(`  applied: ${dn} → ${prop}`);
-    }
-    console.log(`${applied} defs updated`);
+}
+
+// --- --bake: graduate inferred lights with the engine's approved curve -----
+// Writes the SAME values the engine's runtime stack-normalization produces
+// (webnoita ts/src/light-stacks.ts — walk + curve MUST match it exactly,
+// verified by lightbench parity after baking) and drops "inferred": true:
+// the lights become authored, the engine skips them (no double-scaling),
+// and the room's inferWeaponLights rule no longer affects this package.
+if (args.includes('--bake')) {
+  const T = 8;      // must match light-stacks.ts targetTotal
+  const BUFF = 1.15; // must match light-stacks.ts buff
+  const q4 = (v) => Math.round(v * 1e4) / 1e4;
+  const scale = (S) => S > 0 ? BUFF * T * (1 - Math.exp(-S / T)) / S : 1;
+
+  // Engine-parity walk (port of stackCountsFromT0): per-weapon SUM of paths,
+  // global MAX across weapons; per particle, each child ref takes the MAX
+  // contribution across its trigger lists (death alternatives never co-fire
+  // and usually repeat the same children); trails count one generation.
+  const engineCounts = new Map();
+  for (const [, w] of weapons) {
+    const acc = new Map();
+    const bump = (name, n) => acc.set(name, (acc.get(name) ?? 0) + n);
+    const walk = (name, mult, path, depth) => {
+      if (depth > 8 || path.has(name) || mult <= 0) return;
+      if (effects.has(name)) { bump(name, mult); return; }
+      const def = particles.get(name);
+      if (!def) return;
+      bump(name, mult);
+      const next = new Set(path); next.add(name);
+      const childMult = new Map();
+      for (const [trig, actions] of Object.entries(def.on ?? {})) {
+        if (trig === 'tick') continue;
+        const perList = new Map();
+        for (const { ref, count } of refsOf(actions)) {
+          perList.set(ref, (perList.get(ref) ?? 0) + count);
+        }
+        for (const [ref, count] of perList) {
+          childMult.set(ref, Math.max(childMult.get(ref) ?? 0, count));
+        }
+      }
+      for (const t of def.on?.tick ?? []) {
+        for (const { ref, count } of refsOf(t.do)) {
+          childMult.set(ref, Math.max(childMult.get(ref) ?? 0, count));
+        }
+      }
+      for (const tr of def.trails ?? []) {
+        const ref = tr.effect ?? tr.spawn?.type;
+        if (typeof ref === 'string') childMult.set(ref, Math.max(childMult.get(ref) ?? 0, 1));
+      }
+      for (const [ref, count] of childMult) walk(ref, mult * count, next, depth + 1);
+    };
+    for (const { ref, count } of refsOf(w.on?.fire)) walk(ref, count, new Set(), 0);
+    for (const [name, n] of acc) engineCounts.set(name, Math.max(engineCounts.get(name) ?? 0, n));
   }
+
+  const { writeFileSync } = await import('node:fs');
+  let baked = 0;
+  for (const [name, def] of [...particles, ...effects]) {
+    const l = lightOf(def);
+    if (!l || l.inferred !== true) continue;
+    const kind = kindOf(name) === 'particle' ? 'particles' : 'effects';
+    const file = join(root, kind, `${name}.json5`);
+    let text = readFileSync(file, 'utf8');
+    const S = intensityOf(l) * Math.max(1, engineCounts.get(name) ?? 0);
+    const newI = q4(intensityOf(l) * scale(S));
+    const before = text;
+    text = text.replace(
+      /("light"\s*:\s*\{[^}]*"intensity"\s*:\s*)([0-9.]+)/,
+      (_, pre) => `${pre}${newI}`,
+    );
+    text = text.replace(/,(\s*)"inferred": true(?=\s*\})/, '');
+    if (text === before) { console.log(`  !! no edit landed in ${file}`); continue; }
+    writeFileSync(file, text);
+    baked++;
+    console.log(`  baked: ${name} ${intensityOf(l)} → ${newI} (n=${engineCounts.get(name) ?? 0})`);
+  }
+  console.log(`${baked} defs graduated to authored`);
 }
