@@ -56,14 +56,9 @@
       "draw_on_map": false
     },
     "light": {
-      "rgb": [
-        1,
-        1,
-        1
-      ],
-      "intensity": 0.5,
-      "radius": 12,
-      "inferred": true
+      "color": "#24ffa0",
+      "intensity": 0.05,
+      "radius": 12
     }
   }
 }
