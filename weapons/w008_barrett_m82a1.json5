@@ -43,10 +43,9 @@
   "presentation": {
     "name": "BARRETT M82A1",
     "laser_sight": true,
-    "sounds_wl": {
-      "fire": 2,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "rifle.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

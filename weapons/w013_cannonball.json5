@@ -32,10 +32,8 @@
   "presentation": {
     "name": "CANNONBALL",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 5,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "throw.wav"
     },
     "fire_cone": -1,
     "shells": {

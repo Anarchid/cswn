@@ -43,10 +43,9 @@
   "presentation": {
     "name": "HK FABARM FP6",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 0,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "shotgun.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

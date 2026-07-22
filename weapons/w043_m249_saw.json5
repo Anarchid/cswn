@@ -43,10 +43,9 @@
   "presentation": {
     "name": "M249 SAW",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 1,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "shot.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

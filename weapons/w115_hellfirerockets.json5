@@ -23,10 +23,9 @@
   "presentation": {
     "name": "HELLFIREROCKETS",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 3,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "bazooka.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": 0,
     "shells": {

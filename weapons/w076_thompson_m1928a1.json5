@@ -43,10 +43,9 @@
   "presentation": {
     "name": "THOMPSON M1928A1",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 18,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "hurt1.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

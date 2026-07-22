@@ -23,10 +23,8 @@
   "presentation": {
     "name": "GADGET",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 21,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "alive.wav"
     },
     "fire_cone": -1,
     "shells": {

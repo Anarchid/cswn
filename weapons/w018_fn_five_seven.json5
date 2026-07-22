@@ -43,10 +43,9 @@
   "presentation": {
     "name": "FN FIVE-SEVEN",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 13,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "dirt.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

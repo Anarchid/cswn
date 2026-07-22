@@ -43,10 +43,9 @@
   "presentation": {
     "name": "FLAKCANNON",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 29,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "burner.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

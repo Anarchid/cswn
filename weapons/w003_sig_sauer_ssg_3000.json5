@@ -43,10 +43,9 @@
   "presentation": {
     "name": "SIG SAUER SSG 3000",
     "laser_sight": true,
-    "sounds_wl": {
-      "fire": 8,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "exp3b.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

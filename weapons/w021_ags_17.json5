@@ -32,10 +32,8 @@
   "presentation": {
     "name": "AGS-17",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 22,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "begin.wav"
     },
     "fire_cone": -1,
     "shells": {

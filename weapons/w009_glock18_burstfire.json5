@@ -43,10 +43,9 @@
   "presentation": {
     "name": "GLOCK18 BURSTFIRE",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 14,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "bump.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

@@ -43,10 +43,8 @@
   "presentation": {
     "name": "DUAL 96G BERETTAS",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 13,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "dirt.wav"
     },
     "fire_cone": -1,
     "shells": {

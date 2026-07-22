@@ -43,10 +43,9 @@
   "presentation": {
     "name": "AK-47",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 7,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "exp3a.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

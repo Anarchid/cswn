@@ -23,10 +23,8 @@
   "presentation": {
     "name": "CROSSBOW",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 2,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "rifle.wav"
     },
     "fire_cone": -1,
     "shells": {

@@ -23,10 +23,8 @@
   "presentation": {
     "name": "CALTROPS",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 20,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "hurt3.wav"
     },
     "fire_cone": -1,
     "shells": {

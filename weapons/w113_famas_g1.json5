@@ -43,10 +43,8 @@
   "presentation": {
     "name": "FAMAS G1",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 1,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "shot.wav"
     },
     "fire_cone": -1,
     "shells": {

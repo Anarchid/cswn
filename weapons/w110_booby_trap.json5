@@ -23,11 +23,6 @@
   "presentation": {
     "name": "BOOBY TRAP",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": -1,
-      "play_reload": false,
-      "reload": -1
-    },
     "fire_cone": -1,
     "shells": {
       "leave": 0,

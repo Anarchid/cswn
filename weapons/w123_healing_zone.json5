@@ -23,11 +23,6 @@
   "presentation": {
     "name": "HEALING ZONE",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": -1,
-      "play_reload": false,
-      "reload": -1
-    },
     "fire_cone": 0,
     "shells": {
       "leave": 0,

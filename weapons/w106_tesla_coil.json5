@@ -23,10 +23,8 @@
   "presentation": {
     "name": "TESLA COIL",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 27,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "select.wav"
     },
     "fire_cone": 0,
     "shells": {

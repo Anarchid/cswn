@@ -32,10 +32,9 @@
   "presentation": {
     "name": "VIRUS",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 5,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "throw.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

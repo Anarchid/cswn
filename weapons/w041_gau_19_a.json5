@@ -43,10 +43,8 @@
   "presentation": {
     "name": "GAU-19/A",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 23,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "dropshel.wav"
     },
     "fire_cone": -1,
     "shells": {

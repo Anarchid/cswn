@@ -75,8 +75,8 @@
   "presentation": {
     "color_index": 162,
     "splinter_color_index": 11,
-    "sounds_wl": {
-      "explode": 12
+    "sounds": {
+      "explode": "exp5.wav"
     },
     "sprite_wl": {
       "start": 534

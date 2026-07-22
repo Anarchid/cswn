@@ -20,8 +20,17 @@
     "bonus_health": "s211_1",
     "bonus_weapon": "s210_1"
   },
+  // Engine-owned sound slots, resolved by name from sounds/ (the classic
+  // pack's hardcoded indices 18-20/15-17/14/5). Weapon fire, particle
+  // explode, and effect start sounds live on the defs themselves
+  // (presentation.sounds).
+  "sounds": {
+    "hurt": { "any": ["hurt1.wav", "hurt2.wav", "hurt3.wav"] },
+    "death": { "any": ["death1.wav", "death2.wav", "death3.wav"] },
+    "bump": "bump.wav",
+    "throw": "throw.wav"
+  },
   "legacy_assets": {
-    "soundpack": "csliero.zip",
     "color_anim": [
       133,
       136,

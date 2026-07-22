@@ -43,10 +43,9 @@
   "presentation": {
     "name": "INGRAM MAC-10",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 20,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "hurt3.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

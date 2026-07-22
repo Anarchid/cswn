@@ -32,10 +32,8 @@
   "presentation": {
     "name": "OERLIKON KBA 25mm",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 29,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "burner.wav"
     },
     "fire_cone": -1,
     "shells": {

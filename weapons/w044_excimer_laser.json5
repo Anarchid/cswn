@@ -32,10 +32,8 @@
   "presentation": {
     "name": "EXCIMER LASER",
     "laser_sight": true,
-    "sounds_wl": {
-      "fire": -1,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

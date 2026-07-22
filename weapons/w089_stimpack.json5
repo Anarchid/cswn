@@ -23,10 +23,8 @@
   "presentation": {
     "name": "STIMPACK",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 15,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "death1.wav"
     },
     "fire_cone": 0,
     "shells": {

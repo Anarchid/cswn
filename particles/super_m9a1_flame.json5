@@ -93,9 +93,6 @@
   "presentation": {
     "color_index": 75,
     "splinter_color_index": 0,
-    "sounds_wl": {
-      "explode": -1
-    },
     "sprite_wl": {
       "start": 219
     },

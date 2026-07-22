@@ -43,10 +43,9 @@
   "presentation": {
     "name": "STERLING SAR-87",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 6,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "larpa.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

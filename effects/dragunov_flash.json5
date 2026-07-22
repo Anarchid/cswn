@@ -17,9 +17,8 @@
     }
   ],
   "presentation": {
-    "sounds_wl": {
-      "start": 29,
-      "num": 0
+    "sounds": {
+      "start": "burner.wav"
     },
     "sprite_wl": {
       "start": 51,

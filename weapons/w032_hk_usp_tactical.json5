@@ -43,10 +43,9 @@
   "presentation": {
     "name": "HK USP TACTICAL",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 23,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "dropshel.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

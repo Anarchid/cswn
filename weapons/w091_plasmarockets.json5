@@ -23,10 +23,8 @@
   "presentation": {
     "name": "PLASMAROCKETS",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 3,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "bazooka.wav"
     },
     "fire_cone": 0,
     "shells": {

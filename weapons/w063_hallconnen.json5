@@ -32,10 +32,9 @@
   "presentation": {
     "name": "HALLCONNEN",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 10,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "exp3.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

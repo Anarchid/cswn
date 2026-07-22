@@ -43,10 +43,9 @@
   "presentation": {
     "name": "RHEINMETALL RMK30",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 11,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "exp4.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

@@ -25,10 +25,6 @@
     }
   ],
   "presentation": {
-    "sounds_wl": {
-      "start": -1,
-      "num": 0
-    },
     "sprite_wl": {
       "start": 102,
       "frames": 2,

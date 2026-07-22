@@ -32,10 +32,9 @@
   "presentation": {
     "name": "RUGER 77",
     "laser_sight": true,
-    "sounds_wl": {
-      "fire": 9,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "exp2.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

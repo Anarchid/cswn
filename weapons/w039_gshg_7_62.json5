@@ -43,10 +43,9 @@
   "presentation": {
     "name": "GShG-7.62",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 22,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "begin.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

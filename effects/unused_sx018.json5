@@ -26,9 +26,8 @@
     }
   ],
   "presentation": {
-    "sounds_wl": {
-      "start": 10,
-      "num": 0
+    "sounds": {
+      "start": "exp3.wav"
     },
     "sprite_wl": {
       "start": 51,

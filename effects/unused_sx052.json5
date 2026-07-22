@@ -25,9 +25,14 @@
     }
   ],
   "presentation": {
-    "sounds_wl": {
-      "start": 25,
-      "num": 3
+    "sounds": {
+      "start": {
+        "any": [
+          "moveup.wav",
+          "movedown.wav",
+          "select.wav"
+        ]
+      }
     },
     "sprite_wl": {
       "start": 51,

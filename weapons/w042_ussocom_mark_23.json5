@@ -43,10 +43,9 @@
   "presentation": {
     "name": "USSOCOM MARK 23",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 4,
-      "play_reload": true,
-      "reload": -1
+    "sounds": {
+      "fire": "blaster.wav",
+      "reload": "reloaded.wav"
     },
     "fire_cone": -1,
     "shells": {

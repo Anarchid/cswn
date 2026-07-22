@@ -43,10 +43,8 @@
   "presentation": {
     "name": "XM214 MINIGUN",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 4,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "blaster.wav"
     },
     "fire_cone": -1,
     "shells": {

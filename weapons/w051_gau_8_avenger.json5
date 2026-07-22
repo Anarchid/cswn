@@ -43,10 +43,8 @@
   "presentation": {
     "name": "GAU-8 AVENGER",
     "laser_sight": false,
-    "sounds_wl": {
-      "fire": 22,
-      "play_reload": false,
-      "reload": -1
+    "sounds": {
+      "fire": "begin.wav"
     },
     "fire_cone": -1,
     "shells": {
