@@ -37,6 +37,13 @@
     "fall_damage_up": 0,
     "min_bounce_horiz": 0.813,
     "min_bounce_down": 0.813,
-    "min_bounce_up": 0.813
+    "min_bounce_up": 0.813,
+    // WN extension, no WL ancestor (deliberate fidelity break): ballistic
+    // worms keep vertical velocity grazing a flat vertical wall (scrubbed
+    // by wall_slide_friction per graze tick) instead of the authentic
+    // Liero corner-point bounce (velY -> -velY/3). Walking into the wall
+    // still cliff-hangs. Rooms can override via the Wall slide rule.
+    "wall_slide": true,
+    "wall_slide_friction": 0.89
   }
 }
