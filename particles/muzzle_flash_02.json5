@@ -55,9 +55,13 @@
     },
     "sprite": "s9_7",
     "light": {
-      "color": "#ffd080",
-      "intensity": 0.5032,
-      "radius": 18
+      "rgb": [
+        1,
+        0.9046,
+        0.4064
+      ],
+      "intensity": 0.8,
+      "radius": 22
     }
   }
 }
