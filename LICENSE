@@ -10,6 +10,11 @@ derived from — the csliero weapon data and sprite art originating with
 Radon and the later "rewormed" revision. No license is known to have been
 published for that work. See README.md ("Provenance and permissions").
 
+It likewise does not cover `sprites/nuke_scar.png`, which is derived from
+the Zero-K RTS project's ground-scar decal (`scar5_big.png`,
+github.com/ZeroK-RTS/Zero-K, GPL v2); that file remains under its
+upstream terms.
+
 
 MIT License
 

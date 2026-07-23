@@ -23,6 +23,18 @@
         ],
         "debris": true
       }
+    },
+    // Blast scar (2026-07-22, kept after playtest): nuke_scar stretched over
+    // r 40 at 50% opacity — a battery of rockets marks a wall up nicely.
+    {
+      "stain": {
+        "r": [
+          0,
+          40
+        ],
+        "strength": 0.5,
+        "texture": 10
+      }
     }
   ],
   "presentation": {

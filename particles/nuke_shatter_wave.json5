@@ -19,7 +19,7 @@
   "speed_variance": 0,
   "spawn_jitter": 0,
   "fuse": {
-    "ticks": 1,
+    "ticks": 5,
     "variance": 0
   },
   "on": {

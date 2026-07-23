@@ -245,15 +245,12 @@ particles/no160	particles/shield_spark
 particles/no161	particles/hallconnen_shrapnel
 particles/no162	particles/badger_trail
 particles/no163	particles/badger_spray
-particles/no164	particles/gadget_ember
 particles/no165	particles/nuke_shatter_wave
 particles/no166	particles/nuke_melt_wave
 particles/no167	particles/gadget_shatter_wave
 particles/no168	particles/gadget_melt_wave
 particles/no169	particles/nuka_shatter_wave
 particles/no170	particles/nuka_melt_wave
-particles/no171	particles/fallout_soot_riser
-particles/no172	particles/fallout_soot
 particles/wo000	particles/spas_12_pellet
 particles/wo001	particles/g3_bullet
 particles/wo002	particles/ssg_3000_bullet

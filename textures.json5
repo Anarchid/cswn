@@ -74,6 +74,14 @@
       "fill_frame": 73,
       "fill_count": 2,
       "destroy_rock": false
+    },
+    // 10: nuclear blast scar (hand-authored 2026-07-22) — pure native fill,
+    // no WL frames. Stretched over the blast zone by the nuke epicenters'
+    // stain verb, never used as a place fill.
+    {
+      "carve": false,
+      "destroy_rock": false,
+      "fill_sprite": "nuke_scar"
     }
   ]
 }

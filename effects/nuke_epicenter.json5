@@ -15,6 +15,26 @@
         "force": 0.043
       }
     },
+    // Explosion scar (2026-07-23): replaces the fallout particle spray. The
+    // nuke_scar texture (Zero-K scar5_big) is stretched over r 94 (~120% of
+    // the slag ring + voronoi fragment overhang) at full strength, alpha
+    // shaping the falloff. Deliberately FIRST band, before destroy_all: the
+    // r 32 core's debris shower and the shatter ring's rigid debris (r 64,
+    // fragments overhang up to ~cell_size past it) carry scorched pixels,
+    // and resolidified rubble stays scarred. The stain is a solid disc
+    // through the ground, so crater walls exposed later are scarred too.
+    // The shatter wave is fuse-5 so this scar is on screen a beat before
+    // the ground bursts (extrapolation displays 4f ahead).
+    {
+      "stain": {
+        "r": [
+          0,
+          94
+        ],
+        "strength": 1,
+        "texture": 10
+      }
+    },
     {
       "destroy_all": {
         "r": [

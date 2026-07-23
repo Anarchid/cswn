@@ -1,0 +1,12 @@
+// Hand-authored (2026-07-22): nuclear blast scar, from Zero-K's
+// bitmaps/Unknown/scars_newer/scar5_big.png (LARGE_AOE ground decal),
+// downscaled 1024->256. Referenced by textures.json5 as a dirt-fill
+// flipbook; the nuke epicenters stretch it over the blast zone via the
+// stain terrain verb (texture form), alpha shaping the falloff.
+{
+  "frames": 1,
+  "origin": [
+    0,
+    0
+  ]
+}
