@@ -67,8 +67,9 @@ We will act on it.
 
 ## License
 
-MIT, covering the work authored here — see [LICENSE](LICENSE), which sets out
-what that does and does not extend to. In short: the packaging, naming,
-organization and WebNoita adaptations are freely reusable; the inherited
-weapon data and sprite art carry whatever status their original authors gave
-them, which is to say none stated.
+GPL v2, covering the work authored here — see [LICENSE](LICENSE), which sets
+out what that does and does not extend to. In short: the packaging, naming,
+organization and WebNoita adaptations are GPL v2 (matching the Zero-K asset
+this package borrows); the inherited weapon data and sprite art carry
+whatever status their original authors gave them, which is to say none
+stated.
