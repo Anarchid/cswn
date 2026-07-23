@@ -20,6 +20,19 @@
         ],
         "debris": true
       }
+    },
+    // Blast scar (2026-07-23): the every-big-explosion rule — nuke_scar
+    // stretched over 0.7x the damage radius at damage/176 opacity
+    // (clamped 0.25..1); rocket_explosion is the hand-tuned anchor.
+    {
+      "stain": {
+        "r": [
+          0,
+          14
+        ],
+        "strength": 0.8,
+        "texture": 10
+      }
     }
   ],
   "presentation": {
