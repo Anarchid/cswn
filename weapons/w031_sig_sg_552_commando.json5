@@ -3,7 +3,7 @@
 // fidelity gate if you intend to stay byte-compatible with the WL original.
 {
   "ammo": 35,
-  "reload": 490,
+  "reload": 245,
   "fire_delay": 6,
   "recoil": 0.05,
   "on": {
