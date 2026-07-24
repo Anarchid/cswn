@@ -72,6 +72,14 @@
     "sprite_wl": {
       "start": 0,
       "draw_on_map": false
+    },
+    // Hand-authored 2026-07-23: same fix as ricochet's, dimmer per spark —
+    // a Raffaello burst lands 5 fragments x 4 pellets, so stacks run 5-20
+    // where bullet sparks run 1-2. Deep amber holds hue at the pile-up.
+    "light": {
+      "color": "#ecb400",
+      "intensity": 0.35,
+      "radius": 12
     }
   }
 }

@@ -32,6 +32,7 @@
       "delay": 0
     },
     "sprite": "s49_5",
+    "lit": false,
     "shadow": true,
     "shake": 3,
     "flash": 6,

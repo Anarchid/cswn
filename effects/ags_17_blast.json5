@@ -34,6 +34,7 @@
       "delay": 3
     },
     "sprite": "s51_4",
+    "lit": false,
     "shadow": true,
     "shake": 2,
     "flash": 3,

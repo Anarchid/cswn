@@ -51,6 +51,7 @@
       "delay": 4
     },
     "sprite": "s40_15",
+    "lit": false,
     "shadow": true,
     "shake": 5,
     "flash": 2,

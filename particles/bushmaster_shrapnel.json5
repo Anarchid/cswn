@@ -60,6 +60,15 @@
     "sprite_wl": {
       "start": 0,
       "draw_on_map": false
+    },
+    "light": {
+      "rgb": [
+        1,
+        0.8448,
+        0.3404
+      ],
+      "intensity": 0.3,
+      "radius": 10
     }
   },
   "terrain": [

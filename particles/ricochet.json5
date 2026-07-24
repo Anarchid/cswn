@@ -72,6 +72,15 @@
     "sprite_wl": {
       "start": 0,
       "draw_on_map": false
+    },
+    // Hand-authored 2026-07-23: bullet sparks were pitch dark (particle-class
+    // defs never got inferred lights). Deep-saturated amber (palette 75, B~0)
+    // holds hue when a burst stacks; sized to light the spark itself + a small
+    // terrain halo. Shared by every gun's impact sparks.
+    "light": {
+      "color": "#ecb400",
+      "intensity": 0.5,
+      "radius": 10
     }
   }
 }

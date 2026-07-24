@@ -6,7 +6,7 @@
     "particle_class": true
   },
   "physics": {
-    "gravity": -0.092,
+    "gravity": 0.092,
     "pushed_by_blasts": false,
     "ccd": false
   },
@@ -60,6 +60,15 @@
     "sprite_wl": {
       "start": 0,
       "draw_on_map": false
+    },
+    "light": {
+      "rgb": [
+        1,
+        0.8448,
+        0.3404
+      ],
+      "intensity": 0.6112,
+      "radius": 10
     }
   },
   "terrain": [

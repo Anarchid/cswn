@@ -41,6 +41,7 @@
       "delay": 4
     },
     "sprite": "s46_9",
+    "lit": false,
     "shadow": true,
     "shake": 3,
     "flash": 5,

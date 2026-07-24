@@ -35,6 +35,7 @@
       "delay": 0
     },
     "sprite": "s45_10",
+    "lit": false,
     "shadow": true,
     "shake": 32,
     "flash": 55,

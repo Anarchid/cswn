@@ -62,6 +62,7 @@
       "start": 51,
       "draw_on_map": false
     },
-    "sprite": "s51_5"
+    "sprite": "s51_5",
+    "lit": false
   }
 }
