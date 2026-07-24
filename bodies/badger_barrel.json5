@@ -2,8 +2,13 @@
 // Fired as the `badger` carrier particle, which spawns this body on landing.
 // Blueprint mask + stain baked from sprites/s516_1.png (the WL BADGER sprite);
 // `material: core:metal` fills the mask, the stain paints the barrel art.
-// Detonates on its long random fuse OR when shot to 0 hp (destroy chain):
-// the classic BADGER acid burst (badger_dig + 99 radial badger_spray).
+//
+// A RADIOACTIVE keg, not a fragile bomb: `hp` is omitted, so it is
+// indestructible — shots and blasts shove it around but can NEVER kill it.
+// While it sits it pulses `badger_trail` (an invisible r160 contact-damage
+// field) every 8 ticks — the low-intensity radiation aura that IS the
+// weapon's main effect. It ends only when its long random fuse runs out
+// (on.fuse), venting the classic acid burst (badger_dig + 99 radial spray).
 {
   "shape": {
     "blueprint": {
@@ -25,7 +30,6 @@
     }
   },
   "material": "core:metal",
-  "hp": 20,
   "mass": 40,
   "fuse": { "ticks": 9999, "variance": 9200 },
   "stain": [
@@ -41,12 +45,15 @@
     0, 0, 0, 0, 216, 216, 216, 255, 180, 180, 180, 255, 0, 224, 0, 255, 124, 124, 124, 255, 124, 124, 124, 255, 108, 108, 108, 255, 60, 172, 60, 255, 76, 76, 76, 255, 0, 0, 0, 0,
     92, 92, 92, 255, 92, 92, 92, 255, 84, 232, 0, 255, 92, 92, 92, 255, 92, 92, 92, 255, 92, 92, 92, 255, 92, 92, 92, 255, 92, 92, 92, 255, 60, 172, 60, 255, 0, 224, 0, 255
   ],
-  "destroy": [
-    "badger_dig",
-    { "emit": { "type": "badger_spray", "count": 99, "velocity": "radial", "wl_free_step": true } },
-    { "sound": "exp5.wav" }
-  ],
   "on": {
+    "tick": [
+      {
+        "every": 8,
+        "do": [
+          { "emit": { "type": "badger_trail" } }
+        ]
+      }
+    ],
     "fuse": [
       "badger_dig",
       { "emit": { "type": "badger_spray", "count": 99, "velocity": "radial", "wl_free_step": true } },
