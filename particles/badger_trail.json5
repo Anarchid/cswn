@@ -31,11 +31,6 @@
           "amount": 1
         }
       },
-      {
-        "push_other": {
-          "factor": 0
-        }
-      }
     ]
   },
   "anim": {

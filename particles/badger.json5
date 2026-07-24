@@ -59,14 +59,7 @@
         "every": 8,
         "unit": "wl_tick_burst",
         "do": [
-          {
-            "emit": {
-              "type": "badger_trail",
-              "velocity": "radial",
-              "wl_inherit_div": 3,
-              "wl_free_step": true
-            }
-          }
+          {"emit": {"type": "badger_trail"}},
         ]
       }
     ]
@@ -84,7 +77,12 @@
     "sprite_wl": {
       "start": 516
     },
-    "sprite": "s516_1"
+    "sprite": "s516_1",
+    "light": {
+      "rgb": [0,1,0],
+      "intensity": 0.2,
+      "radius": 160
+    }
   },
   "speed": 2.22
 }
