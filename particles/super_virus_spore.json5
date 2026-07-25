@@ -8,6 +8,7 @@
   "physics": {
     "gravity": 0,
     "pushed_by_blasts": true,
+    "impulse_mass": 4,
     "ccd": false
   },
   "radius": 1,

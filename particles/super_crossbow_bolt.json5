@@ -7,6 +7,7 @@
     "damping": 1,
     "wobble": 0.03,
     "pushed_by_blasts": true,
+    "impulse_mass": 4,
     "ccd": false,
     "substeps": 2,
     "spiral": {

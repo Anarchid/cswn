@@ -9,6 +9,7 @@
   "physics": {
     "gravity": 0.06,
     "pushed_by_blasts": false,
+    "impulse_mass": 4,
     "ccd": false,
     "bounce": {
       "restitution": 0.81
