@@ -1,5 +1,6 @@
 // BADGER barrel — a rigid-body keg (WebNoita §10 package body).
-// Fired as the `badger` carrier particle, which spawns this body on landing.
+// Fired as the `badger` carrier particle, which hands off its velocity and its
+// owner/weapon attribution to this body two ticks out of the muzzle.
 // Blueprint mask + stain baked from sprites/s516_1.png (the WL BADGER sprite);
 // `material: core:metal` fills the mask, the stain paints the barrel art.
 //

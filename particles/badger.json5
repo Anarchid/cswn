@@ -1,9 +1,13 @@
-// BADGER carrier — the thrown keg in flight. It travels, bounces, and comes
-// to rest, then SPAWNS the `badger_barrel` rigid body in its place and
-// vanishes (on.settle). The long random detonation fuse and the acid burst
-// now live on the barrel body (bodies/badger_barrel.json5), which can also be
-// shot to detonate early. Physics/sprite/trail below match the old WL badger
-// so the flight looks identical.
+// BADGER carrier — the thrown keg's first half-second of flight. It travels as
+// a particle, then its 30-tick fuse hands the throw to the `badger_barrel`
+// rigid body (`velocity: "inherit"` — without it the keg would materialize
+// mid-arc with no momentum and drop straight down) and vanishes; on.settle is
+// the same handoff for when it lands first. The long random
+// detonation fuse and the acid burst live on the barrel body
+// (bodies/badger_barrel.json5), which can also be shot to detonate early.
+// Physics/sprite/trail below match the old WL badger so the launch looks
+// identical, and the carrier's owner/weapon ride the spawn — a keg you threw
+// credits YOU when it crushes someone.
 {
   "legacy": {
     "obj_trail_delay_unused": 1
@@ -28,39 +32,18 @@
     "projectiles": false
   },
   "fuse": {
-    "ticks": 90,
+    "ticks": 30,
     "variance": 0
   },
   "on": {
     "settle": [
-      { "spawn_body": { "body": "badger_barrel" } },
+      { "spawn_body": { "body": "badger_barrel", "velocity": "inherit" } },
       { "remove": {} }
     ],
     "fuse": [
-      { "spawn_body": { "body": "badger_barrel" } },
+      { "spawn_body": { "body": "badger_barrel", "velocity": "inherit" } },
       { "remove": {} }
     ],
-    "collide_worm": [
-      {
-        "damage_other": {
-          "amount": 0
-        }
-      },
-      {
-        "push_other": {
-          "factor": 0
-        }
-      }
-    ],
-    "tick": [
-      {
-        "every": 8,
-        "unit": "wl_tick_burst",
-        "do": [
-          {"emit": {"type": "badger_trail"}},
-        ]
-      }
-    ]
   },
   "anim": {
     "frames": 0,
@@ -69,18 +52,10 @@
   "presentation": {
     "color_index": 162,
     "splinter_color_index": 11,
-    "sounds": {
-      "explode": "exp5.wav"
-    },
     "sprite_wl": {
       "start": 516
     },
     "sprite": "s516_1",
-    "light": {
-      "rgb": [0,1,0],
-      "intensity": 0.2,
-      "radius": 160
-    }
   },
   "speed": 2.22
 }
