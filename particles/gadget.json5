@@ -48,6 +48,7 @@
     "mode": "by_velocity"
   },
   "presentation": {
+    "lit":false,
     "color_index": 162,
     "splinter_color_index": 11,
     "sprite_wl": {

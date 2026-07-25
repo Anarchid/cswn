@@ -51,14 +51,9 @@
     100, 100, 100, 255, 76, 76, 76, 255, 84, 84, 84, 255, 92, 92, 92, 255, 100, 100, 100, 255, 84, 84, 84, 255, 76, 76, 76, 255, 76, 76, 76, 255, 76, 76, 76, 255
   ],
   "on": {
-    // The arming clunk, on the frame the carrier hands the mine over.
-    "create": [
-      { "sound": "dropshel.wav" }
-    ],
     // Defused. `destroy_self` runs the authored death (`death` defaults to
     // `shower`), which an omitted `hp` would otherwise have made unreachable.
     "collide_worm": [
-      { "sound": "bump.wav" },
       { "destroy_self": {} }
     ],
     // Nobody came. The chain below is verbatim the old `gadget_core` fuse.
