@@ -1,0 +1,71 @@
+// GADGET mine — the thrown nuke, as a rigid body (WebNoita §10 package body).
+// Fired as the `gadget` carrier particle, which hands off its throw and its
+// owner/weapon attribution here the moment it settles (or after 180 ticks in
+// flight, whichever comes first). Blueprint mask + stain baked from
+// sprites/s588_1.png (the WL GADGET sprite); `material: core:metal` fills the
+// mask, the stain paints the casing art.
+//
+// Three ways it ends, and only one of them is loud:
+//   worm contact  → `destroy_self`: it crumbles into a shower of its own
+//                   pixels. Touching the mine DEFUSES it — the one way to
+//                   save the map, and it costs you walking into the thing.
+//   fuse (1620t)  → the full nuke chain: gadget_explosion, then the
+//                   gadget_detonator → shatter → melt → 255 fireball cascade
+//                   that kills every worm on the map. Leave it alone and
+//                   everybody dies.
+//   projectiles   → nothing. `hp` is omitted, so the engine makes it
+//                   INDESTRUCTIBLE: shots and blasts shove the casing around
+//                   (mass 20 against ordnance's impulse_mass) but can never
+//                   end it. You can kick it toward someone; you cannot
+//                   disarm it from range.
+{
+  "shape": {
+    "blueprint": {
+      "w": 9,
+      "h": 9,
+      "ids": [
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1,
+        1, 1, 1, 1, 1, 1, 1, 1, 1
+      ]
+    }
+  },
+  "material": "core:metal",
+  "mass": 20,
+  "fuse": { "ticks": 1620, "variance": 0 },
+  "stain": [
+    156, 156, 156, 255, 140, 140, 140, 255, 132, 132, 132, 255, 132, 132, 132, 255, 132, 132, 132, 255, 140, 140, 140, 255, 148, 148, 148, 255, 148, 148, 148, 255, 116, 116, 116, 255,
+    144, 144, 144, 255, 124, 124, 124, 255, 160, 152, 40, 255, 108, 108, 108, 255, 92, 92, 92, 255, 100, 100, 100, 255, 200, 192, 48, 255, 116, 116, 116, 255, 84, 84, 84, 255,
+    132, 132, 132, 255, 120, 116, 28, 255, 160, 152, 40, 255, 200, 192, 48, 255, 92, 92, 92, 255, 200, 192, 48, 255, 160, 152, 40, 255, 200, 192, 48, 255, 84, 84, 84, 255,
+    140, 140, 140, 255, 108, 108, 108, 255, 108, 108, 108, 255, 100, 100, 100, 255, 100, 100, 100, 255, 100, 100, 100, 255, 108, 108, 108, 255, 108, 108, 108, 255, 84, 84, 84, 255,
+    148, 148, 148, 255, 108, 108, 108, 255, 92, 92, 92, 255, 92, 92, 92, 255, 160, 152, 40, 255, 100, 100, 100, 255, 108, 108, 108, 255, 108, 108, 108, 255, 84, 84, 84, 255,
+    148, 148, 148, 255, 108, 108, 108, 255, 100, 100, 100, 255, 108, 108, 108, 255, 108, 108, 108, 255, 108, 108, 108, 255, 100, 100, 100, 255, 100, 100, 100, 255, 76, 76, 76, 255,
+    140, 140, 140, 255, 124, 124, 124, 255, 108, 108, 108, 255, 100, 100, 100, 255, 200, 192, 48, 255, 100, 100, 100, 255, 100, 100, 100, 255, 108, 108, 108, 255, 76, 76, 76, 255,
+    144, 144, 144, 255, 100, 100, 100, 255, 92, 92, 92, 255, 200, 192, 48, 255, 160, 152, 40, 255, 120, 116, 28, 255, 100, 100, 100, 255, 92, 92, 92, 255, 72, 72, 72, 255,
+    100, 100, 100, 255, 76, 76, 76, 255, 84, 84, 84, 255, 92, 92, 92, 255, 100, 100, 100, 255, 84, 84, 84, 255, 76, 76, 76, 255, 76, 76, 76, 255, 76, 76, 76, 255
+  ],
+  "on": {
+    // The arming clunk, on the frame the carrier hands the mine over.
+    "create": [
+      { "sound": "dropshel.wav" }
+    ],
+    // Defused. `destroy_self` runs the authored death (`death` defaults to
+    // `shower`), which an omitted `hp` would otherwise have made unreachable.
+    "collide_worm": [
+      { "sound": "bump.wav" },
+      { "destroy_self": {} }
+    ],
+    // Nobody came. The chain below is verbatim the old `gadget_core` fuse.
+    "fuse": [
+      "gadget_explosion",
+      { "emit": { "type": "gadget_detonator", "count": 1, "velocity": "radial", "wl_free_step": true } },
+      { "remove": {} }
+    ]
+  }
+}
