@@ -119,7 +119,16 @@
     "sprite_wl": {
       "start": 110
     },
-    "sprite": "s110_16"
+    "sprite": "s110_16",
+    "light": {
+      "rgb": [
+        1,
+        0.7627,
+        0.5
+      ],
+      "intensity": 0.5574,
+      "radius": 12
+    }
   },
   "facing": {
     "follow": "owner_aim"
