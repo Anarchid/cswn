@@ -1,0 +1,16 @@
+// Hand-authored (2026-07-25): EXCIMER LASER beam tile, 96x3 RGBA.
+// Generated, not painted — the recipe is in the commit message. Rows are the
+// beam's cross-section (fringe / hot core / fringe) mapped across
+// `presentation.line.width`; the 96 columns tile every 96 world px
+// (`length: 96`, i.e. one texel per world pixel, so the crackle is genuinely
+// per-pixel). Colors come from what it replaces: smoke_puff's s76_2 dots
+// (#f0f0b4 / #f4f470) over laser_pulse's splinter colour 75 (#ecb400), with
+// white-hot sparks. Alpha carries the intensity profile — the beam draws
+// additively (SRC_ALPHA, ONE) when the lit look is on, plain alpha otherwise.
+{
+  "frames": 1,
+  "origin": [
+    0,
+    0
+  ]
+}

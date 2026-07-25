@@ -84,26 +84,52 @@
       {
         "remove": {}
       }
-    ],
-    "tick": [
-      {
-        "every": 1,
-        "unit": "wl_tick_burst",
-        "do": [
-          "smoke_puff"
-        ]
-      }
     ]
   },
   "anim": {
     "frames": 0,
     "mode": "by_velocity"
   },
+  // The beam is FIRST-CLASS now (2026-07-25). Liero had no way to texture a
+  // laser, so the WL original faked one: `on.tick {every: 1, unit:
+  // "wl_tick_burst", do: ["smoke_puff"]}` dropped a smoke_puff effect at
+  // EVERY substep — up to 255 sObjects (each with its own light) per shot,
+  // just to paint a dotted yellow line. That is now one `presentation.line`
+  // quad along the bullet's spawn-tick segment, the same mechanism
+  // dark/PowerEternal's `emitcharge` uses. The texture reproduces the old
+  // look deliberately: gold filament, ~3px dot rhythm (the old substep
+  // spacing), white sparks. `scroll` decorrelates the pattern between shots,
+  // so a burst crackles instead of stamping the same beam five times.
+  // Gameplay delta: the puffs also carried damage {r: 2, amount: 1}, so a
+  // near-miss no longer grazes for a point or two — the 16-damage direct hit
+  // is unchanged.
   "presentation": {
     "color_index": 161,
     "splinter_color_index": 75,
     "sprite_wl": {
       "start": -1
+    },
+    "line": {
+      "texture": "excimer_beam",
+      "color": "#ffffff",
+      "width": 5,
+      "length": 96,
+      "scroll": 7000,
+      "lit": false,
+      "blend": "auto"
+    },
+    // Replaces the glow the 255 puff lights used to stack along the path
+    // (each rgb [1, 1, 0.6046] i0.0361 r12). A line-presented light washes
+    // down the whole segment as one emissive quad plus a hot spot at the
+    // impact, so this is one light def, not a swarm.
+    "light": {
+      "rgb": [
+        1,
+        0.96,
+        0.55
+      ],
+      "intensity": 0.7,
+      "radius": 16
     }
   },
   "speed": 3
