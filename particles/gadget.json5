@@ -1,7 +1,7 @@
 // GADGET carrier — the thrown mine's flight. It travels as a particle with
 // the WL gadget's exact physics and sprite, then hands itself off to the
 // `gadget_mine` rigid body: on `settle` the moment it comes to rest, and on
-// its 180-tick fuse as the fallback for a throw that never settles cleanly
+// its 60-tick fuse as the fallback for a throw that never settles cleanly
 // (a mine fired into the ground can wedge at the muzzle with no settle edge).
 // `velocity: "inherit"` carries the throw across the handoff — without it the
 // mine would materialize mid-arc at rest and drop straight down — and the
@@ -30,7 +30,7 @@
     "projectiles": false
   },
   "fuse": {
-    "ticks": 180,
+    "ticks": 60,
     "variance": 0
   },
   "on": {
