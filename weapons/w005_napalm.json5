@@ -12,7 +12,12 @@
         "emit": {
           "type": "napalm_charge",
           "count": 1,
-          "speed": 1,
+          // The WL original declares bulletSpeed 0 — the charge drops at the
+          // worm's feet. This package was materialized while the converter
+          // read that through `||`, which turned it into 1 px/frame of
+          // forward drift; the converter now uses `??`, but already-generated
+          // files like this one keep the old value until corrected by hand.
+          "speed": 0,
           "jitter": 0.107,
           "inherit": 0.03
         }

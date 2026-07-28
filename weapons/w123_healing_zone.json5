@@ -12,7 +12,12 @@
         "emit": {
           "type": "healing_zone_field",
           "count": 2,
-          "speed": 1,
+          // WL bulletSpeed 0: the zone settles where it is dropped rather
+          // than creeping forward. Same materialized-with-`||` artifact as
+          // w005_napalm; GADGET and BADGER share the origin but have since
+          // been re-authored around the rigid-body handoff, so they keep
+          // whatever launch their current content was tuned against.
+          "speed": 0,
           "jitter": 0,
           "inherit": 0
         }
