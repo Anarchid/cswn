@@ -34,6 +34,75 @@ tree modulo the permutation. That gate earned its keep the hard way: it
 passed clean, the playtest did not, and the hunt that followed found a real
 namespace error that had been latent in the converter from the start.
 
+## Heat
+
+Explosions in this mod leave the ground *hot*, and hot ground burns. The
+engine has carried temperature per cell for a long time, but until the
+`modify_temperature` verb landed (2026-07-30) no weapon could write to it, so
+a map could declare a flammable material and a flashpoint and nothing in a
+match could ever reach it. These are the numbers that close that loop.
+
+The verb's limit is **directional**: with a positive `amount` it heats *up to*
+the limit and refuses to touch anything already hotter, so bands stack toward
+a ceiling instead of fighting each other. That is what lets a nuke's fringe
+sit at 190° while the 255 fireballs raining +25 across it leave both the
+190° core and the 200° slag ring exactly where they are.
+
+| tier | amount | limit | where |
+| --- | --- | --- | --- |
+| scorch | +25 | 150 | every yellow-circle explosion that digs, at ~1.5× its carve radius; every fire-weapon flame that lands, at r 4 (r 6 on the two that carve) |
+| excimer | +25 | 80 | `laser_pulse`, annulus r 4–6, at the impact |
+| plasma | +90 | 200 | `plasma_rocket`, r 6, at the impact |
+| thermal pulse | +100 | 190 | `nuke_epicenter` / `nuka_epicenter`, r 100 |
+
+The two constants worth knowing when you retune any of this:
+
+- **80** is `core:wood`'s ignition point, and the highest flashpoint anything
+  ships with. Every limit above it can start a fire. Ignition tests `>=`, so a
+  limit of exactly 80 still lights wood.
+- **200** is `core:sand`'s melting point, the lowest in the engine. Every
+  limit below it is guaranteed never to turn ground to lava. Only plasma is
+  allowed to reach it.
+
+**Heat must always be wider than the carve it travels with**, and this is the
+easiest thing here to get wrong. Bands run in list order over the world the
+previous band left, and `carve` takes exactly the `DESTRUCTIBLE` cells — which
+is exactly the fuel. A heat disc the size of its own crater therefore heats
+nothing but air. It is silent: the shots land, the wood disappears, and not one
+cell ever catches. Both `flame` and the excimer shipped that way for an hour
+and were caught only by counting cells in a running match — 40 held laser shots
+drilled 250 cells of timber and started zero fires. `plasma_rocket` (heat 6
+over a carve of 3) and the explosion effects (~1.5×, and the heat band listed
+after the carve) were right by construction.
+
+Measured on `kamikaze/jungle-mossfire`, counting material in a 48×48 box on the
+densest timber structure (523 cells of `timber`, flashpoint 80, ambient 0):
+
+| weapon | result |
+| --- | --- |
+| M79 (plain explosion) | shells 1–3 carve and do not ignite; the **4th** lights it — 0→25→50→75→100 |
+| EXCIMER LASER | first cells at the 2nd shot, settling into a ~60-cell smoulder |
+| PLASMAROCKETS | ignites on the **first** hit (60 cells); 228 by the fourth |
+| MOLOTOV COCKTAIL | one bottle: 523 timber → 27, 129 cells alight |
+| NAPALM | one charge: 81% of the timber gone in about a second |
+
+Scorch is deliberately too weak to light `core:wood` in one hit — it takes
+three, or four on the jungle-mossfire tiers, which cool at about 7.5°/second
+and so need the hits inside roughly a ten-second window. Sustained shelling
+starts fires; a stray grenade does not. The soft tiers give way sooner:
+jungle tinder (45) goes in two, `core:oil` (60) in two, bloodrun-emberfall's
+banner cloth (58, and it never cools) in two whenever they happen to land.
+
+A flame that burns out in mid-air rather than hitting anything leaves one
+pixel of `core:fire` behind — the ember on `flame`, `napalm_flame` and
+`bumblebee_flame`. Those three are the terminal flames; the delivery flames
+already emit one of them, so putting the ember anywhere else double-counts it.
+
+None of this is visible on terrain that is neither flammable nor emissive:
+heating plain `core:rock` writes a number nothing reads. The payoff is on maps
+that declare fuel — `kamikaze/jungle-mossfire` and `dsds/bloodrun-emberfall`
+today — and on any map authored against it later.
+
 ## Provenance and permissions
 
 The lineage, as far as the files themselves record it:

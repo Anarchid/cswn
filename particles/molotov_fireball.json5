@@ -106,6 +106,18 @@
           4
         ]
       }
+    },
+    // Wider than the carve above it — see the note in flame.json5: a heat
+    // disc the size of the carve heats only the hole it just made.
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          6
+        ],
+        "amount": 25,
+        "limit": 150
+      }
     }
   ]
 }

@@ -43,6 +43,18 @@
         ],
         "debris": true
       }
+    },
+    // Thermal pulse (2026-07-30) — same numbers as nuke_epicenter; see the
+    // note there for why 100/190 is "lights everything, melts nothing".
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          100
+        ],
+        "amount": 100,
+        "limit": 190
+      }
     }
   ],
   "presentation": {

@@ -109,5 +109,21 @@
       "radius": 12
     }
   },
-  "speed": 3.4
+  "speed": 3.4,
+  // Scorch — a burning thing that touches the ground heats it (README
+  // "Heat"). Stamped at the death position, so this is the contact case; a
+  // mid-air fuse-out puts the same disc on whatever is within 4px, which is
+  // the right answer there too.
+  "terrain": [
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          4
+        ],
+        "amount": 25,
+        "limit": 150
+      }
+    }
+  ]
 }

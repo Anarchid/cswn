@@ -24,7 +24,19 @@
     "variance": 10
   },
   "on": {
-    "fuse": [],
+    "fuse": [
+      // Burned out in mid-air: leave one pixel of real fire behind. In an
+      // `on.*` list `place` is the EventAction form (scalar r) — it nudges
+      // to the nearest free cell and only writes into non-solid, so a flame
+      // expiring against a wall drops its ember beside the wall, not inside
+      // it. `core:fire` arrives at its own spawn_temp (180).
+      {
+        "place": {
+          "r": 0,
+          "material": "core:fire"
+        }
+      }
+    ],
     "collide_terrain": [
       {
         "remove": {}
@@ -72,5 +84,21 @@
       "draw_on_map": false
     },
     "sprite": "s219_4"
-  }
+  },
+  // Scorch — a burning thing that touches the ground heats it (README
+  // "Heat"). Stamped at the death position, so this is the contact case; a
+  // mid-air fuse-out puts the same disc on whatever is within 4px, which is
+  // the right answer there too.
+  "terrain": [
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          4
+        ],
+        "amount": 25,
+        "limit": 150
+      }
+    }
+  ]
 }

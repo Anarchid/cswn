@@ -132,5 +132,44 @@
       "radius": 16
     }
   },
+  // Excimer burn (2026-07-30): a 2px scorch ring around the beam's terminus.
+  // The def's own terrain list, stamped once at the death position — NOT
+  // along the path. Scorching the whole beam would need an on.tick effect
+  // firing per movement step, which at substeps 255 is exactly the 255
+  // sObjects the `line` presentation above was written to delete.
+  //
+  // An ANNULUS, and it has to be. This def's bands stamp before the death
+  // effects', and `bullet_impact` carves r 4 — so a disc inside that radius
+  // is deleted by the crater a few microseconds after it is written, every
+  // shot, forever. Measured as exactly that: 40 held shots, 250 timber cells
+  // drilled, zero ignitions. Starting at 4 puts the heat where the wood
+  // still is.
+  //
+  // The 80 limit is core:wood's ignition point exactly, and that is the
+  // whole design: an excimer can light wood (and oil at 60, and jungle
+  // tinder at 45) and can do literally nothing else to terrain — 80 is far
+  // under the lowest melting point in the engine (core:sand, 200). Ignition
+  // tests `>=`, so landing exactly on 80 is a hit, not a near miss.
+  //
+  // The amount is the scorch tier's, not something smaller, because the beam
+  // is a MOVING target: it drills ~4px a shot, so the ring lands on fresh
+  // wood each time and few cells collect more than two or three stamps
+  // before the hole is through and the terminus drops out of the timber
+  // entirely. +12 (four stamps to reach 80) never ignited anything in 40
+  // held shots; +25 lights the first cells on the second shot and settles
+  // into a ~60-cell smoulder, which is the intended weak-but-real effect.
+  // +40 was tried and flashes the whole structure — too strong for a laser.
+  "terrain": [
+    {
+      "modify_temperature": {
+        "r": [
+          4,
+          6
+        ],
+        "amount": 25,
+        "limit": 80
+      }
+    }
+  ],
   "speed": 3
 }

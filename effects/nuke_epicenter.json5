@@ -43,6 +43,31 @@
         ],
         "debris": true
       }
+    },
+    // Thermal pulse (2026-07-30). Reaches well past everything else the nuke
+    // does — the r 65 melt wave, the r 64 shatter ring, the r 94 scar — so
+    // the fringe of the blast is left hot rather than merely dirty. LAST
+    // band on purpose: the r 32 core is already air by now, and air takes no
+    // temperature, so this only heats what survived.
+    //
+    // 100 lights every fuel in one hit (core:wood 80, jungle timber 80 from
+    // an ambient 0). The 190 limit is the "not-ground-melting" half: the
+    // lowest melting point in the engine is core:sand at 200, so no amount
+    // of nuking can turn ground to lava by heat alone. The r 65 melt wave
+    // still makes its slag ring — that is a transmute, not a temperature,
+    // and the two do not fight: slag spawns at 200, and a POSITIVE
+    // modify_temperature never cools anything already above its limit, so
+    // the 255 nuke_burst fireballs raining +25/limit-150 afterwards leave
+    // the slag pool alone.
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          100
+        ],
+        "amount": 100,
+        "limit": 190
+      }
     }
   ],
   "presentation": {

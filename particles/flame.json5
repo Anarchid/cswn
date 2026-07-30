@@ -27,7 +27,19 @@
     "variance": 1
   },
   "on": {
-    "fuse": [],
+    "fuse": [
+      // Burned out in mid-air: leave one pixel of real fire behind. In an
+      // `on.*` list `place` is the EventAction form (scalar r) — it nudges
+      // to the nearest free cell and only writes into non-solid, so a flame
+      // expiring against a wall drops its ember beside the wall, not inside
+      // it. `core:fire` arrives at its own spawn_temp (180).
+      {
+        "place": {
+          "r": 0,
+          "material": "core:fire"
+        }
+      }
+    ],
     "collide_terrain": [
       {
         "remove": {}
@@ -74,6 +86,21 @@
           0,
           4
         ]
+      }
+    },
+    // Wider than the carve above it ON PURPOSE. Bands run in list order and
+    // each sees the world the previous one left, so a heat disc the same size
+    // as the carve lands entirely inside the hole it just made — and `carve`
+    // takes exactly the DESTRUCTIBLE cells, which is exactly the fuel. r 6
+    // over a carve of 4 leaves a 2px heated rim that is still there to burn.
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          6
+        ],
+        "amount": 25,
+        "limit": 150
       }
     }
   ]

@@ -36,6 +36,17 @@
         "strength": 0.53,
         "texture": 10
       }
+    },
+    // Scorch ring — the standard yellow-explosion heat (README "Heat").
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          9
+        ],
+        "amount": 25,
+        "limit": 150
+      }
     }
   ],
   "presentation": {

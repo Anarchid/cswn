@@ -92,5 +92,24 @@
       "radius": 20
     }
   },
+  // Plasma impact (2026-07-30): the hottest thing in the mod. +90 lights any
+  // fuel in the engine from cold in a single hit (core:wood ignites at 80
+  // from a 20 ambient; jungle timber at 80 from an ambient 0). The limit is
+  // core:lava's spawn temperature, so a sustained plasma barrage is the one
+  // weapon that can take terrain past a melting point by heat alone — and
+  // only the softest: core:sand melts at exactly 200, gravel at 210 and rock
+  // at 220 stay solid however long you hold the trigger.
+  "terrain": [
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          6
+        ],
+        "amount": 90,
+        "limit": 200
+      }
+    }
+  ],
   "speed": 3.4
 }
