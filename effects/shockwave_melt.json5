@@ -16,12 +16,19 @@
       }
     },
     {
-      "melt": {
+      "transmute": {
         "r": [
           0,
           65
         ],
-        "material": "core:slag"
+        "match": {
+          "flags_any": [
+            "SOLID",
+            "POWDER"
+          ]
+        },
+        "to": "core:slag",
+        "temp": "spawn"
       }
     }
   ],
