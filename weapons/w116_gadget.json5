@@ -6,15 +6,30 @@
   "reload": 65535,
   "fire_delay": 60,
   "recoil": 0,
+  // A PLACED mine, not a thrown one — WL `bulletSpeed: 0`, restored. The mine
+  // leaves the worm with no muzzle speed of its own and exactly the worm's
+  // velocity (`inherit: 1`), so a standing worm sets one down at its feet and
+  // a running one skids it along. The `speed: 1` this used to carry was a
+  // converter fossil (the old `||` fallback turned WL's 0 into 1), and the
+  // rigidization then handed that phantom muzzle speed to the body.
+  //
+  // `offset: 9` puts the spawn 14 px out (5 px base muzzle + 9): the casing
+  // is 9×9 around its COM and the worm's body-contact box reaches ±4 px wide
+  // and 6 px up, so 14 px clears the mine of its thrower at every aim angle
+  // including the 45° diagonals. The carrier hands off to the body two ticks
+  // later (particles/gadget.json5) and this offset is the ONLY thing keeping
+  // that body out of the firing worm — a mine that spawns touching you is a
+  // mine you instantly defuse (`on.collide_worm` → `destroy_self`).
   "on": {
     "fire": [
       {
         "emit": {
           "type": "gadget",
           "count": 1,
-          "speed": 1,
+          "speed": 0,
           "jitter": 0,
-          "inherit": 0
+          "inherit": 1,
+          "offset": 9
         }
       }
     ]

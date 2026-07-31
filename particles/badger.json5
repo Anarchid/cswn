@@ -1,13 +1,24 @@
-// BADGER carrier — the thrown keg's first half-second of flight. It travels as
-// a particle, then its 30-tick fuse hands the throw to the `badger_barrel`
-// rigid body (`velocity: "inherit"` — without it the keg would materialize
-// mid-arc with no momentum and drop straight down) and vanishes; on.settle is
-// the same handoff for when it lands first. The long random
-// detonation fuse and the acid burst live on the barrel body
+// BADGER carrier — the vestigial particle phase of the thrown keg. It exists
+// only to reach `spawn_body`, which no weapon `on.fire` list can call itself
+// (§11: on.fire executes `emit` and nothing else), so the shortest legal
+// handoff is a particle that fuses immediately.
+//
+// `fuse.ticks: 1` IS that immediacy: a wObject-class def expires on
+// `time_alive > timeout`, so 1 is the shortest expressible fuse and the keg
+// becomes a `badger_barrel` two ticks out of the muzzle. Nothing keeps it out
+// of the firing worm during those two ticks except the weapon's `offset: 9`
+// — see weapons/w122_badger.json5. `velocity: "inherit"` carries the throw
+// across the handoff; with the weapon's `speed: 0, inherit: 1` that throw IS
+// the worm's own velocity, so a standing worm hands over a body at rest (the
+// spawn leaves it asleep) and a running one hands over a moving keg.
+// `on.settle` is the same handoff for a keg fired point-blank into terrain,
+// which parks before the fuse reaches it.
+//
+// The long random detonation fuse and the acid burst live on the barrel body
 // (bodies/badger_barrel.json5), which can also be shot to detonate early.
-// Physics/sprite/trail below match the old WL badger so the launch looks
-// identical, and the carrier's owner/weapon ride the spawn — a keg you threw
-// credits YOU when it crushes someone.
+// Physics/sprite below still match the old WL badger — two ticks of it are
+// visible — and the carrier's owner/weapon ride the spawn, so a keg you
+// threw credits YOU when it crushes someone.
 {
   "legacy": {
     "obj_trail_delay_unused": 1
@@ -32,7 +43,7 @@
     "projectiles": false
   },
   "fuse": {
-    "ticks": 30,
+    "ticks": 1,
     "variance": 0
   },
   "on": {

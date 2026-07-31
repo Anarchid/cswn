@@ -1,7 +1,7 @@
 // GADGET mine — the thrown nuke, as a rigid body (WebNoita §10 package body).
 // Fired as the `gadget` carrier particle, which hands off its throw and its
-// owner/weapon attribution here the moment it settles (or after 180 ticks in
-// flight, whichever comes first). Blueprint mask + stain baked from
+// owner/weapon attribution here two ticks out of the muzzle — the carrier's
+// whole life. Blueprint mask + stain baked from
 // sprites/s588_1.png (the WL GADGET sprite); `material: core:metal` fills the
 // mask, the stain paints the casing art.
 //
