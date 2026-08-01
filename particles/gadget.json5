@@ -17,9 +17,12 @@
 // The carrier's owner/weapon ride the spawn, so the nuke credits whoever
 // placed it.
 //
-// Everything that used to live on the `gadget_core` particle (the 1620-tick
-// nuke fuse, the worm-contact reaction) now lives on the body
-// (bodies/gadget_mine.json5), which is why `gadget_core` no longer exists.
+// Everything that used to live on the `gadget_core` particle now lives on
+// TWO bodies (which is why `gadget_core` no longer exists):
+// bodies/gadget_mine.json5 is the unarmed grace phase (the WL original's
+// 180 carrier ticks, restored), and it morphs into
+// bodies/gadget_mine_armed.json5 — the 1620-tick nuke fuse and the
+// worm-contact defuse.
 {
   "legacy": {
     "obj_trail_delay_unused": 1

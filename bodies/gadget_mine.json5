@@ -1,23 +1,25 @@
-// GADGET mine — the thrown nuke, as a rigid body (WebNoita §10 package body).
-// Fired as the `gadget` carrier particle, which hands off its throw and its
-// owner/weapon attribution here two ticks out of the muzzle — the carrier's
-// whole life. Blueprint mask + stain baked from
-// sprites/s588_1.png (the WL GADGET sprite); `material: core:metal` fills the
-// mask, the stain paints the casing art.
+// GADGET mine, UNARMED — the grace-period phase of the thrown nuke.
 //
-// Three ways it ends, and only one of them is loud:
-//   worm contact  → `destroy_self`: it crumbles into a shower of its own
-//                   pixels. Touching the mine DEFUSES it — the one way to
-//                   save the map, and it costs you walking into the thing.
-//   fuse (1620t)  → the full nuke chain: gadget_explosion, then the
-//                   gadget_detonator → shatter → melt → 255 fireball cascade
-//                   that kills every worm on the map. Leave it alone and
-//                   everybody dies.
-//   projectiles   → nothing. `hp` is omitted, so the engine makes it
-//                   INDESTRUCTIBLE: shots and blasts shove the casing around
-//                   (mass 20 against ordnance's impulse_mass) but can never
-//                   end it. You can kick it toward someone; you cannot
-//                   disarm it from range.
+// The WL original never armed on placement: the `gadget` particle flew for
+// 180 ticks before emitting the armed `gadget_core`. Rigidizing the mine
+// collapsed that into an instantly-armed body, and the grace period turned
+// out to be load-bearing — with `offset: 9` placement the mine appears at
+// the placer's elbow, and one careless step defused it on the spot. So the
+// body now arms in two phases, morph idiom (§13.1): THIS def is inert to
+// touch for the original's 180 ticks (walk over it freely, shove it, kick
+// it into position), then swaps itself for `gadget_mine_armed` in place —
+// `velocity: "inherit"` + `rotation: "inherit"` so the armed mine keeps
+// whatever slide, tilt and spin the unarmed one had (a swap that snapped
+// upright could also re-bury a corner and catch the depenetration
+// ejection). 180 + the armed 1620 = the original's 1800-tick doomsday
+// clock, unchanged.
+//
+// Same casing art as armed (the current dull sprite, yellow trefoil
+// included) — the tell is the GLOW: flat paint here, the trefoil pixels
+// faintly emissive once armed.
+//
+// `hp` omitted = INDESTRUCTIBLE here too: shots shove, nothing kills. An
+// unarmed mine can't be destroyed early — only relocated.
 {
   "shape": {
     "blueprint": {
@@ -38,7 +40,7 @@
   },
   "material": "core:metal",
   "mass": 20,
-  "fuse": { "ticks": 1620, "variance": 0 },
+  "fuse": { "ticks": 180, "variance": 0 },
   "stain": [
     156, 156, 156, 255, 140, 140, 140, 255, 132, 132, 132, 255, 132, 132, 132, 255, 132, 132, 132, 255, 140, 140, 140, 255, 148, 148, 148, 255, 148, 148, 148, 255, 116, 116, 116, 255,
     144, 144, 144, 255, 124, 124, 124, 255, 160, 152, 40, 255, 108, 108, 108, 255, 92, 92, 92, 255, 100, 100, 100, 255, 200, 192, 48, 255, 116, 116, 116, 255, 84, 84, 84, 255,
@@ -51,15 +53,11 @@
     100, 100, 100, 255, 76, 76, 76, 255, 84, 84, 84, 255, 92, 92, 92, 255, 100, 100, 100, 255, 84, 84, 84, 255, 76, 76, 76, 255, 76, 76, 76, 255, 76, 76, 76, 255
   ],
   "on": {
-    // Defused. `destroy_self` runs the authored death (`death` defaults to
-    // `shower`), which an omitted `hp` would otherwise have made unreachable.
-    "collide_worm": [
-      { "destroy_self": {} }
-    ],
-    // Nobody came. The chain below is verbatim the old `gadget_core` fuse.
+    // The grace expires: arm in place. Remove flushes BEFORE the spawn
+    // queue, so the same-tick swap nets to one body standing exactly here,
+    // wearing this body's pose and momentum.
     "fuse": [
-      "gadget_explosion",
-      { "emit": { "type": "gadget_detonator", "count": 1, "velocity": "radial", "wl_free_step": true } },
+      { "spawn_body": { "body": "gadget_mine_armed", "velocity": "inherit", "rotation": "inherit" } },
       { "remove": {} }
     ]
   }

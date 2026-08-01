@@ -1,0 +1,28 @@
+// Trefoil glow — the armed GADGET's warning pips (§12 package material,
+// the first one authored through the T0 `materials/` section).
+//
+// Physically it IS core:metal (same flags, density, friction, melt-to-lava
+// at 240°), so the armed mine's casing stays one rigid slug of metal to
+// every SIM system — the ONLY difference is render-side: a faint yellow
+// emission, `unshaded` so the pips read in a dark tunnel. The armed
+// blueprint paints its 13 trefoil pixels with this id; the unarmed mine is
+// plain core:metal and stays dark. Defuse showers spray these cells like
+// any others — briefly glowing embers where the mine crumbled.
+//
+// `id: 255` is explicit because the blueprint raster hardcodes the byte
+// (blueprint bytes ARE material ids in literal mode); the auto assigner
+// would hand out 255 to the sorted-first auto material anyway, but a later
+// materials/ addition must never renumber a byte that is baked into a
+// shipped raster. Content ids run 255 downward by convention (maps go
+// upward from 100).
+{
+  "id": 255,
+  "flags": ["SOLID", "BLOCKS_PARTICLE", "CONDUCTIVE", "BLOCKS_LIGHT"],
+  "colors": ["#c8c030", "#a09828", "#787418", "#c8c030"],
+  "density": 255,
+  "friction": 220,
+  "meltingPoint": 240,
+  "transformProduct": "core:lava",
+  "emission": 0.4,
+  "unshaded": true
+}
