@@ -33,7 +33,7 @@
       {
         "place": {
           "r": 0,
-          "material": "core:fire"
+          "material": "core:flame"
         }
       }
     ],
