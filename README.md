@@ -44,16 +44,29 @@ match could ever reach it. These are the numbers that close that loop.
 
 The verb's limit is **directional**: with a positive `amount` it heats *up to*
 the limit and refuses to touch anything already hotter, so bands stack toward
-a ceiling instead of fighting each other. That is what lets a nuke's fringe
-sit at 190° while the 255 fireballs raining +25 across it leave both the
-190° core and the 200° slag ring exactly where they are.
+a ceiling instead of fighting each other. That is what lets a nuke's glow
+apron sit at 150–190° while the 255 fireballs raining +25/limit-150 across it
+leave both the apron and the 200° slag ring exactly where they are.
 
 | tier | amount | limit | where |
 | --- | --- | --- | --- |
 | scorch | +25 | 150 | every yellow-circle explosion that digs, at ~1.5× its carve radius; every fire-weapon flame that lands, at r 4 (r 6 on the two that carve) |
 | excimer | +25 | 80 | `laser_pulse`, annulus r 4–6, at the impact |
 | plasma | +90 | 200 | `plasma_rocket`, r 6, at the impact |
-| thermal pulse | +100 | 190 | `nuke_epicenter` / `nuka_epicenter`, r 100 |
+| thermal pulse | +220 fading to zero at r 192 | 190 | `nuke_epicenter` / `nuka_epicenter`, in the same pass as the soot stain |
+
+The thermal pulse is the mod's one faded disc (`falloff: 0`); everything else
+keeps the default flat disc, which is what every stamp here was tuned
+against — at r 4–12 a flat edge doesn't read, and flat is the shape a modder
+can do arithmetic on. At nuke scale the edge *does* read, so the pulse fades:
+riding the epicenter with the soot — one pass stains and heats, five ticks
+before the shatter wave — its profile from a 20° ambient caps at 190° out to
+d 43 (inside the crater), crosses `core:hot_rock`'s 150° flip at d 78 —
+where the scar texture's alpha actually runs out, its stretched r 94 box
+being mostly empty fringe — so everything sooted glows and the glow dies
+with the soot, then grades fuel ignition out to ~d 139 before reaching true
+zero at 192. The apron cools back out through hot_rock's 140° exit
+afterwards.
 
 The two constants worth knowing when you retune any of this:
 
@@ -98,10 +111,13 @@ pixel of `core:fire` behind — the ember on `flame`, `napalm_flame` and
 `bumblebee_flame`. Those three are the terminal flames; the delivery flames
 already emit one of them, so putting the ember anywhere else double-counts it.
 
-None of this is visible on terrain that is neither flammable nor emissive:
-heating plain `core:rock` writes a number nothing reads. The payoff is on maps
-that declare fuel — `kamikaze/jungle-mossfire` and `dsds/bloodrun-emberfall`
-today — and on any map authored against it later.
+Since `core:hot_rock` (2026-08-02) heat is visible on plain rock too: any
+band that reaches 150 makes the rock itself glow, which is what the nukes'
+thermal pulse does out to the soot scar's rim. Below that line, on terrain
+that is neither flammable nor emissive, heating writes a number nothing
+reads. The fire payoff is still maps that declare fuel —
+`kamikaze/jungle-mossfire` and `dsds/bloodrun-emberfall` today — and any map
+authored against it later.
 
 ## Provenance and permissions
 

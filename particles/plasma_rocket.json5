@@ -104,10 +104,10 @@
       "modify_temperature": {
         "r": [
           0,
-          6
+          2
         ],
         "amount": 90,
-        "limit": 200
+        "limit": 221
       }
     }
   ],

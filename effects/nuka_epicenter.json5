@@ -35,6 +35,23 @@
         "texture": 10
       }
     },
+    // Thermal pulse — same numbers as nuke_epicenter, and in the same pass
+    // as the stain for the same reasons: soot and heat land together, and
+    // it is the mod's one FADED disc (falloff: 0), profiled so the 150°
+    // hot_rock flip line lands on the scar's last visible streak tips
+    // (d 78 — the alpha, not the r 94 box, is where the soot ends) and
+    // the glow dies with the soot. See the note there for the geometry.
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          192
+        ],
+        "amount": 220,
+        "limit": 190,
+        "falloff": 0
+      }
+    },
     {
       "destroy_all": {
         "r": [
@@ -42,18 +59,6 @@
           32
         ],
         "debris": true
-      }
-    },
-    // Thermal pulse (2026-07-30) — same numbers as nuke_epicenter; see the
-    // note there for why 100/190 is "lights everything, melts nothing".
-    {
-      "modify_temperature": {
-        "r": [
-          0,
-          100
-        ],
-        "amount": 100,
-        "limit": 190
       }
     }
   ],

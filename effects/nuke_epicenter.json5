@@ -35,6 +35,48 @@
         "texture": 10
       }
     },
+    // Thermal pulse (2026-07-30; in the soot pass since 2026-08-02). Same
+    // pass as the stain, same reasoning: soot and heat land together, five
+    // ticks before the shatter wave, so by the time the ground bursts it is
+    // already glowing — rock's 150 flip to core:hot_rock is what made this
+    // band visible — and the r 64 debris is carved out of hot rock.
+    //
+    // The one FADED disc in the mod (falloff: 0; the default is flat). A
+    // flat pulse ends in a razor 170°-beside-ambient circle, and at nuke
+    // scale that edge is a visible perfect ring of glow; every smaller
+    // stamp keeps the flat disc precisely because at r 4-12 the edge
+    // doesn't read. The glow has to die where the SOOT dies, and the soot
+    // is the scar texture's alpha, not the stain's r 94 box: measured on
+    // nuke_scar.png, mean alpha crosses 50% by ~r 49 and even the
+    // starburst streak tips are spent by ~r 78 — the box's outer band is
+    // empty fringe. 220 puts the 150° hot_rock flip line at d 78 (deposit
+    // 130 exactly), right at the last streak tips. The profile from a 20°
+    // ambient: capped at 190° out to d 43 (well inside the crater, which
+    // masks it), glowing 190→150 across the scar's dense body, then
+    // sub-flip warmth that still lights fuels out to ~d 139 (core:wood
+    // 80) and reaches true zero at 192. On a 0° ambient map the flip
+    // pulls in to d 61 — the streaky outer third of the scar stays
+    // glowless there.
+    //
+    // The 190 limit is unchanged — the "not-ground-melting" half:
+    // core:sand melts at 200 and hot_rock needs 220 to run to lava, so no
+    // amount of nuking liquefies ground by heat alone. The r 65 melt wave
+    // still makes its slag ring — that is a transmute, not a temperature,
+    // and the two do not fight: slag spawns at 200, and a POSITIVE
+    // modify_temperature never cools anything already above its limit, so
+    // the 255 nuke_burst fireballs raining +25/limit-150 afterwards leave
+    // both the glow apron and the slag pool alone.
+    {
+      "modify_temperature": {
+        "r": [
+          0,
+          192
+        ],
+        "amount": 220,
+        "limit": 190,
+        "falloff": 0
+      }
+    },
     {
       "destroy_all": {
         "r": [
@@ -42,31 +84,6 @@
           32
         ],
         "debris": true
-      }
-    },
-    // Thermal pulse (2026-07-30). Reaches well past everything else the nuke
-    // does — the r 65 melt wave, the r 64 shatter ring, the r 94 scar — so
-    // the fringe of the blast is left hot rather than merely dirty. LAST
-    // band on purpose: the r 32 core is already air by now, and air takes no
-    // temperature, so this only heats what survived.
-    //
-    // 100 lights every fuel in one hit (core:wood 80, jungle timber 80 from
-    // an ambient 0). The 190 limit is the "not-ground-melting" half: the
-    // lowest melting point in the engine is core:sand at 200, so no amount
-    // of nuking can turn ground to lava by heat alone. The r 65 melt wave
-    // still makes its slag ring — that is a transmute, not a temperature,
-    // and the two do not fight: slag spawns at 200, and a POSITIVE
-    // modify_temperature never cools anything already above its limit, so
-    // the 255 nuke_burst fireballs raining +25/limit-150 afterwards leave
-    // the slag pool alone.
-    {
-      "modify_temperature": {
-        "r": [
-          0,
-          100
-        ],
-        "amount": 100,
-        "limit": 190
       }
     }
   ],
