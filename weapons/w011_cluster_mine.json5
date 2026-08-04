@@ -17,6 +17,12 @@
           "inherit": 0.1
         }
       }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_heavy", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "reload": [
+      { "emit": { "type": "snd_reload", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ]
   },
   "beam": false,

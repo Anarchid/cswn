@@ -37,6 +37,12 @@
           "angle": 90
         }
       }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_heavy", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "selected": [
+      { "emit": { "type": "snd_sight_on", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ]
   },
   "beam": false,

@@ -17,6 +17,12 @@
           "inherit": 0
         }
       }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_rifle", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "reload": [
+      { "emit": { "type": "snd_reload", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ]
   },
   "beam": false,

@@ -17,6 +17,15 @@
           "inherit": 0
         }
       }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_pistol", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "reload": [
+      { "emit": { "type": "snd_energy_reload", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "selected": [
+      { "emit": { "type": "snd_sight_on", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ]
   },
   "beam": false,
@@ -24,7 +33,7 @@
     "name": "PLASMAROCKETS",
     "laser_sight": false,
     "sounds": {
-      "fire": "bazooka.wav"
+      "fire": "plasma_blast.ogg"
     },
     "fire_cone": 0,
     "shells": {

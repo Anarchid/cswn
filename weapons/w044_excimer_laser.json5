@@ -26,6 +26,18 @@
           "inherit": 0
         }
       }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_pistol", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "reload": [
+      { "emit": { "type": "snd_laser_charge", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "reloading": [
+      { "emit": { "type": "snd_laser_drain", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "selected": [
+      { "emit": { "type": "snd_sight_on", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ]
   },
   "beam": true,

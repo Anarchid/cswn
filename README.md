@@ -133,11 +133,19 @@ The lineage, as far as the files themselves record it:
 - **csliero-wormnõid** — this repository: converted to the native package
   format, then hand-authored
 
-One asset comes from outside that lineage: `sprites/nuke_scar.png`, the
+One sprite comes from outside that lineage: `sprites/nuke_scar.png`, the
 nuclear-blast ground scar, is the Zero-K RTS project's `scar5_big.png` decal
 ([ZeroK-RTS/Zero-K](https://github.com/ZeroK-RTS/Zero-K), GPL v2),
 downscaled. Credit and thanks to the Zero-K artists; that file keeps its
 upstream license.
+
+So do the nine `sounds/*.ogg` — the dry-fire clicks, reload and
+empty-magazine sounds, and the plasma discharge. They are cut from
+freesound.org recordings under CC0 or CC BY 4.0, and every one is credited by
+title, author and licence in [`sounds/origin.txt`](sounds/origin.txt), which
+is also where the reasoning lives for the one sound from that batch this
+package does **not** ship: a CC BY-NC recording, whose NonCommercial term the
+GPL cannot honour.
 
 No license is known to have been published for any of the upstream work, and
 none of it carries a license file. This package is published in the spirit in

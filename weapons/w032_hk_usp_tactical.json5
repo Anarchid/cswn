@@ -37,6 +37,12 @@
           "angle": 90
         }
       }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_pistol", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "reload": [
+      { "emit": { "type": "snd_reload", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ]
   },
   "beam": false,

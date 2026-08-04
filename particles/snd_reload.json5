@@ -1,0 +1,68 @@
+// Silent sound carrier — the reload chime, and the canonical example of the
+// shape every other snd_*.json5 in here copies.
+//
+// WHY A PARTICLE AT ALL. The §11 weapon trigger lists (`on.dryfire`,
+// `on.reload`, `on.reloading`, `on.selected`, …) execute `emit` and nothing
+// else, exactly like `on.fire` — a weapon cannot call the `sound` verb
+// itself. So the shortest legal handoff from a trigger to a sound is an
+// invisible particle that fuses immediately and plays the sound on its way
+// out. Same trick as particles/gadget.json5 uses to reach `spawn_body`.
+//
+// INVISIBLE BY CONSTRUCTION, two independent ways, because one of them
+// silently stops being true if someone adds art here later:
+//   - no `presentation.sprite`, so the render sprite-start resolves to the
+//     -1 sentinel and this def gets no sprite set at all;
+//   - no `presentation.color_index`, which means 0, and the point-render
+//     pass skips colour 0 as "no palette entry".
+//
+// INERT BY CONSTRUCTION. radius 0, speed 0, gravity 0, no `collide_worm` and
+// no `collide_terrain` list, and the wallhack bounce so terrain can never
+// park or detonate it. It spawns ~5px off the muzzle, sits there for its two
+// ticks, and expires. `fuse.ticks: 1` is the shortest expressible fuse (a
+// wObject-class def expires on `time_alive > timeout`).
+//
+// AND YET IT MUST STAY IN THE SIM — that is the whole point, and it is not an
+// accident. The engine's R11 fast path demotes consequence-free particles to
+// the render-side fx pool, skipping the world spawn entirely; a particle that
+// got demoted would never play anything. `is_fx_only` reads a `sound` verb as
+// a consequence, so this def is never demoted, the spawn is real, and the
+// SoundEvent goes out at the muzzle **on every peer**. That is why the reload
+// hook lives here rather than in a client-side reaction to a weapon's
+// `presentation.sounds.reload`: you hear the enemy's magazine, not just your
+// own.
+{
+  "legacy": {
+    "wallhack_bounce": -1
+  },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "wobble": 0,
+    "pushed_by_blasts": false,
+    "ccd": false,
+    "substeps": 1
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false,
+    "projectiles": false
+  },
+  "fuse": {
+    "ticks": 1,
+    "variance": 0
+  },
+  "on": {
+    "fuse": [
+      {
+        "sound": {
+          "file": "reloaded.wav"
+        }
+      },
+      {
+        "remove": {}
+      }
+    ]
+  },
+  "speed": 0
+}

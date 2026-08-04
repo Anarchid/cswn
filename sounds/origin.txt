@@ -1,0 +1,57 @@
+Provenance and attribution for the sounds in this directory.
+
+The 28 Liero-derived .wav files (alive, bazooka, begin, blaster, boing, bump,
+burner, death*, dirt, dropshel, exp*, hurt*, larpa, movedown, moveup, reloaded,
+rifle, select, shot, shotgun, throw) come from csliero's sounds.snd and carry
+the same provenance as the rest of the inherited layer — see README.md.
+
+The .ogg files were added 2026-08-05 for the weapon trigger hooks (dryfire,
+reload, empty-magazine and selection sounds). All are cut from freesound.org
+originals under CC0 or CC-BY 4.0 — licences that permit commercial
+redistribution, as this package's GPL v2 requires. tools/cut-new-sounds.sh is
+the exact record of how each was trimmed, levelled and encoded.
+
+  dryfire_pistol.ogg   "9mm Handgun Being Dry Fired" by serøutōnin--deprivəd
+                       https://freesound.org/people/ser%C3%B8ut%C5%8Dnin--depriv%C9%99d/sounds/674568/
+                       CC0 — no attribution required, credited anyway
+
+  dryfire_rifle.ogg    "Generic Firearm Dryfire" by jackyyang09
+                       https://freesound.org/people/jackyyang09/sounds/467432/
+                       CC BY 4.0
+
+  dryfire_shotgun.ogg  "Shotgun Trigger Pull" by DrinkingWindGames
+                       https://freesound.org/people/DrinkingWindGames/sounds/789658/
+                       CC BY 4.0
+
+  dryfire_heavy.ogg    same source as dryfire_shotgun.ogg, pitched down ~4
+                       semitones for the launchers and emplaced guns — an
+                       adaptation, as CC BY 4.0 permits
+                       CC BY 4.0, DrinkingWindGames
+
+  laser_charge.ogg     "Lazer Rifle Zoom In-Out Effect" by Hybrid_V, first half
+  laser_drain.ogg      same file, second half
+                       https://freesound.org/people/Hybrid_V/sounds/321216/
+                       CC BY 4.0
+
+  energy_reload.ogg    "Activation sound effect" by hotpin7
+                       https://freesound.org/people/hotpin7/sounds/842507/
+                       CC BY 4.0
+
+  sight_on.ogg         "Switch Flip #1" by IanStarGem
+                       https://freesound.org/people/IanStarGem/sounds/278205/
+                       CC0 — no attribution required, credited anyway
+
+  plasma_blast.ogg     "BLASTER (multiple)" by C3Sabertooth, one take of ten
+                       https://freesound.org/people/C3Sabertooth/sounds/480872/
+                       CC0 — no attribution required, credited anyway
+
+DELIBERATELY NOT SHIPPED: freesound 515194 ("rifle, assault rifle mp5, empty
+chamber, dry fire" by JoseIgnacioTriay) arrived in the same batch and is a good
+sound, but it is CC BY-NC 4.0. A NonCommercial term cannot be honoured by a
+GPL v2 package — the GPL grants commercial use unconditionally — so it is
+absent from this directory rather than merely unreferenced. The rifle dryfire
+above is cut from jackyyang09's CC-BY sound instead. Do not re-add 515194.
+
+Also unused: freesound 818509 ("night vision activate" by hotpin7, CC BY 4.0),
+kept out of the package because every file in sounds/ is downloaded by every
+client whether or not a def references it.

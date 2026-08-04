@@ -1,0 +1,40 @@
+// Silent sound carrier: a laser sight or energy weapon switching on as it is drawn (on.selected).
+// See snd_reload.json5 for why a trigger hook needs a particle to reach a
+// sound at all, and why this def must never become invisible-AND-inert enough
+// for the engine's R11 fx demotion to take it out of the sim.
+{
+  "legacy": {
+    "wallhack_bounce": -1
+  },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "wobble": 0,
+    "pushed_by_blasts": false,
+    "ccd": false,
+    "substeps": 1
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false,
+    "projectiles": false
+  },
+  "fuse": {
+    "ticks": 1,
+    "variance": 0
+  },
+  "on": {
+    "fuse": [
+      {
+        "sound": {
+          "file": "sight_on.ogg"
+        }
+      },
+      {
+        "remove": {}
+      }
+    ]
+  },
+  "speed": 0
+}
