@@ -33,7 +33,11 @@
     // reaches the world and never draws world RNG (which is also what makes
     // the jitter free — the fx pool rolls it client-side).
     "while_selected": [
-      { "emit": { "type": "flamer_pilot", "count": 1, "speed": 1, "jitter": 0.25, "inherit": 1, "offset":10} }
+      // `offset` pulls the flame back toward the worm off the 8 px muzzle
+      // (= flamer_pilot's radius 3, + 5). Negative is legal and always was —
+      // what was NOT working is that the R11 fx path dropped the field
+      // entirely, which is fixed as of webnoita's fx_demotion_honours_emit_offset.
+      { "emit": { "type": "flamer_pilot", "count": 1, "speed": 1, "jitter": 0.25, "inherit": 1, "offset": -1 } }
     ]
   },
   "beam": false,
