@@ -1,0 +1,68 @@
+// The pilot light: the little flame that sits burning at a flamethrower's
+// nozzle for as long as the thing is in your hand. One is emitted from
+// `on.while_selected` every tick, so the "flame" you see is really a rolling
+// cluster of three, each a single hot-yellow pixel with a small warm light.
+//
+// THIS DEF MUST STAY R11-FX-DEMOTABLE, and that is load-bearing rather than
+// merely tidy. `while_selected` beats sixty times a second for every worm
+// holding a flamer, and a demoted emit takes the fx fast path in
+// run_weapon_emits: no world spawn, no projectile slot, and — the part that
+// matters — NOT ONE WORLD-RNG DRAW. Give this def a consequence (any
+// non-inert entry in a collide/fuse list, a `terrain:` band, an `on.tick`,
+// `pushed_by_blasts`, `collide.projectiles`) and it becomes a real particle:
+// three more projectiles per worm per tick, and a per-tick RNG draw that
+// re-sequences the jitter of every other weapon in the mod for as long as
+// anybody is holding a flamethrower. Demotion is derived from hashed def data
+// so every peer would still agree — it would not desync, it would just
+// quietly change how the whole package plays.
+//
+// Being demoted is also what makes the call-site `jitter` free: the fx pool
+// rolls it with Math.random client-side, precisely because the sim skipped
+// the draw on every peer. A pilot flame that flickers differently on your
+// screen and mine is not a desync, it is a pilot flame.
+//
+// - radius 3 (not 0) puts the spawn at detect_range + 5 = 8 px off the worm,
+//   which is exactly where the three flame particles leave the barrel. The
+//   pilot sits on the muzzle, not inside the worm.
+// - colour 112 is the hot-yellow step of the palette's fire ramp (104-118),
+//   two steps above where the flames themselves burn.
+// - fuse 3 with one spawned per tick means three overlap, and the fx pool
+//   scales each one's light by its remaining life — so the cluster is bright
+//   at the nozzle and falls off behind it without any animation.
+// - the wallhack bounce keeps it lit when you hold the gun against a wall.
+{
+  "legacy": {
+    "wallhack_bounce": -1
+  },
+  "physics": {
+    "gravity": -0.03,
+    "damping": 1,
+    "wobble": 0,
+    "pushed_by_blasts": false,
+    "ccd": false,
+    "substeps": 1
+  },
+  "radius": 3,
+  "collide": {
+    "terrain": false,
+    "worms": false,
+    "projectiles": false
+  },
+  "fuse": {
+    "ticks": 3,
+    "variance": 0
+  },
+  "speed": 0,
+  "presentation": {
+    "color_index": 112,
+    "light": {
+      "rgb": [
+        1,
+        0.86,
+        0.28
+      ],
+      "intensity": 0.5,
+      "radius": 1
+    }
+  }
+}

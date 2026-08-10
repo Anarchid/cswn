@@ -1,0 +1,67 @@
+// Silent sound carrier: the sustained roar of a flamethrower. See
+// snd_reload.json5 for why a trigger hook needs a particle to reach a sound
+// at all, and for every "invisible and yet not fx-demoted" property this def
+// inherits from it unchanged.
+//
+// THE ONE THING THAT IS DIFFERENT HERE: `cooldown`. The three flamers have
+// `fire_delay: 1`, so `on.fire` runs SIXTY TIMES A SECOND, and a 0.32 s roar
+// spawned sixty times a second is ~19 coherent copies of itself stacked on
+// top of each other — a wall of noise that the master limiter would then pump
+// on and off. The `sound` verb's `cooldown:` (ticks) is the re-trigger floor
+// that fixes it: the carrier still spawns every tick, and the renderer drops
+// every request that arrives inside 18 ticks of the last one from the same
+// place. Same mechanism gus2wn gives a Gusanos continuous `detect_range`.
+//
+// So the cadence is 18 ticks = 0.300 s against a 0.320 s cell: the cell's
+// 30 ms tail fade crossfades into the next cell's 20 ms head, and the roar is
+// continuous for exactly as long as the trigger is down and not one tick
+// longer. tools/cut-zk-flamer-sounds.sh cut the file to those numbers — the
+// three of them (cell length, cooldown, fades) only work together.
+//
+// WHY NOT `on.open_fire`, which fires once per burst and needs no cooldown:
+// because a full M9A1-7 magazine is 155 ticks of continuous flame and the cell
+// is 19, so a burst-start sound would cover an eighth of it and leave the
+// rest silent. WHY NOT a periodic `on.tick` carrier: `every:` is phased on the
+// global frame counter, so it would work, but nothing would ever tell the
+// carrier the trigger had come up. `on.fire` IS the "still firing" signal.
+//
+// The cooldown key is the verb id plus a 16 px cell of the sound's position,
+// so two worms flaming at opposite ends of the map each get their own roar,
+// and two worms flaming shoulder to shoulder share one. Both are right.
+{
+  "legacy": {
+    "wallhack_bounce": -1
+  },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "wobble": 0,
+    "pushed_by_blasts": false,
+    "ccd": false,
+    "substeps": 1
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false,
+    "projectiles": false
+  },
+  "fuse": {
+    "ticks": 1,
+    "variance": 0
+  },
+  "on": {
+    "fuse": [
+      {
+        "sound": {
+          "file": "flamer_loop.ogg",
+          "cooldown": 18
+        }
+      },
+      {
+        "remove": {}
+      }
+    ]
+  },
+  "speed": 0
+}

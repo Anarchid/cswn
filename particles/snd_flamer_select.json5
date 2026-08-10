@@ -1,0 +1,44 @@
+// Silent sound carrier: the blowtorch striking as a flamethrower comes into
+// the hand. See snd_reload.json5 for the shape and why it exists at all.
+//
+// Rides `on.selected`, which fires once per switch INCLUDING the starting
+// loadout — so a worm that spawns holding a flamer lights it on its first
+// tick rather than staying mute until the first CHANGE. No cooldown: unlike
+// snd_flamer_loop this is a one-per-edge trigger, and the only way to hear it
+// twice quickly is to actually cycle weapons quickly, which should be audible.
+{
+  "legacy": {
+    "wallhack_bounce": -1
+  },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "wobble": 0,
+    "pushed_by_blasts": false,
+    "ccd": false,
+    "substeps": 1
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false,
+    "projectiles": false
+  },
+  "fuse": {
+    "ticks": 1,
+    "variance": 0
+  },
+  "on": {
+    "fuse": [
+      {
+        "sound": {
+          "file": "flamer_select.ogg"
+        }
+      },
+      {
+        "remove": {}
+      }
+    ]
+  },
+  "speed": 0
+}

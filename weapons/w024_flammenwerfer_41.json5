@@ -16,10 +16,24 @@
           "jitter": 0.305,
           "inherit": 0
         }
-      }
+      },
+      // The roar. `fire_delay: 1` means this list runs every tick, which is
+      // why the carrier's sound verb declares a cooldown instead of playing
+      // sixty times a second — see particles/snd_flamer_loop.json5.
+      { "emit": { "type": "snd_flamer_loop", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
     ],
     "dryfire": [
       { "emit": { "type": "snd_dryfire_heavy", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    "selected": [
+      { "emit": { "type": "snd_flamer_select", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ],
+    // The pilot light, one per tick for as long as the gun is in hand. Costs
+    // the sim nothing at all: flamer_pilot is R11-demoted, so this never
+    // reaches the world and never draws world RNG (which is also what makes
+    // the jitter free — the fx pool rolls it client-side).
+    "while_selected": [
+      { "emit": { "type": "flamer_pilot", "count": 1, "speed": 0, "jitter": 0.25, "inherit": 0 } }
     ]
   },
   "beam": false,

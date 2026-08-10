@@ -45,6 +45,24 @@ the exact record of how each was trimmed, levelled and encoded.
                        https://freesound.org/people/C3Sabertooth/sounds/480872/
                        CC0 — no attribution required, credited anyway
 
+The two flamethrower .ogg files were added 2026-08-10 and come from Zero-K,
+not from freesound. Zero-K's legal.txt places everything unspecified under the
+GNU General Public License (v2 or later) or Public Domain, which is compatible
+with this package's GPL v2 — the same basis on which sprites/nuke_scar.png is
+here. tools/cut-zk-flamer-sounds.sh is the exact record of both cuts.
+
+  flamer_loop.ogg      Zero-K sounds/weapon/flamethrower.wav, 0.15-0.47 s.
+                       Zero-K's own sounds/weapon/origin.txt credits this file
+                       to **OpenLieroX** — so it is a Liero-clone sound coming
+                       home to a Liero mod by way of an RTS.
+                       Zero-K / OpenLieroX, GPL v2+
+
+  flamer_select.ogg    Zero-K sounds/misc/blowtorch.wav, 0.03-0.50 s.
+                       Zero-K records no per-file origin for this one (neither
+                       sounds/origin.txt nor sounds/misc/origin.txt lists it),
+                       so it stands on the blanket legal.txt grant above.
+                       Zero-K, GPL v2+ / Public Domain
+
 DELIBERATELY NOT SHIPPED: freesound 515194 ("rifle, assault rifle mp5, empty
 chamber, dry fire" by JoseIgnacioTriay) arrived in the same batch and is a good
 sound, but it is CC BY-NC 4.0. A NonCommercial term cannot be honoured by a
