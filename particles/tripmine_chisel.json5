@@ -1,0 +1,60 @@
+// TRIPWIRE MINE pingback — the trip travelling home.
+//
+// Emitted backwards out of the broken beam and cast the same way (1 px per
+// step), so it retraces the beam's own path. Whatever it lands on IS the
+// wall to tear: normally the mine's casing, which is a rigid body and stops
+// particles like terrain does, ~7 px short of the wall proper. Either way
+// the bore that follows starts from a surface and drives inward, so a worm
+// stepping into the beam behind cover tears the cover instead — the
+// geometry answers "what if something is in the way" without being asked.
+//
+// It ignores worms entirely (no `collide_worm` list), which it must: it is
+// born inside the trespasser it was tripped by.
+//
+// The casing dies here, silently. `remove_body` takes the nearest body of
+// that def within 64 px — a proximity scope, so the other mines on the map
+// are untouched. The charge is NOT dispatched from here: the bore carries
+// it, and the casing's own `destroy:` chain emits the identical bore, so
+// tripped and shot-out deaths detonate through one shared path.
+{
+  "legacy": { "particle_class": true },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "pushed_by_blasts": false,
+    "ccd": true,
+  },
+  "radius": 1,
+  "collide": {
+    "terrain": true,
+    "projectiles": false
+  },
+  "speed": 140,
+  "speed_variance": 0,
+  "spawn_jitter": 0,
+  // `fuse.ticks` counts MOVEMENT STEPS, not frames — `time_alive` is
+  // incremented per substep. At 140 substeps a fuse of 1 would kill the
+  // ray after ONE PIXEL; 140 is exactly one tick's worth of travel, so
+  // the beam reaches its full range and is gone within its own tick.
+  "fuse": { "ticks": 140, "variance": 0 },
+  "on": {
+    "collide_terrain": [
+      { "emit": { "type": "tripmine_bore", "count": 1, "offset": 12 } },
+      { "remove_body": { "body": "tripmine_armed" } },
+      { "remove": {} }
+    ],
+    // Nothing to tear (the casing was destroyed mid-flight): fizzle.
+    "fuse": [
+      { "remove": {} }
+    ]
+  },
+  "anim": { "frames": 0 },
+  "presentation": {
+    "line": {
+      "color": "#ff0000",
+      "width": 1,
+      "lit": false,
+      "blend": "auto"
+    }
+  }
+}

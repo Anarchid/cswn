@@ -1,0 +1,61 @@
+// TRIPWIRE MINE — replaces the WL STEALTH MINE.
+//
+// Renamed from w097_stealth_mine.json5. Safe because ids are assigned by
+// sorted FQN and the `wNNN_` prefix pins the sort position: no other weapon
+// file can sort between w096_* and w098_*, so the descriptive half is free
+// to change. Verified by compiling the package before and after — the sim
+// blob came out byte-identical. The one thing that DOES key on the stem is
+// the dedicated server's `weaponRules` (webnoita/server-cswn.json), which
+// warns and drops the rule on a stale key rather than failing; it was
+// updated in the same change.
+//
+// The original's whole idea was a mine you couldn't see, which cswn's
+// lighting gave away for free: drop a normal mine and shoot the lamps out.
+// So the stealth is gone and the mine announces itself instead — it sticks
+// to a wall and casts a visible laser across the gap. Break the beam and
+// the wall it is bolted to is torn out and thrown down the beam at you.
+//
+// The chain: this weapon → `tripmine` carrier → `tripmine_casing` body
+// (1.5 s grace, dim sighting ray) → `tripmine_armed` (live `tripmine_beam`)
+// → `tripmine_chisel` back down the beam → `tripmine_bore` 12 px into the
+// wall → `tripmine_tear`. Shooting the armed casing (200 hp) reaches the
+// same bore through its `destroy:` chain.
+//
+// The tear throws two things down that line, on two timescales: a volley of
+// glowing spall (`tripmine_shrapnel`) that crosses the gap in a tenth of a
+// second, and the wall itself as rigid debris, which takes about a second.
+// Most of the spall never gets out of the socket — it is stopped by the
+// rubble it was born in, and shoves it, which is what makes the slow half
+// arrive twice as heavy and half as late. The numbers, and what they were
+// measured against, live in effects/tripmine_tear.json5.
+//
+// Ammo/delay/reload are the WL original's, untouched: 3 mines, no reload.
+{
+  "ammo": 3,
+  "reload": 65535,
+  "fire_delay": 120,
+  "recoil": 0,
+  "on": {
+    "fire": [
+      {
+        "emit": {
+          "type": "tripmine",
+          "count": 1,
+          "speed": 5.5,
+          "jitter": 0.003,
+          "inherit": 0
+        },
+      }
+    ],
+    "dryfire": [
+      { "emit": { "type": "snd_dryfire_heavy", "count": 1, "speed": 0, "jitter": 0, "inherit": 0 } }
+    ]
+  },
+  "beam": false,
+  "presentation": {
+    "name": "TRIPWIRE MINE",
+    "sounds": {
+      "fire": "throw.wav"
+    },
+  },
+}

@@ -31,7 +31,12 @@
       "fill_count": 2,
       "destroy_rock": false
     },
+    // The only three rows with fill pixels are the only three that can be
+    // named — every other row is a carve MASK, which says what shape to dig
+    // and has no colors to stamp. Referring to a mask as a `texture:` is now
+    // a load error rather than a decal that silently never appears.
     {
+      "name": "blue_dirt",
       "carve": false,
       "mask_frame": 0,
       "fill_frame": 87,
@@ -47,6 +52,7 @@
       "destroy_rock": false
     },
     {
+      "name": "green_dirt",
       "carve": false,
       "mask_frame": 38,
       "fill_frame": 82,
@@ -75,10 +81,11 @@
       "fill_count": 2,
       "destroy_rock": false
     },
-    // 10: nuclear blast scar (hand-authored 2026-07-22) — pure native fill,
-    // no WL frames. Stretched over the blast zone by the nuke epicenters'
-    // stain verb, never used as a place fill.
+    // Nuclear blast scar (hand-authored 2026-07-22) — pure native fill, no WL
+    // frames. Stretched over the blast zone by every big explosion's stain
+    // verb, never used as a place fill.
     {
+      "name": "nuke_scar",
       "carve": false,
       "destroy_rock": false,
       "fill_sprite": "nuke_scar"

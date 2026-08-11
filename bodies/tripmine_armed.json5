@@ -1,0 +1,49 @@
+// TRIPWIRE MINE casing, ARMED — the live phase.
+//
+// Same casing as `tripmine_casing`, live lens, and the beam it emits is
+// `tripmine_beam` instead of the harmless `tripmine_sight`. Breaking that
+// beam runs the whole chain back to here (see effects/tripmine_tear.json5
+// for the full walk).
+//
+// Two ways it ends, and they converge on ONE effect:
+//   - tripped: the pingback chisel `remove_body`s this casing silently and
+//     bores the charge into the wall itself;
+//   - shot out: 200 hp of casing gives way and the `destroy:` chain below
+//     bores the identical charge, from the identical pose.
+// Either way the wall goes, so shooting a tripwire mine you have spotted
+// still means eating the wall it was mounted on. 200 hp is deliberate: the
+// other cs mines are indestructible, and this one doesn't dodge or shoot
+// back, so it can afford to be tougher than a worm without being safe.
+// The bolts are re-made, not inherited: a morph is a NEW rigid id, so every
+// link anchored to the old body dies `partner_died`, and `spawn_body` has no
+// way to carry one across. §10.4 `mount:` is what makes that a non-event —
+// the armed sibling spawns at the casing's exact pose and bolts itself to
+// whatever the casing was bolted to, wall or vehicle, because it is asking
+// the same question in the same place. (Its own seat step is a no-op: the
+// casing already seated, and the armed body inherits that pose.)
+{
+  "shape": { "blueprint": "bodies/tripmine_armed.png" },
+  "material": "core:metal",
+  "mass": 6,
+  "mount": { "pins": [[3, 1], [3, 3]], "reach": 6 },
+  "hp": 200,
+  "stain": "bodies/tripmine_armed.stain.png",
+  "on": {
+    "tick": [
+      {
+        "every": 1,
+        "do": [
+          { "emit": { "type": "tripmine_beam", "angle_offset": 180, "offset": 3 } }
+        ]
+      }
+    ]
+  },
+  // Shot out: bore the charge into the wall behind me and let the casing
+  // shower. `offset: 12` runs along MY facing, which is into the wall — the
+  // same place the chisel puts it, so both deaths detonate identically.
+  // (A destroy chain can't `remove` — the body is already dead.)
+  "destroy": [
+    { "emit": { "type": "tripmine_bore", "offset": 12 } },
+    { "sound": "dirt.wav" }
+  ],
+}

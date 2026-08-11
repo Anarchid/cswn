@@ -1,0 +1,59 @@
+// TRIPWIRE MINE beam — the live tripwire.
+//
+// The armed casing re-casts this every tick: 1 px per step × 120 steps, a
+// 120 px ray that lives and dies inside its own tick. It damages nothing.
+// Its whole job is the `collide_worm` list, which fires at the contact
+// point with the beam's own heading as the event direction — so
+// `angle_offset: 180` sends the chisel straight back down the line it just
+// travelled, to the wall the mine is bolted to. The trespasser is on that
+// line by definition, which is the only reason this weapon can aim at all:
+// nothing in the chain ever asks where the worm is.
+//
+// `remove` at the end of the list is what makes the beam STOP at the first
+// worm it meets (the engine derives `worm_collide` from a Remove in the
+// collide list) — so the visible beam truncates at whoever broke it, and a
+// second worm further down the corridor doesn't fire a second chisel.
+{
+  "legacy": { "particle_class": true },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "pushed_by_blasts": false,
+    "ccd": true,
+  },
+  "radius": 2,
+  "collide": {
+    "terrain": true,
+    "worms": true,
+    "projectiles": false
+  },
+  "speed": 120,
+  "speed_variance": 0,
+  "spawn_jitter": 0,
+  // `fuse.ticks` counts MOVEMENT STEPS, not frames — `time_alive` is
+  // incremented per substep. At 120 substeps a fuse of 1 would kill the
+  // ray after ONE PIXEL; 120 is exactly one tick's worth of travel, so
+  // the beam reaches its full range and is gone within its own tick.
+  "fuse": { "ticks": 1, "variance": 0 },
+  "on": {
+    "collide_terrain": [
+      { "remove": {} }
+    ],
+    // Tripped. No damage here — the wall does the killing.
+    "collide_worm": [
+      { "emit": { "type": "tripmine_chisel", "count": 1, "angle_offset": 180 } },
+      { "remove": {} }
+    ]
+  },
+  "anim": { "frames": 0 },
+  "presentation": {
+    "line": {
+      "texture": "tripwire_beam",
+      "width": 1,
+      "length": 320,
+      "scroll": 900,
+      "lit": false,
+      "blend": "additive"
+    },
+  },
+}

@@ -1,0 +1,58 @@
+// TRIPWIRE MINE bore — the charge, seated 12 px inside the wall.
+//
+// This def exists for one reason: DEPTH. `shatter` launches its fragments
+// radially away from the effect centre, and there is no argument that aims
+// them. Detonated on the wall's face, half the chunks fly into the rock and
+// settle; detonated a foot inside it, "radially outward" and "out of the
+// wall, along the beam, at whoever broke it" are the same direction. So the
+// charge is not fired where the chisel stopped — it is emitted from there
+// with `offset: 12`, which runs along the emission heading, i.e. inward.
+// Spawn displacement is never terrain-checked, so it seats cleanly inside
+// solid rock.
+//
+// It has no collide lists, so being buried is inert: it can't be blocked to
+// death, and with no terrain list there is no `explode_on_ground` to kill
+// it early. It sits for one tick and lets go.
+//
+// **`speed` is 0.2 and not 0, and it is not a travel speed.** A particle's
+// facing is the atan2 of its spawn velocity, and atan2(0, 0) is zero — so a
+// charge with no speed detonates believing it points due east, and every
+// `emit` in the effect it invokes is aimed from that. It did not matter
+// while the tear only shattered: those fragments fly radially and need no
+// heading. It matters now that the tear also throws spall back down the
+// beam (particles/tripmine_shrapnel.json5). 0.2 px/frame is enough for both
+// velocity components to survive Fp truncation at any angle (~0.3 deg of
+// resolution, against the 1.4 deg an angle unit can express even in
+// principle), and it buys no motion at all: the bore is buried in rock, so
+// its first look-ahead is blocked, and a blocked particle with no killing
+// terrain list parks where it stands before moving. The charge still goes
+// off at exactly `offset: 12`.
+{
+  "legacy": { "particle_class": true },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "pushed_by_blasts": false,
+    "ccd": false
+  },
+  "radius": 0,
+  "collide": {
+    "projectiles": false
+  },
+  "speed": 0.2,
+  "speed_variance": 0,
+  "spawn_jitter": 0,
+  "fuse": { "ticks": 1, "variance": 0 },
+  "on": {
+    "fuse": [
+      "tripmine_tear",
+      { "remove": {} }
+    ]
+  },
+  "anim": { "frames": 0 },
+  "presentation": {
+    "color_index": -1,
+    "splinter_color_index": 0,
+    "sprite_wl": { "start": -1 }
+  }
+}

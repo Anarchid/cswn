@@ -1,0 +1,59 @@
+// TRIPWIRE MINE carrier — the thrown object, and nothing else.
+//
+// `spawn_body` is unreachable from a weapon (`on.fire` executes `emit` and
+// nothing else), so every body a weapon places needs a carrier particle to
+// route through. This one flies, sticks, and hands off.
+//
+// It places on `collide_terrain` rather than `settle` for one reason:
+// contact lists run with the impact velocity still intact, so
+// `rotation: "inherit"` resolves to the real impact heading. A settle list
+// runs after the stop has zeroed velocity, and `bam_atan2(0, 0)` would hand
+// the mine a heading of zero — every mine on the map beaming due west.
+// Hence also: no `bounce` block. It stops dead on the first contact, and
+// that contact is the placement.
+{
+  "physics": {
+    "gravity": 0.023,
+    "damping": 0.99,
+    "wobble": 0,
+    "pushed_by_blasts": true,
+    "impulse_mass": 10,
+    "ccd": true,
+    "substeps": 1
+  },
+  "radius": 2,
+  "collide": {
+    "terrain": true,
+    "worms": true,
+    "projectiles": false
+  },
+  "fuse": { "ticks": 151, "variance": 0 },
+  "on": {
+    // Stuck. The casing lands at the contact point wearing the impact
+    // heading — local +x into the wall, lens nub back out along the throw.
+    "collide_terrain": [
+      { "spawn_body": { "body": "tripmine_casing", "rotation": "inherit" } },
+      { "sound": "laser_charge.ogg" },
+      { "remove": {} }
+    ],
+    // Hit a worm in flight: it's a thrown lump of metal, that's all.
+    "collide_worm": [
+      { "damage_other": { "amount": 7 } },
+      { "push_other": { "factor": 0.02 } },
+      { "emit": { "type": "core:blood", "count": 1 } },
+      { "remove": {} }
+    ],
+    // Thrown into the void: no wall, no mine.
+    "fuse": [
+      "poof",
+      { "remove": {} }
+    ]
+  },
+  "anim": { "frames": 0, "mode": "by_velocity" },
+  "presentation": {
+    "color_index": 2,
+    "splinter_color_index": 0,
+    "sprite": "s178_1"
+  },
+  "speed": 5.5
+}

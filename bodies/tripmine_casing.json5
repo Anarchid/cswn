@@ -1,0 +1,75 @@
+// TRIPWIRE MINE casing, UNARMED — the grace phase.
+//
+// The `tripmine` carrier spawns this where it hit, wearing the impact
+// heading (`rotation: "inherit"`), so the body's local +x points INTO the
+// wall it stuck to and its lens nub (blueprint x=0) points back out along
+// the throw. Everything the mine emits rides that pose: `angle_offset: 180`
+// is "out of the wall", `offset` is "further into it".
+//
+// The grace period is load-bearing, exactly as it is for GADGET. The beam
+// shines back down the path the mine was thrown along — which is where the
+// thrower is standing. Armed on placement, it would tear the wall out over
+// its own owner every time. So this phase emits `tripmine_sight`: the same
+// ray, drawn dim, with no worm contact at all. It shows you exactly where
+// the tripwire will fall while you still have time to leave it.
+//
+// It is BOLTED to its wall, not part of it (§10.4 `mount:`). `static: true`
+// was the old answer and it was a lie that read well: a static mine is part
+// of the world, and the difference only shows when the world moves or stops
+// existing. Two bolts through the back face at x = 3 (one px past the art,
+// i.e. into whatever it hit) weld the pose exactly as `static` did — and
+//
+//   * carve the wall out from under it and the bolts have nothing left to
+//     hold: the mine falls, still sighting, and goes off wherever it lands;
+//   * throw it at something that MOVES — a hoverboard, the THEMIS hull — and
+//     the bolts catch the BODY instead of a terrain cell, so the tripwire
+//     goes where the vehicle goes.
+//
+// `reach: 6` is measured, not guessed: a carrier stops at the first blocked
+// pixel of its ray, so how deep the casing lands depends on the approach
+// angle, and the mount seats the body clear of the surface before bolting.
+// Swept over nine approach angles into wall/ceiling/floor, 5 catches both
+// bolts everywhere and 4 misses one on a slant; 6 is 5 plus a pixel.
+//
+// Seating is also what replaced `static`'s other job. A dynamic body spawned
+// part-buried used to catch the depenetration ejection (the GADGET-at-the-
+// floor failure); the mount backs it out along the way it came first, so it
+// is never buried to begin with — measured 0.000 px of drift and 0 of 300
+// frames awake on all five surfaces.
+//
+// `mass: 6` is authored because the derived one is wrong for this object: 9
+// metal cells price at 22.5, heavier than a WORM (16), for a gadget you carry
+// three of. At 22.5 a mine stuck to a hoverboard sank it 30 px/s; at 6 the
+// board holds altitude and the pair sleeps.
+{
+  "shape": { "blueprint": "bodies/tripmine_casing.png" },
+  "material": "core:metal",
+  "mass": 6,
+  "mount": { "pins": [[3, 1], [3, 3]], "reach": 6 },
+  "hp": 200,
+  // Dead lens: dull maroon, no light. The armed sibling is the same casing
+  // with a live one — the tell is the glow, not the shape.
+  "stain": "bodies/tripmine_casing.stain.png",
+  "fuse": { "ticks": 90, "variance": 0 },
+  "on": {
+    // The sighting ray: every tick, out of the wall, cleared past the
+    // casing's own half-width (particles always collide with bodies —
+    // an un-offset beam would die inside its own emitter).
+    "tick": [
+      {
+        "every": 1,
+        "do": [
+          { "emit": { "type": "tripmine_sight", "angle_offset": 180, "offset": 3 } }
+        ]
+      }
+    ],
+    // Arm in place. `rotation: "inherit"` in a body list = my own angle, so
+    // the live mine points exactly where the sight beam has been showing.
+    // Remove flushes before the spawn queue: the swap nets to one body.
+    "fuse": [
+      { "spawn_body": { "body": "tripmine_armed", "rotation": "inherit" } },
+      { "sound": "sight_on.ogg" },
+      { "remove": {} }
+    ]
+  },
+}

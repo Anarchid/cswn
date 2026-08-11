@@ -1,0 +1,135 @@
+// TRIPWIRE MINE spall — the charge's glowing fragments, thrown down the beam.
+//
+// Hand-authored 2026-08-06. The tear used to be silent until the wall
+// arrived: `shatter` throws ~24 fist-sized chunks that need the better part
+// of a second to cross the gap (see effects/tripmine_tear.json5), and a
+// trespasser who kept walking was past the socket before the first one got
+// out of it. This is the fast half of the same charge — spall off the bore,
+// out ahead of the rock.
+//
+// It is emitted by the effect, so it inherits the effect's aiming and not a
+// worm's position: born at the bore 12 px inside the wall and fired at
+// `angle_offset: 180`, i.e. back out along the beam, which is where the
+// trespasser is standing by definition. Nothing here asks where the worm is
+// either.
+//
+// **Most of these die in the debris, and that is the point.** They are born
+// inside the socket the shatter just cut, which is no longer rock but a
+// packed disc of rigid fragments, and a particle stops on a rigid body
+// exactly as it stops on terrain. Each one that lands hands its body an
+// impulse of `impulse_mass` × its own velocity at the contact point — a
+// directed shove, along the beam, into rubble whose own launch is radial and
+// approximate. So the volley does two jobs with one number: what threads the
+// gaps reaches the worm as damage, and what doesn't reaches the worm as
+// rock, sooner and straighter than the shatter alone sends it.
+//
+// `ccd: true` is load-bearing at this speed. Without the swept march a
+// 9 px/frame fragment steps clean over a 6 px debris chunk — it would neither
+// be consumed nor shove anything, and the whole first half of the mechanism
+// would silently not happen.
+//
+// `pushed_by_blasts: false`: these are born from a blast, at a spot the same
+// effect's `repel` is centred on. Emissions spawn after the wave that made
+// them so today's tear cannot touch them, but a second mine going off next
+// door must not be able to blow the volley back into the wall either.
+{
+  "legacy": {
+    "particle_class": true
+  },
+  "physics": {
+    "gravity": 0,
+    "pushed_by_blasts": false,
+    // The shove: the hit body takes `impulse_mass` x this fragment's
+    // velocity at the contact point, against a mass of one per cell. 6 into
+    // a ~40-cell chunk is a bit over 1 px/frame of extra outward velocity
+    // per hit, on debris whose own escape speed is 1-2 — so a chunk that
+    // catches two or three fragments roughly doubles its pace. Measured
+    // end to end in effects/tripmine_tear.json5.
+    "impulse_mass": 6,
+    "ccd": true
+  },
+  "radius": 2,
+  "collide": {
+    "terrain": true,
+    "worms": true,
+    "projectiles": false
+  },
+  // Fast enough to arrive well ahead of the rock, slow enough that the
+  // debris it shoves is still in front of it when it gets there.
+  "speed": 9,
+  "speed_variance": 1.5,
+  "spawn_jitter": 0,
+  // Range, not lifetime: 12-16 frames at ~9 px/frame is 110-145 px, a hair
+  // past the 120 px the beam itself reaches. A fragment that finds nothing
+  // inside the tripwire's own range has no business flying on.
+  "fuse": {
+    "ticks": 16,
+    "variance": 4
+  },
+  "on": {
+    "fuse": [
+      {
+        "remove": {}
+      }
+    ],
+    // Consumed — by the debris (the usual case) or by the far wall. The
+    // impulse and the hp chip are the engine's doing on any death against a
+    // body; this list only has to not survive it.
+    "collide_terrain": [
+      {
+        "remove": {}
+      }
+    ],
+    "collide_worm": [
+      {
+        // Small on purpose: what arrives is a handful out of 72, and the
+        // count does the scaling with range far better than the number
+        // does. See the falloff table in effects/tripmine_tear.json5 —
+        // and read the caveat under it before changing this.
+        "damage_other": {
+          "amount": 6
+        }
+      },
+      {
+        "push_other": {
+          "factor": 0.04
+        }
+      },
+      {
+        "emit": {
+          "type": "core:blood",
+          "count": 3
+        }
+      },
+      {
+        "remove": {}
+      }
+    ]
+  },
+  "anim": {
+    "frames": 0
+  },
+  "presentation": {
+    "color_index": 168,
+    "splinter_color_index": 0,
+    "sprite_wl": {
+      "start": -1,
+      "draw_on_map": false
+    },
+    // Drawn as its own movement segment: a short hot streak, not a dot.
+    "line": {
+      "color": "#ffb45a",
+      "width": 1,
+      "lit": false,
+      "blend": "additive"
+    },
+    // Dim per fragment on purpose — two dozen of these leave the socket
+    // together and the stack is what reads, the same lesson raffaello's
+    // fragments learned.
+    "light": {
+      "color": "#ffb45a",
+      "intensity": 0.18,
+      "radius": 8
+    }
+  }
+}

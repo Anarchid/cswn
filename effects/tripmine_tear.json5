@@ -1,0 +1,104 @@
+// TRIPWIRE MINE charge — tear the wall out and throw it.
+//
+// Runs from `tripmine_bore`, 12 px inside the wall the mine was mounted on.
+// `shatter` converts that rock into loose rigid fragments and launches each
+// one radially away from THIS point, with the speed falling off toward the
+// rim. Seated inside the wall, "radially away" and "out into the corridor,
+// along the beam, at whoever broke it" are the same direction — fragments
+// on the far side of the centre are launched deeper into solid rock and
+// just settle. That burial is the entire aiming mechanism; nothing in this
+// weapon ever asks where the worm is.
+//
+// `include_rock` because the walls worth mounting a mine on are usually the
+// indestructible kind.
+//
+// **`cell_size: 6` and `speed: 20` are measured, not taste** (see
+// crates/webnoita-core/tests/tripmine_scratch.rs). One big slab cannot be
+// thrown, for three compounding reasons: the fragment sitting ON the launch
+// point has `d = pos - centre ≈ 0`, so it gets no launch DIRECTION at any
+// speed; the fragments are born packed into the socket the shatter just cut
+// and have to solve their way out of it; and the velocity pass is an
+// approximate projector (SOLVER-MATH-AUDIT.md F5) that eats what survives.
+// Measured: a 109-cell slab at `speed: 16` travels 7 px in 90 ticks. At this
+// pitch the tear instead throws ~24 fist-sized chunks, of which ~7 (≈167
+// cells of wall, biggest ≈44) cross a worm 48 px down the beam within a
+// second. The wall arrives; it just arrives as a volley.
+//
+// `speed: 20` is the launch inside the socket, not the travel speed — what
+// gets out runs at ~1-2 px/frame. Worth watching on thin-walled maps
+// anyway: bodies have no CCD (F4), and fast debris can ratify its way
+// through a 1-2 px partition.
+//
+// `repel` is NOT what throws the chunks — the blast impulse is mass-scaled
+// against a 16-cell reference, so anything slab-sized barely notices it. It
+// is here for the loose rubble and to shove whoever is standing at the wall.
+//
+// **The spall** (2026-08-06) is the other half of the charge, and the fast
+// half. Everything above describes rock that needs the better part of a
+// second to cross the gap; `tripmine_shrapnel` crosses it in a tenth of
+// that. It is also the one thing here that is AIMED — not radially, but at
+// `angle_offset: 180` off the bore's own heading, which is the beam, which
+// is where the trespasser is standing. That the bore has a heading at all
+// is recent and deliberate (see particles/tripmine_bore.json5); before it
+// did, this emit would have fired due east out of every mine on the map.
+//
+// The cone is born inside the socket the shatter just cut, `offset: 8` out
+// along each fragment's own line, and most of it dies there against the
+// fresh debris — which is the mechanism, not a loss. A fragment stopped by
+// a chunk hands that chunk a directed impulse along the beam, so the volley
+// spends itself buying exactly what this weapon has always been trying to
+// deliver: wall, moving at the worm, sooner and straighter than a radial
+// launch inside a packed socket manages on its own. What threads the gaps
+// arrives ahead of the rock and arrives as damage.
+//
+// **Measured** (crates/webnoita-core/examples/tripmine_spall_probe.rs, which
+// runs the shipped defs end to end — thrown mine, grace, beam, trespasser),
+// worm 50 px down the beam from a wall-mounted mine:
+//
+//   | arm                        | wall past the worm | worm 100 -> |
+//   | no volley (before this)    | 153 cells, plateau at t+30 | 100 |
+//   | volley, shove+damage off   | 153 cells, plateau at t+30 | 100 |
+//   | shipped                    | 232 by t+30, 307 by t+60   |  52 |
+//
+// The middle row is the control that matters: identical emission, identical
+// RNG draws, only the impulse and the damage switched off. It lands exactly
+// on the no-volley curve, so the doubling in the third row is the shove and
+// nothing else. All 24 fragments leave the wall (mean velocity -7.8 px/frame
+// along the beam); about one in nine reaches the worm.
+//
+// **Two things to know before retuning the damage.** First, the weapon's
+// only damage at range IS this volley — the `damage` band below is r 20
+// around a charge seated in the wall, so before the spall a trespasser
+// standing in the open at 50 px took literally nothing and just watched the
+// rubble come. Second, one trip detonates the charge THREE times (beams
+// already in flight when the chisel removes the casing each run their own
+// chisel home), so the volley a worm actually eats is 3 x 24 and the numbers
+// below are for the whole event:
+//
+//   gap from the wall |  12   25   40   55   75  100 px
+//   damage taken      | 168   78   63   60   24   12
+//
+// Hugging the wall is fatal, mid-corridor is most of a worm, and the far end
+// of the tripwire's own 120 px reach is a scratch. If that triple ever
+// becomes a single, this cone is suddenly a third of what it says here.
+{
+  "do": [
+    { "shatter": { "r": 16, "cell_size": 6, "speed": 20, "include_rock": true } },
+    { "emit": { "type": "tripmine_shrapnel", "count": 24,
+                "angle_offset": 180, "spread": 66, "offset": 8 } },
+    { "repel": { "r": 20, "force": 0.06 } },
+    { "damage": { "r": 20, "amount": 26 } },
+    { "stain": { "r": [0, 26], "strength": 0.35, "texture": "nuke_scar" } },
+    { "modify_temperature": { "r": [0, 10], "amount": 25, "limit": 150 } }
+  ],
+  "presentation": {
+    "sounds": { "start": "exp4.wav" },
+    "sprite_wl": { "start": 40, "frames": 15, "delay": 1 },
+    "sprite": "s40_15",
+    "lit": false,
+    "shadow": true,
+    "shake": 4,
+    "flash": 1,
+    "light": { "rgb": [1, 0.72, 0.36], "intensity": 1.4, "radius": 48 }
+  }
+}
