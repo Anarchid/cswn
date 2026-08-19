@@ -1,0 +1,57 @@
+// The highlight where the FORCE FIELD's beam ends — the small sibling of
+// PowerEternal's `flare`.
+//
+// Two frames, nine pixels, an r14 light: a third of the size and a fraction of
+// the glow of the one it is modelled on, because that beam fires in bursts and
+// this one re-fires EVERY FRAME. At PowerEternal's numbers a deployed field
+// would put a 32px green bloom on the floor sixty times a second.
+//
+// Noclip and harmless, so `is_fx_only` demotes it to the render pool and a
+// permanent field costs the projectile budget nothing.
+{
+  "legacy": {
+    "particle_class": true
+  },
+  "physics": {
+    "gravity": 0,
+    "pushed_by_blasts": false,
+    "impulse_mass": 4,
+    "ccd": false
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false
+  },
+  "speed": 0,
+  "speed_variance": 0,
+  "spawn_jitter": 0,
+  "fuse": {
+    "ticks": 2,
+    "variance": 0
+  },
+  "on": {
+    "fuse": [
+      { "remove": {} }
+    ]
+  },
+  "anim": {
+    "frames": 1
+  },
+  "presentation": {
+    "color_index": 0,
+    "splinter_color_index": 0,
+    "sprite_wl": {
+      "start": 0,
+      "draw_on_map": false
+    },
+    "sprite": "force_field_flare",
+    "blend": "additive",
+    "lit": false,
+    "light": {
+      "color": "#7ad945",
+      "intensity": 0.75,
+      "radius": 14
+    }
+  }
+}

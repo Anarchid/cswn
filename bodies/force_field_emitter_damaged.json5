@@ -1,0 +1,161 @@
+// FORCE FIELD emitter — damaged, and currently firing. Phase 2 of 2.
+//
+// Same pod, split casing, guttering coils, one buckled leg (a charred stain
+// over the IDENTICAL blueprint — the mask must not move or the phase swaps
+// stop landing COM on COM; see `force_field_emitter.json5`). The field still
+// works, but not reliably: it sparks off the severed cabling, it smokes, and
+// every so often it cuts out entirely for 30 to 60 frames.
+//
+// The cutout is a two-body cycle. This def burns for a fixed 96 frames on its
+// own `fuse:` and hands over to `force_field_emitter_dark`, which counts an
+// interval it cannot count itself and hands back. Both swaps carry
+// `hp: "inherit"`, which is the load-bearing half: without it the pod would
+// heal to a full 2500 every time it flickered, and a damaged emitter would be
+// unkillable.
+//
+// Fixed 96 on the way out and random 30..60 on the way back is the split the
+// engine forces — a body `fuse:` ignores `variance` — but it also happens to be
+// the right shape. What a player needs to read is "the field is unreliable NOW",
+// and the unpredictable half is the half that matters: you cannot time a dash
+// through the gap.
+{
+  "shape": { "blueprint": "bodies/force_field_emitter.png" },
+  "stain": "bodies/force_field_emitter_wrecked.stain.png",
+  // `core:gravel` — the engine's grey sand (`MAT_GRAY_SAND` is an alias for it)
+  // — and NOT decoration. `death: "shatter"` breaks a body into rigid debris
+  // made of its own cells, and debris (unlike props) resolidifies when it
+  // settles: so the pod comes apart into a dozen tumbling chunks that land, turn
+  // back into grid cells, and then SLUMP, because gravel is a powder. A metal
+  // pod would have left a dozen metal plates welded into the floor.
+  //
+  // Nothing else notices the swap: `mass:` is authored, the CA stamp rasterises
+  // every body as MAT_RIGID whatever it is made of, and worms and bullets are
+  // stopped by the bitmap rather than by what the bitmap is.
+  "material": "core:gravel",
+  "mass": 40,
+  "gravity": 0,
+  "drag": 64,
+  "fixed_rotation": true,
+  "hp": 2500,
+
+  // Chunky and thrown clear: 154 cells at a 4px voronoi cell is ~10 pieces, and
+  // 1.8 px/frame outward is enough to scatter them rather than drop them in a
+  // heap on the crater.
+  "death": "shatter",
+  "shatter": { "cell": 4, "speed": 1.8 },
+
+  // The burn. Counts from SPAWN, which is why it is a body fuse and not an
+  // `on.tick` cadence: `every:` is phased on the WORLD frame, so a pod damaged
+  // just before a boundary would drop out almost immediately.
+  "fuse": { "ticks": 96 },
+
+  "on": {
+    "tick": [
+      // The field, unchanged from phase 1 while it is up.
+      {
+        "every": 1,
+        "do": [
+          {
+            "emit": {
+              "type": "force_field_beam",
+              "count": 1,
+              "speed": 290,
+              "angle": 270,
+              "at": [-0.5, 7.5]
+            }
+          }
+        ]
+      },
+      // Arcing off the split. `every: 4` with a 1-in-3 gate rather than
+      // `every: 12` flat — a metronome reads as a machine working correctly,
+      // and the chance draw is what makes it read as intermittent.
+      //
+      // The spark bed sits 1.5px ABOVE the deck plate, not on the centre of
+      // mass, and that is the same fix the drone needed. A particle is stopped
+      // by bodies: born at the COM, every one of these died on its first step
+      // inside the hull, having first been counted as a hit on it — so they
+      // were nearly invisible AND they were shoving the pod around. Up here
+      // they arc off the split casing, which is where the damage is painted.
+      {
+        "every": 4,
+        "do": [
+          {
+            "emit": {
+              "type": "wreck_spark",
+              "count": 2,
+              "speed": 1.4,
+              "spread": 300,
+              "angle": 90,
+              "at": [-0.5, -6.65],
+              "scatter": [12, 2],
+              "chance_denominator": 3
+            }
+          }
+        ]
+      },
+      // Smoke off the vents, above the plate for the same reason — and here it
+      // matters twice, because `doberman_smoke` is a SHARED def that still
+      // carries the WL import's impulse_mass 4 (the thrown bomb wants it).
+      // Position is the only lever this def has.
+      {
+        "every": 11,
+        "do": [
+          {
+            "emit": {
+              "type": "doberman_smoke",
+              "count": 1,
+              "speed": 0.3,
+              "spread": 90,
+              "angle": 90,
+              "at": [-0.5, -8.65],
+              "scatter": [8, 3]
+            }
+          }
+        ]
+      }
+    ],
+
+    // Cut out. `velocity: "inherit"` so a pod that was drifting keeps drifting
+    // through the swap, `hp: "inherit"` so the damage sticks.
+    "fuse": [
+      {
+        "spawn_body": {
+          "body": "force_field_emitter_dark",
+          "velocity": "inherit",
+          "hp": "inherit"
+        }
+      },
+      { "remove": {} }
+    ]
+  },
+
+  // The other 2500. Nothing hands over — this is the end of the pod.
+  "destroy": [
+    "force_field_burst",
+    {
+      "emit": {
+        "type": "wreck_spark",
+        "count": 24,
+        "speed": 2.2,
+        "spread": 360,
+        "scatter": [14, 8]
+      }
+    },
+    {
+      "emit": {
+        "type": "doberman_smoke",
+        "count": 6,
+        "speed": 0.45,
+        "spread": 360,
+        "scatter": [14, 8]
+      }
+    }
+  ],
+
+  // Dimmer and sicklier than the intact pod's.
+  "light": {
+    "color": "#5fa83a",
+    "intensity": 0.45,
+    "radius": 20
+  }
+}

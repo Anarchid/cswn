@@ -1,0 +1,198 @@
+// DOBERMAN UAV9/DR — the drone, airworthy. Phase 1 of 2.
+//
+// The WL original was a shotType-2 steerable: a sprite that flew wherever its
+// owner aimed, thrust on Up, and let a charge go every 88 ticks. It is a rigid
+// body now, and the immediate reason is light. A body draws itself as its own
+// textured quad and can declare `lit: false`; a projectile sprite cannot, so on
+// an unlit map the UAV was a rumour. Everything else here follows from that one
+// swap, because a body is not a steerable and nothing in the body vocabulary
+// can read a worm's aim.
+//
+// So it flies like the THEMIS gun instead of like a missile. The hull has a
+// REAL angle: Up and Down slew it (`impulse { spin }`, the rate-prescribing
+// verb — `angvel` integrates and a held key would wind it up like a turbine),
+// left/right and jump/rope translate it, and everything it fires leaves along
+// local +x. That is the bore, and it is also the direction a body's action
+// lists emit along (`body_emit_dir`), so "out of the muzzle" costs an `offset:`
+// and no angle arithmetic at all.
+//
+// `spawn_offset` is deliberately ABSENT on both phases. With no offset the
+// anchor IS the centre of mass, so every `offset:` below is measured from the
+// COM, and — the load-bearing half — the wrecked twin shares this exact
+// blueprint, so the phase swap lands COM on COM with nothing to get wrong.
+// (`tools/make-gunship-art.mjs` prints the geometry: 7x11, 39 cells, COM
+// [3.4, 5.5], nose spike at [6.5, 5.5].)
+//
+// Art is the mod's own `sprites/s653_16`, frame 12 — the +x-facing pose of a
+// sixteen-frame directional set — baked in as blueprint (alpha is the collision
+// mask) plus stain. The body's rotation reproduces the whole set continuously
+// instead of in sixteen steps, which is a straight upgrade and costs nothing.
+{
+  "shape": { "blueprint": "bodies/doberman_uav.png" },
+  "stain": "bodies/doberman_uav.stain.png",
+  "material": "core:metal",
+
+  // 39 cells of metal price at ~98 — six worms — which is right for a hull and
+  // wrong for something that has to change direction. 12 is a shade under a
+  // worm: blasts shove it hard, and it answers a throttle.
+  "mass": 12,
+  // A hovering airframe: no fall, and enough drag that a released key stops
+  // meaning something within a second. A frame keeps `1 - drag/512`, so 24 is
+  // 4.7%/frame — terminal speed under the thrusts below is `add x 512/24`,
+  // i.e. ~2.1 px/frame sideways and ~1.9 climbing, and a released slew bleeds
+  // out in about twenty frames.
+  "gravity": 0,
+  "drag": 24,
+  // Fullbright. This is the entire reason the drone is a body.
+  "lit": false,
+
+  // 250, then the wreck's 250. Not indestructible like THEMIS: that tank is
+  // penned into one corner of one map and its counterplay is the exposure of
+  // the driver, where this thing flies to you.
+  "hp": 250,
+
+  // No `collision_damage`: the WL drone dealt exactly 0 on contact (it shoved,
+  // with `push_other: 11`), and a UAV that kills by being flown into people is
+  // a different weapon.
+
+  // §13.3. The gate is the weapon TYPE being held, so an empty DOBERMAN still
+  // flies — and switching away parks the drone in mid-air, still yours, ready
+  // to wake when you draw the launcher again. `camera:` hands the driver the
+  // view with the keys and takes both back together, which is what the WL
+  // steerable's camera did by a different route.
+  "control": "source_weapon_held",
+  "camera": true,
+
+  // The original's 12-second endurance, unchanged. A drone nobody shoots down
+  // still runs its battery out and goes off where it is.
+  "fuse": { "ticks": 721 },
+
+  "on": {
+    "input": [
+      // The classic Liero steerable scheme, and now it is literally that:
+      // LEFT/RIGHT turn the airframe, UP opens the throttle along wherever the
+      // nose ended up. `impulse { forward }` is what makes the second half
+      // expressible at all — every other linear term is world-frame, so before
+      // it a "gunship" could rotate its art without rotating its thrust.
+      //
+      // Positive BAM is clockwise, so LEFT is negative: hold it and a
+      // right-facing drone pitches up, over, and round to face left. 180 deg/s
+      // asked for is ~172 delivered (damping runs after the impulse sets the
+      // rate) — a half turn a second.
+      { "key": "left", "do": [ { "impulse": { "spin": -180 } } ] },
+      { "key": "right", "do": [ { "impulse": { "spin": 180 } } ] },
+      // Throttle. 0.16 px/tick² against `drag: 24` settles at `0.16 x 512/24`
+      // = ~3.4 px/frame, a bit over 200 px/s flat out.
+      { "key": "up", "do": [ { "impulse": { "forward": 0.16 } } ] },
+      // Airbrake — no WL ancestor, and it earns its place: a hull you steer
+      // by turning has no way to stop otherwise, and the drag alone takes
+      // most of a second. 0.94 on top of the drag's 0.953 is ~10%/frame.
+      { "key": "down", "do": [ { "impulse": { "damp": 0.94 } } ] },
+      // Bare captures, no action. The WL original declared `blocks: ["dig"]`
+      // for the same reason, and the trigger is here because the launcher is
+      // `ammo: 1` and non-reloadable: without this entry every frame the pilot
+      // holds fire is a dry click. Jump and rope are deliberately NOT taken —
+      // the original left them to the pilot, and a pilot standing in the open
+      // for twelve seconds should keep something to dodge with.
+      { "key": "dig" },
+      { "key": "fire" }
+    ],
+
+    // The strafing run: the WL cadence, to the frame. `every:` is world-phased
+    // rather than counted from the launch, which is exactly what it was before
+    // (the original's `on.tick` was the same shape on the particle).
+    "tick": [
+      {
+        "every": 88,
+        "do": [
+          // The charge itself, down the bore. `offset: 8` clears the hull's
+          // +x edge (3.6px from the COM) by 4.4 — a body is solid to
+          // particles, and an un-offset shot dies inside its own gun.
+          {
+            "emit": {
+              "type": "doberman_charge",
+              "count": 1,
+              "speed": 9,
+              "inherit": 0.33,
+              "offset": 8
+            }
+          },
+          // The flare, sitting ON the muzzle rather than past it: the firecone
+          // bloom, plus the mod's existing burner flash and shake.
+          {
+            "emit": {
+              "type": "doberman_flare",
+              "count": 1,
+              "speed": 0.5,
+              "offset": 5
+            }
+          },
+          "doberman_muzzle_flash",
+          // The directional half of the flash. A bloom has no orientation to
+          // get wrong; a cone of embers down the bore does the pointing.
+          {
+            "emit": {
+              "type": "ricochet_faint",
+              "count": 5,
+              "speed": 1.7,
+              "spread": 26,
+              "inherit": 0.3,
+              "offset": 8
+            }
+          }
+        ]
+      }
+    ],
+
+    // Battery flat. The WL drone detonated on its own timer and so does this
+    // one — `explosion_large` is the same effect, and it carries its own
+    // sound, shake and light. `remove` rather than `destroy_self`: a body fuse
+    // DISARMS at zero, it does not despawn, and `destroy_self` would run the
+    // `destroy:` chain below and hand out a fresh wreck instead of ending it.
+    "fuse": [
+      "explosion_large",
+      {
+        "emit": {
+          "type": "wreck_spark",
+          "count": 8,
+          "speed": 1.8,
+          "spread": 360
+        }
+      },
+      { "remove": {} }
+    ]
+  },
+
+  // 250 damage in. The airframe is holed but still flying — hand over to the
+  // wrecked twin, in place, carrying pose and momentum so the swap is invisible
+  // except as a change of paint. The shower that follows is this body's own 39
+  // pixels coming off, which is the debris a hit that size should throw.
+  "destroy": [
+    {
+      "spawn_body": {
+        "body": "doberman_uav_wrecked",
+        "velocity": "inherit",
+        "rotation": "inherit"
+      }
+    },
+    { "sound": { "file": "exp2.wav", "volume": 0.8, "cooldown": 10 } },
+    {
+      "emit": {
+        "type": "wreck_spark",
+        "count": 10,
+        "speed": 1.5,
+        "spread": 360,
+        "inherit": 0.4
+      }
+    },
+    {
+      "emit": {
+        "type": "doberman_smoke",
+        "count": 3,
+        "speed": 0.4,
+        "spread": 360,
+        "inherit": 0.3
+      }
+    }
+  ]
+}

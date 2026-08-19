@@ -1,0 +1,121 @@
+// FORCE FIELD emitter — intact. Phase 1 of 2 (plus the dropout state).
+//
+// The WL original was a weightless cell dripping damaging sparks downward
+// forever. This is that cell as a rigid body: something you can see, shoot,
+// shove, and stand on, projecting a laser curtain instead of a rain of dots.
+//
+// Three properties, and each is a deliberate answer:
+//
+//   `fixed_rotation`  the emitter fires on an ABSOLUTE bearing (straight down,
+//                     `angle: 270`), so a pod that could tip would have its art
+//                     pointing one way and its beam another. Freezing the angle
+//                     is what lets the beam stay pose-blind.
+//   `gravity: 0`      it hangs where you threw it, which is the original's
+//                     whole behaviour and the reason the weapon is placed
+//                     rather than aimed. Paired with `drag: 64` as §10
+//                     prescribes — a zero-gravity body at default drag never
+//                     falls but also never stops, so one blast would set it
+//                     drifting for the rest of the round.
+//   `mass: 40`        154 cells of gravel price at ~150, and 154 of metal would
+//                     have been ~385 — either way a bank vault. 40 is two and a
+//                     half worms: a worm can walk across the deck plate without
+//                     skating it away, and a rocket can still reposition it. Its
+//                     top two rows are flat and full width for exactly that
+//                     reason (see tools/make-gunship-art.mjs). Authoring the
+//                     mass is also what keeps the material choice below purely
+//                     about what the WRECKAGE is made of.
+//
+// 5000 hp across two phases, 2500 each. This is a fortification — it is meant
+// to survive being shot at, and taking one down should be a decision rather
+// than a stray hit. `spawn_offset` is absent on all three phases, so the action
+// lists run at the COM and the phase swaps land COM on COM with no arithmetic;
+// the generator prints the geometry (18x12, 154 cells, COM [9, 5.15]).
+{
+  "shape": { "blueprint": "bodies/force_field_emitter.png" },
+  "stain": "bodies/force_field_emitter.stain.png",
+  // `core:gravel` — the engine's grey sand (`MAT_GRAY_SAND` is an alias for it)
+  // — and NOT decoration. `death: "shatter"` breaks a body into rigid debris
+  // made of its own cells, and debris (unlike props) resolidifies when it
+  // settles: so the pod comes apart into a dozen tumbling chunks that land, turn
+  // back into grid cells, and then SLUMP, because gravel is a powder. A metal
+  // pod would have left a dozen metal plates welded into the floor.
+  //
+  // Nothing else notices the swap: `mass:` is authored, the CA stamp rasterises
+  // every body as MAT_RIGID whatever it is made of, and worms and bullets are
+  // stopped by the bitmap rather than by what the bitmap is.
+  "material": "core:gravel",
+  "mass": 40,
+  "gravity": 0,
+  "drag": 64,
+  "fixed_rotation": true,
+  "hp": 2500,
+
+  "on": {
+    // The field. One beam per tick, and it has to be every tick: the beam is a
+    // ONE-FRAME particle (that is what makes its texture scroll — see
+    // particles/force_field_beam.json5), so a slower cadence is not a dimmer
+    // field, it is a strobing one.
+    //
+    // `angle: 270` is absolute (0 = right, 90 = up), which is legitimate only
+    // because this body cannot rotate. `at:` is measured from the COM: 7.5px
+    // down puts the muzzle 0.65px under the pod's own bottom row, clear of its
+    // mask — a particle is stopped by bodies, and a beam started inside its own
+    // emitter dies there.
+    "tick": [
+      {
+        "every": 1,
+        "do": [
+          {
+            "emit": {
+              "type": "force_field_beam",
+              "count": 1,
+              "speed": 290,
+              "angle": 270,
+              "at": [-0.5, 7.5]
+            }
+          }
+        ]
+      }
+    ]
+  },
+
+  // 2500 in. The casing splits, the coils gutter, and the emitter carries on
+  // in the damaged state — in place, keeping whatever motion it had. It does
+  // NOT inherit hp: it is at zero by definition here, and the damaged def's own
+  // 2500 is the second half of the 5000.
+  "destroy": [
+    {
+      "spawn_body": {
+        "body": "force_field_emitter_damaged",
+        "velocity": "inherit"
+      }
+    },
+    { "sound": { "file": "laser_drain.ogg", "volume": 0.9, "cooldown": 12 } },
+    {
+      "emit": {
+        "type": "wreck_spark",
+        "count": 16,
+        "speed": 1.9,
+        "spread": 360,
+        "scatter": [12, 6]
+      }
+    },
+    {
+      "emit": {
+        "type": "doberman_smoke",
+        "count": 4,
+        "speed": 0.4,
+        "spread": 360,
+        "scatter": [12, 6]
+      }
+    }
+  ],
+
+  // The coil glow. Small and green — the beam carries its own light, and this
+  // is only what says the pod is live when you are standing beside it.
+  "light": {
+    "color": "#7ad945",
+    "intensity": 0.7,
+    "radius": 26
+  }
+}

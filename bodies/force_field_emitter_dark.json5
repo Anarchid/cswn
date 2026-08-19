@@ -1,0 +1,160 @@
+// FORCE FIELD emitter — damaged, and currently OUT. The dropout state.
+//
+// Identical to `force_field_emitter_damaged` in every way that a shot can
+// measure — same blueprint, same stain, same mass, same hp, and the hp carried
+// across intact — except that it emits no beam. That is the entire difference,
+// and expressing it as a separate def rather than as a flag is the format's
+// idiom: an `on.tick` cadence cannot be switched off, so "stops emitting" has
+// to be "becomes a def that does not emit".
+//
+// It cannot time its own restart (a body `fuse:` ignores `variance`), so its
+// `on.create` throws a `force_field_relight` particle, whose fuse DOES vary,
+// and listens for the signal it raises 30 to 60 frames later. The timer being a
+// particle is what makes the dropout survive a join: `on.create` never re-fires
+// on a FullState restore, but the live particle rides the state blob.
+//
+// It sparks harder than the firing phase and smokes more — a machine visibly
+// trying to restart. That is also the tell a player needs: the field is down,
+// and it is about to come back.
+{
+  "shape": { "blueprint": "bodies/force_field_emitter.png" },
+  "stain": "bodies/force_field_emitter_wrecked.stain.png",
+  // `core:gravel` — the engine's grey sand (`MAT_GRAY_SAND` is an alias for it)
+  // — and NOT decoration. `death: "shatter"` breaks a body into rigid debris
+  // made of its own cells, and debris (unlike props) resolidifies when it
+  // settles: so the pod comes apart into a dozen tumbling chunks that land, turn
+  // back into grid cells, and then SLUMP, because gravel is a powder. A metal
+  // pod would have left a dozen metal plates welded into the floor.
+  //
+  // Nothing else notices the swap: `mass:` is authored, the CA stamp rasterises
+  // every body as MAT_RIGID whatever it is made of, and worms and bullets are
+  // stopped by the bitmap rather than by what the bitmap is.
+  "material": "core:gravel",
+  "mass": 40,
+  "gravity": 0,
+  "drag": 64,
+  "fixed_rotation": true,
+  "hp": 2500,
+
+  // Chunky and thrown clear: 154 cells at a 4px voronoi cell is ~10 pieces, and
+  // 1.8 px/frame outward is enough to scatter them rather than drop them in a
+  // heap on the crater.
+  "death": "shatter",
+  "shatter": { "cell": 4, "speed": 1.8 },
+
+  "on": {
+    // Start the clock, and say so. Emit/sound are both available here; `effect`
+    // is not (the wave loop has already run), which is why nothing in this list
+    // is a blast.
+    "create": [
+      { "emit": { "type": "force_field_relight", "count": 1, "speed": 0 } },
+      { "sound": { "file": "laser_drain.ogg", "volume": 0.55, "cooldown": 20 } },
+      {
+        "emit": {
+          "type": "wreck_spark",
+          "count": 8,
+          "speed": 1.6,
+          "spread": 360,
+          "at": [-0.5, -6.65],
+          "scatter": [10, 5]
+        }
+      }
+    ],
+
+    "tick": [
+      // No beam entry at all — this is the whole point of the def.
+      //
+      // Arcing, roughly three times as often as the firing phase: `every: 3`
+      // against a 1-in-2 gate.
+      //
+      // The spark bed sits 1.5px ABOVE the deck plate, not on the centre of
+      // mass, and that is the same fix the drone needed. A particle is stopped
+      // by bodies: born at the COM, every one of these died on its first step
+      // inside the hull, having first been counted as a hit on it — so they
+      // were nearly invisible AND they were shoving the pod around. Up here
+      // they arc off the split casing, which is where the damage is painted.
+      {
+        "every": 3,
+        "do": [
+          {
+            "emit": {
+              "type": "wreck_spark",
+              "count": 2,
+              "speed": 1.5,
+              "spread": 320,
+              "angle": 90,
+              "at": [-0.5, -6.65],
+              "scatter": [12, 2],
+              "chance_denominator": 2
+            }
+          }
+        ]
+      },
+      {
+        "every": 7,
+        "do": [
+          {
+            "emit": {
+              "type": "doberman_smoke",
+              "count": 1,
+              "speed": 0.32,
+              "spread": 90,
+              "angle": 90,
+              "at": [-0.5, -8.65],
+              "scatter": [8, 3]
+            }
+          }
+        ]
+      }
+    ],
+
+    // Back on. Same swap in the other direction, damage carried across.
+    "signal": [
+      {
+        "name": "csliero_wormnoid:ff_relight",
+        "do": [
+          {
+            "spawn_body": {
+              "body": "force_field_emitter_damaged",
+              "velocity": "inherit",
+              "hp": "inherit"
+            }
+          },
+          { "sound": { "file": "laser_charge.ogg", "volume": 0.6, "cooldown": 12 } },
+          { "remove": {} }
+        ]
+      }
+    ]
+  },
+
+  // Identical to the firing phase's: which half of the flicker it happened to
+  // be in when it died must not change how it dies.
+  "destroy": [
+    "force_field_burst",
+    {
+      "emit": {
+        "type": "wreck_spark",
+        "count": 24,
+        "speed": 2.2,
+        "spread": 360,
+        "scatter": [14, 8]
+      }
+    },
+    {
+      "emit": {
+        "type": "doberman_smoke",
+        "count": 6,
+        "speed": 0.45,
+        "spread": 360,
+        "scatter": [14, 8]
+      }
+    }
+  ],
+
+  // Barely lit — the coils are cold between attempts.
+  "light": {
+    "color": "#5fa83a",
+    "intensity": 0.2,
+    "radius": 14
+  }
+}

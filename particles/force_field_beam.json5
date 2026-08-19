@@ -1,0 +1,105 @@
+// The FORCE FIELD itself: one frame of scrolling green laser, re-fired every
+// tick for as long as the emitter is lit.
+//
+// It replaces a stream of falling drips (`force_field_spark`, gravity 0.061,
+// fuse 97), and its reach is that stream's reach: a drip in free flight covers
+// `0.061 x 97 x 98 / 2` = 289.9 px before its fuse runs out, so the beam is
+// 290px long. Same curtain, same depth, drawn as one thing instead of forty.
+//
+// ONE FRAME is not a detail, it is the whole reason this reads as a beam.
+// `presentation.line` draws the segment a particle covered THIS FRAME, and the
+// texture's `u` runs 0..1 across that segment — so a slow bolt chained over
+// many frames tiles each 3px hop from its own u=0 and the scroll cannot flow
+// along anything. At speed 290 with `ccd`, the whole 290px is one frame's
+// travel, one quad, one continuous `u`, and `scroll` runs down it. The beam is
+// then re-emitted rather than persisted, exactly as a held laser is.
+//
+// `ccd` is what makes it stop at the wall instead of one step past it: the
+// swept per-pixel march ends at the last free pixel, and 290px of un-swept
+// look-ahead would test a point most of the way across the map.
+//
+// It does NOT carve. PowerEternal's transmission beams burn through whatever
+// diggable matter blocks them, which suits a power line strung across a fixed
+// map and does not suit a grenade a player throws: a field you can deploy
+// anywhere must not quietly dig the floor out from under it. No `terrain:`
+// block at all, so the beam simply ends where the world does.
+{
+  "legacy": {
+    "particle_class": true
+  },
+  "physics": {
+    "gravity": 0,
+    "pushed_by_blasts": false,
+    "impulse_mass": 4,
+    "ccd": true
+  },
+  "radius": 2,
+  "collide": {
+    "terrain": true,
+    "worms": true
+  },
+  "speed": 290,
+  "speed_variance": 0,
+  "spawn_jitter": 0,
+  "fuse": {
+    "ticks": 1,
+    "variance": 0
+  },
+  "on": {
+    // Ran out of world before it ran out of reach.
+    "fuse": [
+      { "emit": { "type": "force_field_flare" } },
+      { "remove": {} }
+    ],
+    "collide_terrain": [
+      { "emit": { "type": "force_field_flare" } },
+      { "remove": {} }
+    ],
+    // 5 a tick, and the number is the old curtain's rate rather than its
+    // dose: a drip carried 14 and arrived every third tick, so a worm holding
+    // station in the field took ~4.7/tick. The beam arrives every tick, so it
+    // carries a third as much.
+    //
+    // `remove` matters twice over. It ends the beam AT the worm, which is what
+    // makes a body standing in a force field read as blocking it — and it is
+    // also the only thing between this def and a per-pixel massacre: the ccd
+    // march consults the worm probe at every one of its ~290 steps, and a
+    // penetrating hit (no `remove`) records at each of them.
+    "collide_worm": [
+      { "damage_other": { "amount": 5 } },
+      { "push_other": { "factor": 0 } },
+      { "emit": { "type": "core:blood", "count": 2 } },
+      { "emit": { "type": "force_field_flare" } },
+      { "remove": {} }
+    ]
+  },
+  "anim": {
+    "frames": 0
+  },
+  "presentation": {
+    "color_index": 0,
+    "splinter_color_index": 0,
+    "sprite_wl": {
+      "start": -1
+    },
+    "line": {
+      "texture": "force_field_beam",
+      "color": "#54ff6a",
+      "width": 6,
+      "length": 96,
+      "scroll": 16000,
+      "blend": "additive",
+      "lit": true
+    },
+    // Beam light is a WASH along the segment plus a hot spot at the head, and
+    // it is rasterised into the emission texture rather than spent from the
+    // per-frame point-light budget — so a 290px beam costs the explosions
+    // around it nothing. Well under PowerEternal's intensity 5: that beam is
+    // 15px wide and fires in bursts, this one is 6px and never stops.
+    "light": {
+      "color": "#54ff6a",
+      "intensity": 2,
+      "radius": 2
+    }
+  }
+}

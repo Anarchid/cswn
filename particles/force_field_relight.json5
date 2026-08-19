@@ -1,0 +1,59 @@
+// The damaged FORCE FIELD's restart timer. Invisible, inert, and the only
+// thing in this weapon that knows how long a dropout lasts.
+//
+// A body `fuse:` is a fixed count — `variance` is documented as ignored for
+// bodies — so "30 to 60 frames" cannot live on the dark emitter itself. A
+// particle's fuse CAN vary, and the engine draws it as `ticks - rng(variance)`,
+// a subtraction rather than a spread: 60 with a variance of 31 is 30..60
+// inclusive, which is the interval exactly.
+//
+// The dark emitter emits one of these in its `on.create` and listens for the
+// signal it raises. That the timer is a particle rather than body state is what
+// makes it survive a join: `on.create` does NOT re-fire on a FullState restore,
+// but the live particle rides the state blob, so a joiner inherits a dropout
+// already in progress instead of one that never ends.
+//
+// `radius: 40` on the signal, not a global broadcast: two damaged emitters on
+// one map must not relight each other. 40 covers whatever drift a shoved pod
+// manages in under a second at `drag: 64` and stops well short of a second pod
+// anyone would deploy separately. Two pods parked inside 40px of each other
+// will flicker in lockstep, which is a fair price and arguably a feature.
+{
+  "legacy": {
+    "particle_class": true
+  },
+  "physics": {
+    "gravity": 0,
+    "pushed_by_blasts": false,
+    "impulse_mass": 4,
+    "ccd": false
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false
+  },
+  "speed": 0,
+  "speed_variance": 0,
+  "spawn_jitter": 0,
+  "fuse": {
+    "ticks": 60,
+    "variance": 31
+  },
+  "on": {
+    "fuse": [
+      { "signal": { "name": "csliero_wormnoid:ff_relight", "radius": 40 } },
+      { "remove": {} }
+    ]
+  },
+  "anim": {
+    "frames": 0
+  },
+  "presentation": {
+    "color_index": 0,
+    "splinter_color_index": 0,
+    "sprite_wl": {
+      "start": -1
+    }
+  }
+}

@@ -1,0 +1,181 @@
+// DOBERMAN UAV9/DR — the drone, holed. Phase 2 of 2.
+//
+// Same airframe, same controls, same gun: 250 damage did not stop it, it just
+// took the paint off. What changed is the paint (a charred stain over the
+// identical blueprint, so the swap is pixel-exact — see `doberman_uav.json5`
+// for why the mask must not move), the endurance, and the fact that it now
+// advertises itself: sparks off the severed conductor, smoke off the burning
+// core, every few frames, for as long as it stays up.
+//
+// The next 250 kills it for good. `destroy:` here is the end of the line — no
+// third phase, just the original's `explosion_large`.
+{
+  "shape": { "blueprint": "bodies/doberman_uav.png" },
+  "stain": "bodies/doberman_uav_wrecked.stain.png",
+  "material": "core:metal",
+  "mass": 12,
+  "gravity": 0,
+  "drag": 24,
+  "lit": false,
+  "hp": 250,
+  "control": "source_weapon_held",
+  "camera": true,
+
+  // 180 rather than the intact hull's 721, and not simply because a wreck
+  // should not last. A body `fuse:` counts from SPAWN, so a drone shot into
+  // this phase at second nine would otherwise get a FRESH twelve seconds and
+  // outlive an untouched one. Three seconds of trailing smoke reads as an
+  // aircraft going down, and it caps the worst case at 721 + 180 rather than
+  // at double.
+  "fuse": { "ticks": 180 },
+
+  "on": {
+    // Identical to phase 1's, on purpose. Losing the airframe's paint must not
+    // change what the stick does — a control scheme that shifts under you when
+    // you are hit is the wrong kind of difficulty.
+    "input": [
+      { "key": "left", "do": [ { "impulse": { "spin": -180 } } ] },
+      { "key": "right", "do": [ { "impulse": { "spin": 180 } } ] },
+      // Throttle. 0.16 px/tick² against `drag: 24` settles at `0.16 x 512/24`
+      // = ~3.4 px/frame, a bit over 200 px/s flat out.
+      { "key": "up", "do": [ { "impulse": { "forward": 0.16 } } ] },
+      // Airbrake — no WL ancestor, and it earns its place: a hull you steer
+      // by turning has no way to stop otherwise, and the drag alone takes
+      // most of a second. 0.94 on top of the drag's 0.953 is ~10%/frame.
+      { "key": "down", "do": [ { "impulse": { "damp": 0.94 } } ] },
+      // Bare captures, no action. The WL original declared `blocks: ["dig"]`
+      // for the same reason, and the trigger is here because the launcher is
+      // `ammo: 1` and non-reloadable: without this entry every frame the pilot
+      // holds fire is a dry click. Jump and rope are deliberately NOT taken —
+      // the original left them to the pilot, and a pilot standing in the open
+      // for twelve seconds should keep something to dodge with.
+      { "key": "dig" },
+      { "key": "fire" }
+    ],
+
+    "tick": [
+      // The gun still works, on the same 88-frame beat.
+      {
+        "every": 88,
+        "do": [
+          {
+            "emit": {
+              "type": "doberman_charge",
+              "count": 1,
+              "speed": 9,
+              "inherit": 0.33,
+              "offset": 8
+            }
+          },
+          {
+            "emit": {
+              "type": "doberman_flare",
+              "count": 1,
+              "speed": 0.5,
+              "offset": 5
+            }
+          },
+          "doberman_muzzle_flash",
+          {
+            "emit": {
+              "type": "ricochet_faint",
+              "count": 5,
+              "speed": 1.7,
+              "spread": 26,
+              "inherit": 0.3,
+              "offset": 8
+            }
+          }
+        ]
+      },
+      // Arcing. `every: 5` with a 1-in-2 gate rather than `every: 10` flat,
+      // because a wreck on a metronome reads as a machine that is fine; the
+      // chance draw is what makes it look like something intermittently
+      // shorting out.
+      //
+      // `offset: -7` walks the spray back past the TAIL, and the 7 is measured:
+      // the hull reaches 3.4px along its own -x from the COM, so this clears it
+      // by 3.6 at every bearing. At the -3 it started life with, every spark
+      // was born INSIDE the drone — a particle is stopped by bodies, so each
+      // one died on its first step, having first been counted as a hit. Two
+      // findings in one: the sparks were nearly invisible, and they were
+      // shoving the drone around hard enough to make it unflyable.
+      {
+        "every": 5,
+        "do": [
+          {
+            "emit": {
+              "type": "wreck_spark",
+              "count": 2,
+              "speed": 1.3,
+              "spread": 200,
+              "inherit": 0.5,
+              "offset": -7,
+              "chance_denominator": 2
+            }
+          }
+        ]
+      },
+      // Smoke off the burning core, thinner and slower than the sparks. Drifts
+      // with the airframe (`inherit`), so a drone under power trails it. Same
+      // clearance rule as the sparks, and `doberman_smoke` is a SHARED def that
+      // still carries impulse_mass 4 (the thrown bomb wants it), so getting the
+      // position right is the whole of the fix here.
+      {
+        "every": 9,
+        "do": [
+          {
+            "emit": {
+              "type": "doberman_smoke",
+              "count": 1,
+              "speed": 0.35,
+              "spread": 140,
+              "angle": 90,
+              "inherit": 0.6,
+              "offset": -8
+            }
+          }
+        ]
+      }
+    ],
+
+    // Endurance gone: the same detonation the intact hull gets.
+    "fuse": [
+      "explosion_large",
+      {
+        "emit": {
+          "type": "wreck_spark",
+          "count": 8,
+          "speed": 1.8,
+          "spread": 360
+        }
+      },
+      { "remove": {} }
+    ]
+  },
+
+  // Dead for good. `destroy:` on a body already IS the death, so there is
+  // nothing to remove and nothing to hand over — the shower of the hull's own
+  // pixels runs after this list and that is the last of it.
+  "destroy": [
+    "explosion_large",
+    {
+      "emit": {
+        "type": "wreck_spark",
+        "count": 12,
+        "speed": 2.1,
+        "spread": 360,
+        "inherit": 0.4
+      }
+    },
+    {
+      "emit": {
+        "type": "doberman_smoke",
+        "count": 4,
+        "speed": 0.5,
+        "spread": 360,
+        "inherit": 0.3
+      }
+    }
+  ]
+}

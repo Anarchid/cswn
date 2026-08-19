@@ -1,0 +1,73 @@
+// The spark a broken machine throws: pale electrical blue-white, weightless,
+// harmless, gone in a fifth of a second.
+//
+// Shared by both wrecks in this pass — the DOBERMAN's holed airframe and the
+// FORCE FIELD's split emitter — because they are the same event seen twice: a
+// severed conductor arcing to whatever is nearest. Deliberately NOT one of the
+// existing `*_spark` defs, all of which bite (shield 25, energy 4, tesla): a
+// wreck that quietly damages whoever walks past it is a trap nobody can read.
+//
+// Colour index 16 (#bcfcfc) rather than a sprite: at one pixel there is nothing
+// a sprite could add, and a point particle costs no atlas.
+//
+// `impulse_mass: 0`, and that one is not tidiness. At the WL import default of
+// 4 these punched the wreck they came off: two a frame into a 12-mass drone
+// made it unflyable, and the 40-mass emitter visibly shuddered. `impulse_mass`
+// is opt-in for exactly this reason — it stopped being a hardcoded 4 the day
+// the death blood spray was found launching a worm's own gibs across the map.
+// Decoration does not push.
+{
+  "legacy": {
+    "particle_class": true
+  },
+  "physics": {
+    "gravity": 0.06,
+    "pushed_by_blasts": false,
+    "impulse_mass": 0,
+    "ccd": false,
+    "bounce": {
+      "restitution": 0.25
+    }
+  },
+  "radius": 1,
+  "collide": {
+    "terrain": true,
+    "worms": true
+  },
+  "speed": 1.1,
+  "speed_variance": 0.5,
+  "spawn_jitter": 0.4,
+  "fuse": {
+    "ticks": 12,
+    "variance": 6
+  },
+  "on": {
+    "fuse": [
+      { "remove": {} }
+    ],
+    "collide_terrain": [
+      { "remove": {} }
+    ],
+    "collide_worm": [
+      { "damage_other": { "amount": 0 } },
+      { "push_other": { "factor": 0 } },
+      { "remove": {} }
+    ]
+  },
+  "anim": {
+    "frames": 0
+  },
+  "presentation": {
+    "color_index": 16,
+    "splinter_color_index": 0,
+    "sprite_wl": {
+      "start": 0,
+      "draw_on_map": false
+    },
+    "light": {
+      "color": "#bcfcfc",
+      "intensity": 0.35,
+      "radius": 9
+    }
+  }
+}

@@ -1,0 +1,73 @@
+// The FORCE FIELD emitter going up — hand-authored (2026-08-19).
+//
+// A 5000 hp fortification should not die to the same puff a grenade makes, and
+// what it is full of is a charged emitter coil. So this is `explosion_large`
+// scaled up to `hallconnen`'s reach and re-lit green: the same damage/repel/
+// carve/stain/heat shape every big cs explosion has, at the radius the hp
+// justifies.
+//
+// The green light is doing a specific job. Every other big blast in the mod is
+// yellow-orange, so an emitter failure has to read differently at a glance or
+// it is just another explosion happening near a pod that has quietly gone.
+{
+  "do": [
+    {
+      "damage": {
+        "r": 42,
+        "amount": 118
+      }
+    },
+    {
+      "repel": {
+        "r": 52,
+        "force": 0.062
+      }
+    },
+    {
+      "carve": {
+        "r": [0, 11],
+        "debris": true
+      }
+    },
+    // Blast scar, on the mod's rule: nuke_scar over 0.7x the damage radius at
+    // damage/176 opacity (clamped 0.25..1).
+    {
+      "stain": {
+        "r": [0, 29],
+        "strength": 0.67,
+        "texture": "nuke_scar"
+      }
+    },
+    // Hotter than a shell burst and over a wider ring — this is a coil letting
+    // go, not a charge going off.
+    {
+      "modify_temperature": {
+        "r": [0, 18],
+        "amount": 40,
+        "limit": 170
+      }
+    }
+  ],
+  "presentation": {
+    "sounds": {
+      "start": {
+        "any": ["exp4.wav", "exp5.wav"]
+      }
+    },
+    "sprite_wl": {
+      "start": 40,
+      "frames": 15,
+      "delay": 4
+    },
+    "sprite": "s40_15",
+    "lit": false,
+    "shadow": true,
+    "shake": 6,
+    "flash": 7,
+    "light": {
+      "color": "#8cff72",
+      "intensity": 1.35,
+      "radius": 74
+    }
+  }
+}

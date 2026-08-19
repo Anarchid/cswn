@@ -1,0 +1,79 @@
+// The DOBERMAN's muzzle flare — the worm firecone, out of the worm firecone's
+// own sheet, in whichever of its seven poses matches the bore.
+//
+// The first draft synthesised a bloom in the firecone's colours instead, on the
+// belief that the strip itself was unusable: `aim_pose` sets are drawn by the
+// render pool ATTACHED TO THE OWNER WORM, so a drone emitting one would flash
+// at its pilot standing across the map. That is true — of the render pool. A
+// SIM projectile with the same set takes the other branch, and that branch
+// resolves the pose from the particle's OWN VELOCITY
+// (`atan2(-spdY, |spdX|)`, flipped by the sign of spdX). Emitted down the bore,
+// it points down the bore, at every hull angle, for free.
+//
+// So the whole def is `muzzle_flash_01` with three deliberate differences:
+//
+//   * `pushed_by_blasts: true` — LOAD-BEARING, and not for the physics. It is
+//     what disqualifies this def from `is_fx_only`, and therefore what keeps
+//     it in the sim and out of the render pool. Demoted, it would be
+//     `attached` and would draw on the pilot. (A muzzle flash puffed by a
+//     nearby blast is also just correct, which is why this is the field
+//     chosen rather than one of the other disqualifiers.)
+//   * a small `speed` at the call site — a stationary flash has no velocity to
+//     read a pose from, and `atan2(0,0)` is 0, so every flash would draw the
+//     horizontal pose facing right.
+//   * `impulse_mass: 0` — cosmetic things do not shove bodies. Left at the WL
+//     import's 4 it would kick the 12-mass drone it is drawn on.
+//
+// wObject-class (no `legacy.particle_class`) and that is also load-bearing:
+// the aim-pose branch in the renderer is under the wObject arm of the entity
+// buffer. An nObject-class twin would draw pose 0 forever.
+{
+  "legacy": {
+    "wallhack_bounce": -1
+  },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "wobble": 0,
+    "pushed_by_blasts": true,
+    "impulse_mass": 0,
+    "ccd": false,
+    "substeps": 1
+  },
+  "radius": 0,
+  "collide": {
+    "terrain": false,
+    "worms": false,
+    "projectiles": false
+  },
+  "fuse": {
+    "ticks": 3,
+    "variance": 0
+  },
+  "on": {
+    "fuse": [
+      { "remove": {} }
+    ]
+  },
+  "anim": {
+    "frames": 0
+  },
+  "presentation": {
+    "color_index": 0,
+    "splinter_color_index": 0,
+    "sprite_wl": {
+      "start": 9,
+      "frames": 6,
+      "aim_pose": true
+    },
+    "sprite": "s9_7",
+    // ONE light in the whole flash. The ember spray beside it carries none —
+    // a muzzle flash wants a lot of particles and exactly one light source,
+    // which is the lesson the THEMIS gun's first draft paid for.
+    "light": {
+      "rgb": [1, 0.9046, 0.4064],
+      "intensity": 0.8,
+      "radius": 22
+    }
+  }
+}
