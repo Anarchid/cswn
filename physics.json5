@@ -49,6 +49,64 @@
     // Liero corner-point bounce (velY -> -velY/3). Walking into the wall
     // still cliff-hangs. Rooms can override via the Wall slide rule.
     "wall_slide": true,
-    "wall_slide_friction": 0.89
+    "wall_slide_friction": 0.89,
+
+    // ---- Body-into-worm damage (WN extension, no WL ancestor) ----------
+    // Written out at the ENGINE DEFAULTS so this block is a no-op until you
+    // move a number: the point is to have every dial in one place, with its
+    // shipped value visible, rather than to change anything yet.
+    //
+    // Two separate paths, deliberately tuned apart:
+    //
+    //   IMPACT — a body in free flight hits a worm. No backstop needed. This
+    //   is blast debris landing on someone, and it is what makes bringing a
+    //   ceiling down a way to kill. Damage scales with the body's MASS (so
+    //   with what it is made of — see cellMass on materials) and its approach
+    //   speed along the contact normal. One-shot in practice: the momentum
+    //   exchange equalises velocities right after, so a worm free to be
+    //   shoved reads ~zero approach next frame.
+    //
+    //   CRUSH — a body presses a worm into a backstop (terrain, another
+    //   body, the map edge). No mass term at all, applies EVERY frame the
+    //   pinch lasts, so its cap is a RATE: at 30 a sustained crush kills from
+    //   full in four frames.
+    //
+    // Who can deal impact damage is per body, not global: terrain debris
+    // always (x1), worm gibs never (hardcoded 0 — a corpse is not a weapon),
+    // props only if their def sets collision_damage.
+
+    // Global scale on impact. 0 restores the pre-2026-08 world, where only a
+    // real crush could hurt you and a rock at 20px/f in the open did nothing.
+    "collision_damage_mul": 3.0,
+    // Approach speed (px/frame) below which an impact is free, and which
+    // damage is measured up from. Raise it to make debris kills a matter of
+    // real velocity rather than of standing in a crowded room.
+    "collision_damage_min_speed": 0.5,
+    // Ceiling on one impact. 60 leaves the worst single hit survivable at
+    // full health and lethal to anyone already hurt.
+    "collision_damage_max": 100,
+
+    // Global scale on crush. Separate dial from impact because the two are
+    // different fantasies — trash compactor vs thrown rock — and a mod may
+    // want one deadly and the other decorative.
+    "crush_damage_mul": 3.0,
+    // Same role as collision_damage_min_speed, same default so both paths
+    // agree on what "moving harmlessly" means. Sub-pixel, like impact.
+    "crush_damage_min_speed": 1,
+    // Per-frame ceiling — a rate, not a hit. See above.
+    "crush_damage_max": 100,
+
+    // Entombment: a worm sealed in by a rigid plug is buried even when
+    // nothing moves. This is NOT governed by crush_damage_mul — being sealed
+    // in is not a pinch, and the two are tuned apart on purpose. Frames of
+    // full enclosure before it starts chipping...
+    "entomb_grace": 10,
+    // ...and how often it chips. 0 = OFF; it is the only damage source here
+    // without a _mul to zero.
+    "entomb_chip_period": 3,
+    // ...and how much each chip takes. Burial rate is
+    // damage x 60 / period hp/s, so this pair is what sets lethality:
+    // 1/3 = the historical ~20 hp/s, 1/1 = 60, 5/1 = 300.
+    "entomb_chip_damage": 1
   }
 }
