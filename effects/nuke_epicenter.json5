@@ -32,7 +32,7 @@
           94
         ],
         "strength": 1,
-        "texture": 10
+        "texture": "nuke_scar"
       }
     },
     // Thermal pulse (2026-07-30; in the soot pass since 2026-08-02). Same

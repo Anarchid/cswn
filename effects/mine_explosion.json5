@@ -31,7 +31,7 @@
           14
         ],
         "strength": 0.8,
-        "texture": 10
+        "texture": "nuke_scar"
       }
     },
     // Scorch ring — the standard yellow-explosion heat (README "Heat").

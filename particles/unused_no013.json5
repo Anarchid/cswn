@@ -60,7 +60,7 @@
           7
         ],
         "material": "core:dirt",
-        "texture": 4
+        "texture": "blue_dirt"
       }
     }
   ]
