@@ -25,7 +25,7 @@
         "emit": {
           "type": "badger",
           "count": 1,
-          "speed": 0,
+          "speed": 0.5,
           "jitter": 0,
           "inherit": 1,
           "offset": 9
