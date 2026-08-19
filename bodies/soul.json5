@@ -1,0 +1,130 @@
+// The soul a death leaves behind in the `dm+souls` and `souls` game modes,
+// bound as this package's `soul_body` in physics.json5.
+//
+// THIS DEF IS A DELIBERATE NO-OP: it reproduces the engine's built-in soul
+// exactly — same 9x9 rhombus, same shading, same physics — so that binding it
+// changes nothing on screen and every later edit is a change you made on
+// purpose, measured against the shipped look. Start tuning from here.
+//
+// What each piece is doing:
+//
+//   shape      `soul_mask.png` — an INDEXED png, one pixel per body cell,
+//              index 0 empty and index 1 solid (magenta in the palette so the
+//              shape is visible while you edit; the palette is for your eyes
+//              only, the engine reads indices). `material` below fills every
+//              non-zero pixel, so this file is pure coverage. Drop `material`
+//              and the indices become material ids themselves, one per pixel.
+//                The built-in shape is the L1 ball |dx| + |dy| <= 4 — a
+//              diamond inscribed in the 9x9 square. The empty corners are the
+//              point: the body's boundary samples trace the slanted edges, so
+//              it reads as a gem rather than a box. Resize the png and the
+//              body resizes with it.
+//
+//   stain      `soul_stain.png` — RGBA, same dimensions as the mask. Ordinary
+//              artwork: paint the gem however you like, full opacity. Alpha
+//              here means only coverage (0 = show the material tint instead).
+//
+//   tint       `soul_tint.png` — GRAYSCALE, same dimensions again: how
+//              strongly the dead worm's colour replaces the stain, per pixel.
+//              Black = keep your art, white = pure owner colour, grey =
+//              blend. That is what makes a soul readable as *whose* it is,
+//              and lets you tell your own (uncollectable) one from a rival's.
+//                Right now only the two centre pixels are white, so the gem
+//              keeps its painted body and its heart carries the colour.
+//                Paint white in GIMP — no alpha needed. This file exists
+//              precisely because the older convention wanted alpha EXACTLY
+//              128 to mark a tinted pixel, and a paint program whose opacity
+//              is a percentage cannot reliably hit that: 50% lands on 127 or
+//              128 by rounding, and a near-miss silently becomes ordinary
+//              translucent art. A separate mask has no such cliff, and being
+//              a strength rather than a flag it can also do partial tinting.
+//                Handy identity: lerping from BLACK toward the owner colour
+//              is the same as multiplying it. So a black stain plus a
+//              grayscale ramp here gives the classic shaded-gem look — the
+//              ramp is the shading, and it costs no alpha tricks.
+//                Paint is not sim: if the stain or tint goes missing or fails
+//              to decode, the body still spawns, just untinted or wearing the
+//              material's own colours. The MASK is not so forgiving — it IS
+//              the body.
+//
+//   gravity 0  A soul hangs where the worm died. WITHOUT THIS IT FALLS — body
+//   drag 64    defaults are `gravity: 1.0`, `drag: 1.0`, and the two go
+//              together: a weightless body with default drag never falls but
+//              never stops either, so one blast sends it drifting for the rest
+//              of the round. 64 is ~12%/frame, enough that a shove dies out
+//              near the kill. The ceiling is 512 (dead stop in one frame).
+//
+//   collide    Shots and the rope tip SHOVE souls (`particle`) — a contested
+//   sense      soul can be blasted away from whoever is diving for it. Worms
+//              only NOTICE it (`sense`), so you absorb a soul by walking
+//              through it instead of bumping into furniture. `body` is off so
+//              a pile of souls doesn't hold itself awake near a killzone, and
+//              `ca` is off so sand pours through instead of burying them.
+//              None of that affects terrain: the mask has no terrain channel,
+//              so a soul still stops dead against rock.
+//
+//   hp         Omitted = indestructible. Give it hp and rivals can DENY a
+//              soul by shooting it before you arrive — a real mode variant,
+//              not a bug.
+//
+//   mass 4     Four cell-masses. Light enough to shove, heavy enough not to
+//              fly across the map off a graze.
+//
+// The engine still owns two things no def can say: the owner tag, and the
+// worm notice bit (forced on, so a def that forgets `sense` can't mint score
+// nobody can reach).
+//
+// "Identical" is pinned by a test in the engine
+// (`the_documented_recipe_reproduces_the_builtin_soul_exactly`): same mask,
+// same resolved pixels, same hp/channels/gravity/drag/mass. Two differences
+// are deliberate and invisible — an authored body spawns asleep rather than
+// awake (same resting state for something weightless and motionless), and its
+// cells carry the material's palette dither instead of a flat variant 0,
+// which is only ever read if cells reach the grid. A soul's never do: it is
+// indestructible and its `ca` channel is off.
+{
+  "shape": { "blueprint": "bodies/soul_mask.png" },
+  "stain": "bodies/soul_stain.png",
+  "tint": "bodies/soul_tint.png",
+  "material": "core:window",
+  "mass": 4,
+  "gravity": 0,
+  "drag": 64,
+  "collide": ["particle","body"],
+  "sense": ["worm"],
+  // Render-only, and it MUST sit under `presentation` — a bare top-level
+  // `light` is silently ignored by the body compiler.
+  "presentation": {
+    "light": { "color": "#0088ff", "radius": 22, "intensity": 1 },
+    // Off-screen compass marker. Souls are the ONE thing that gets one
+    // without asking (a soul you can't find is score you can't spend), so
+    // leaving this out is not the same as opting out — it takes the default:
+    // the built-in 5-pixel cross, four contour arms sweeping black → the dead
+    // worm's colour → white around a dot held at that colour.
+    //   Name a sprite to use your own glyph. Its pixels pick a band by alpha:
+    // 128 = the steady colour, 64 = the pulsing one, opaque = literal art
+    // (R = shade, G = additive, as in the tint markers). `pulse: false`
+    // freezes the contour; `"compass": false` refuses the marker entirely.
+    // "compass": { "sprite": "soul_marker", "color": "owner" },
+  },
+  "on": {
+    "create":[ { "impulse": { "set": [ 0, 1.0 ] } } ],
+    "tick": [
+      {
+        "every": 7,
+        "do": [
+          {
+            "emit": {
+              "type": "soul_trail",
+              "speed": 0.2,
+              "inherit": 0.5,
+              "spread": 360,
+              "count":5,
+              "offset":2,
+            }
+          }
+        ]
+      }
+    ]
+  },
+}

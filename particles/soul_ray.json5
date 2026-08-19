@@ -1,0 +1,54 @@
+// TRIPWIRE MINE sighting ray — the grace-period beam.
+//
+// Physically identical to `tripmine_beam` minus the one thing that matters:
+// no `collide_worm` list at all, so `worm_contact_matters()` is false and
+// the per-substep worm sweep never runs. Worms walk straight through it.
+// It exists so the mine's line of fire is legible for the 1.5 s before it
+// goes live — including to the worm who threw it, who is standing in it.
+//
+{
+  "legacy": { "particle_class": true },
+  "physics": {
+    "gravity": 0,
+    "damping": 1,
+    "pushed_by_blasts": false,
+    "ccd": true,
+  },
+  "radius": 1,
+  "collide": {
+    "terrain": true,
+    "projectiles": false
+  },
+  "speed": 10,
+  "speed_variance": 20,
+  "spawn_jitter": 0,
+  // `fuse.ticks` counts MOVEMENT STEPS, not frames — `time_alive` is
+  // incremented per substep. At 120 substeps a fuse of 1 would kill the
+  // ray after ONE PIXEL; 120 is exactly one tick's worth of travel, so
+  // the beam reaches its full range and is gone within its own tick.
+  "fuse": { "ticks": 1, "variance": 0 },
+  "on": {
+    "collide_terrain": [
+      { "remove": {} }
+    ]
+  },
+  "presentation": {
+    "line": {
+      "texture": "soul_ray",
+      "width": 8,
+      "length": 10,
+      "scroll": 0,
+      "lit": false,
+      "blend": "additive"
+    },
+    "light": {
+      "rgb": [
+        0,
+        0,
+        1
+      ],
+      "intensity": 0.1,
+      "radius": 1
+    }
+  },
+}

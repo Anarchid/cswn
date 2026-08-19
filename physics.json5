@@ -8,6 +8,11 @@
   "blood_particle": "blood_droplet",
   // The effect a bonus crate detonates with (legacy fallback: effect 0).
   "bonus_death_effect": "mine_explosion",
+  // The body a death leaves behind in the souls game modes. `bodies/soul.json5`
+  // is a deliberate no-op — it reproduces the engine's built-in soul exactly,
+  // so this binding changes nothing until you edit that file. Unbind it (drop
+  // this line) and the engine mints its built-in rhombus instead.
+  "soul_body": "soul",
   "blood_gravity": 0.015,
   "blood_palette": {
     "first": 80,
