@@ -22,7 +22,7 @@
     "projectiles": true
   },
   "fuse": {
-    "ticks": 33,
+    "ticks": 34,
     "variance": 3
   },
   "on": {
