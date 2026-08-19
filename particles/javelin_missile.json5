@@ -63,7 +63,7 @@
     "collide_worm": [
       {
         "damage_other": {
-          "amount": 100
+          "amount": 4000
         }
       },
       {
