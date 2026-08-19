@@ -26,9 +26,10 @@
   // (presentation.sounds).
   "sounds": {
     "hurt": { "any": ["hurt1.wav", "hurt2.wav", "hurt3.wav"] },
-    "death": { "any": ["death1.wav", "death2.wav", "death3.wav"] },
+    "death": { "any": ["death2.wav", "death3.wav"] },
     "bump": "bump.wav",
-    "throw": "throw.wav"
+    "throw": "throw.wav",
+    "impact": "death1.wav"
   },
   "legacy_assets": {
     "color_anim": [
