@@ -31,6 +31,21 @@
     "throw": "throw.wav",
     "impact": "death1.wav"
   },
+  // The mixer this mod's sound design was balanced against, inherited from
+  // csliero. WebLiero refuses a sound past 17 concurrent voices and drops it
+  // outright, and the splinter chains here lean on that: Big Bertha asks for
+  // 47 sounds (44 of them the moveup/movedown blips its fragments and
+  // bomblets reuse) and C4 asks for 511 (510 blips). Played in full the blip
+  // cloud sits +8 to +14 dB over the explosion it belongs to; capped, you
+  // hear the boom the weapon was designed around.
+  //
+  // Retuning the splinter presentation — quieter or rarer sounds on the
+  // fragment/bomblet effects, instead of a ceiling on the mixer — would let
+  // this go back to unlimited. Until then the ceiling is the honest
+  // description of how this content sounds right.
+  "audio": {
+    "voices": 17
+  },
   "legacy_assets": {
     "color_anim": [
       133,
