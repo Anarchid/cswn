@@ -25,7 +25,13 @@
   "physics": {
     "gravity": 0,
     "pushed_by_blasts": false,
-    "impulse_mass": 4,
+    // Zero, like every other pure-presentation particle in this set. At
+    // `speed: 0` the momentum handed to a body is zero either way, but the
+    // engine branches on `impulse_mass > 0` BEFORE it multiplies: a nonzero
+    // one takes the `apply_point_impulse` path, which wakes the body and
+    // resets its `settle_frames` even when the impulse itself is nothing.
+    // Nothing to shove, nothing to wake.
+    "impulse_mass": 0,
     "ccd": false
   },
   "radius": 0,

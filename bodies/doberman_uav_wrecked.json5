@@ -16,7 +16,23 @@
   "mass": 12,
   "gravity": 0,
   "drag": 24,
-  "lit": false,
+  // Fullbright. This is the entire reason the drone is a body.
+  //
+  // It lives under `presentation:` and that is not a style choice: a PACKAGE
+  // body's render passthroughs are read off `b.presentation.{light,lit,blend,
+  // compass}` and nowhere else, while a MAP body's are read off the top level.
+  // The two paths are mirror images, and authoring the map spelling here got
+  // the key dropped in silence — the drone shipped fully lit, which is the one
+  // thing it became a rigid body to avoid.
+  "presentation": {
+    "lit": false,
+    // Hotter and amber where the intact hull's is white: this airframe is
+    // already burning, and a hit on it should look like it fanned something
+    // rather than like it rang a bell. `color` is a per-channel multiplier on
+    // the body's OWN pixels, so a warm one lifts the embers and the rust
+    // without touching the soot.
+    "flash": { "frames": 6, "gain": 3.2, "color": "#ffb070" }
+  },
   "hp": 250,
   "control": "source_weapon_held",
   "camera": true,

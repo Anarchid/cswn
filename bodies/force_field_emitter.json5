@@ -113,9 +113,23 @@
 
   // The coil glow. Small and green — the beam carries its own light, and this
   // is only what says the pod is live when you are standing beside it.
-  "light": {
-    "color": "#7ad945",
-    "intensity": 0.7,
-    "radius": 26
+  // Under `presentation:`, not at the top level: a PACKAGE body's render
+  // passthroughs are read off `b.presentation.{light,lit,blend,compass}` and a
+  // MAP body's off the top level. The two paths are mirror images, and the map
+  // spelling here was dropped in silence — this glow never existed.
+  "presentation": {
+    "light": {
+      "color": "#7ad945",
+      "intensity": 0.7,
+      "radius": 26
+    },
+    // §10.5 damage flash. Longer and softer than the drone's, and green
+    // rather than white, for two reasons. This is a 2500 hp fortification, so
+    // a hit should read as ABSORBED — a pulse through the coils — where the
+    // drone's reads as a strike on sheet metal. And unlike the drone this
+    // body is LIT, so its flash draws before the light composite and is a
+    // multiply against whatever light reaches it; a longer, gentler pulse
+    // survives that better than a one-frame blow-out would.
+    "flash": { "frames": 9, "gain": 2.2, "color": "#b6ffc0" }
   }
 }

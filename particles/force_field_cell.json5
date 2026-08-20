@@ -59,14 +59,33 @@
     ]
   },
   "anim": {
-    "frames": 0,
-    "mode": "by_velocity"
+    "frames": 0
   },
+  // The pod, drawn with the body's own pixels.
+  //
+  // This carrier used to draw nothing (`start: -1`, inherited from the WL cell,
+  // which was invisible because its DRIPS were the throw's feedback and they
+  // began three ticks in). A body that unfolds at the end of the coast has no
+  // such cover: the 22 ticks below were a third of a second of empty screen
+  // followed by a pod that appeared to teleport into place.
+  //
+  // `force_field_pod` is byte-identical to the emitter's stain and its origin
+  // is the negated COM, so the sprite and the body occupy exactly the same
+  // pixels — the handover is invisible because there is nothing to hand over.
+  // The light matches the body's for the same reason. The emitter is
+  // `fixed_rotation`, so a still sprite is the whole of its pose.
   "presentation": {
     "color_index": 0,
     "splinter_color_index": 24,
     "sprite_wl": {
-      "start": -1
+      "start": 0,
+      "draw_on_map": false
+    },
+    "sprite": "force_field_pod",
+    "light": {
+      "color": "#7ad945",
+      "intensity": 0.7,
+      "radius": 26
     }
   },
   "speed": 3.7

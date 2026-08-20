@@ -30,7 +30,26 @@
   "physics": {
     "gravity": 0,
     "pushed_by_blasts": false,
-    "impulse_mass": 4,
+    // No shove, and this one is not a preference — `impulse_mass` is
+    // multiplied BY THE SHOT'S SPEED to get the momentum handed to a rigid
+    // body (`j = spd x impulse_mass`, then `dv = j / mass`), and this def's
+    // speed is not a speed. 290 is how far the segment REACHES in a frame, a
+    // drawing quantity; a laser has no mass moving at 290 px/tick behind it.
+    //
+    // At the converter's inherited 4 that arithmetic read 290 x 4 = 1160 into
+    // a 12-mass drone: 96 px/frame, straight down, in ONE frame, re-applied
+    // every frame it stayed in the curtain — plus the angular half, which
+    // spun it. The drip stream this replaced hit at 6.9 px/tick at the very
+    // bottom of its fall and arrived every third tick, so it pressed at about
+    // 0.8 px/frame. The beam was ~125x that.
+    //
+    // 1 does not rescue it either — 290/12 is still 24 px/frame — so there is
+    // no u8 that expresses the old press. Zero is the honest value, and it
+    // agrees with the `push_other: 0` this def already declares for worms:
+    // the field burns, it does not throw. The mod's other scan beams
+    // (tripmine_beam/sight/chisel, 120-140 px/tick) declare no impulse_mass
+    // at all for the same reason.
+    "impulse_mass": 0,
     "ccd": true
   },
   "radius": 2,

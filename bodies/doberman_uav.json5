@@ -44,7 +44,29 @@
   "gravity": 0,
   "drag": 24,
   // Fullbright. This is the entire reason the drone is a body.
-  "lit": false,
+  //
+  // It lives under `presentation:` and that is not a style choice: a PACKAGE
+  // body's render passthroughs are read off `b.presentation.{light,lit,blend,
+  // compass}` and nowhere else, while a MAP body's are read off the top level.
+  // The two paths are mirror images, and authoring the map spelling here got
+  // the key dropped in silence — the drone shipped fully lit, which is the one
+  // thing it became a rigid body to avoid.
+  "presentation": {
+    "lit": false,
+    // §10.5 damage flash: the quad lights up on any frame this body's hp
+    // drops. Short and white-hot — 5 frames is under a tenth of a second,
+    // which is what makes it read as an impact rather than as a state. It
+    // needs no timer in the sim: the renderer keeps hp by body id and
+    // triggers off the difference.
+    //
+    // This is the drone's answer to a question the older gadgets never posed.
+    // BADGER and GADGET omit `hp:` entirely, so they are indestructible, and
+    // an indestructible body's hp is the i16::MIN sentinel that `saturating_sub`
+    // cannot move — they will never flash, and cannot be made to. Shooting one
+    // of those looks exactly like shooting a wall because that is what it is.
+    // Shooting this one does not.
+    "flash": { "frames": 5, "gain": 3.0 }
+  },
 
   // 250, then the wreck's 250. Not indestructible like THEMIS: that tank is
   // penned into one corner of one map and its counterplay is the exposure of

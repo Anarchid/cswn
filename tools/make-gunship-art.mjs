@@ -12,6 +12,7 @@
 //   bodies/force_field_emitter_wrecked.stain.png
 //   sprites/force_field_beam.png       PowerEternal's beamlaser, de-tinted
 //   sprites/force_field_flare.png      2-frame beam-impact highlight
+//   sprites/force_field_pod.png        the emitter as the carrier draws it
 //
 // ...and PRINTS the derived geometry (COM, muzzle reach, aperture offset) that
 // the def files quote. Those numbers are hand-copied into bodies/*.json5 with a
@@ -423,6 +424,30 @@ writeFileSync(join(PKG, 'bodies/force_field_emitter.stain.png'),
   encodeRgbaPng(FW, FH, paintEmitter(false)));
 writeFileSync(join(PKG, 'bodies/force_field_emitter_wrecked.stain.png'),
   encodeRgbaPng(FW, FH, paintEmitter(true)));
+
+// ===========================================================================
+// sprites/force_field_pod.png — the emitter, in flight
+// ===========================================================================
+// The intact stain again, re-emitted as a sprite. The FORCE FIELD is thrown as
+// a carrier particle that coasts for 22 ticks and only THEN unfolds into the
+// body (particles/force_field_cell.json5), and that carrier used to be drawn
+// with nothing at all: for a third of a second after the throw the screen was
+// empty and the pod then appeared to teleport into place. The original could
+// afford an invisible carrier because its drips started falling three ticks
+// in, so the FIELD was the throw's feedback; a body that unfolds at the end
+// has no such cover.
+//
+// Drawing the carrier with the body's own pixels closes that gap without
+// touching the flight at all — the thing you watch fly is the thing that
+// lands, and the handover is invisible because there is nothing to hand over.
+// Same buffer, so the two can never drift apart.
+//
+// The sidecar's origin is [-9, -5]: the negated COM ([9, 5.15]) at whole-pixel
+// resolution. `spawn_body` lands the body's ANCHOR on the carrier's position,
+// and with no `spawn_offset` the anchor is the COM — so that is the one offset
+// that makes sprite and body cover the same pixels.
+writeFileSync(join(PKG, 'sprites/force_field_pod.png'),
+  encodeRgbaPng(FW, FH, paintEmitter(false)));
 
 // ===========================================================================
 // sprites/force_field_beam.png — dark/PowerEternal's beamlaser, de-tinted
